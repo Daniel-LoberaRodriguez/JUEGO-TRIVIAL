@@ -141,27 +141,28 @@
 
         .mode-selector {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
             margin: 16px 0;
         }
 
         .mode-card {
             background: #121019;
             border: 3px solid #362f4d;
-            border-radius: 18px;
-            padding: 12px 8px;
+            border-radius: 16px;
+            padding: 10px 4px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .mode-card .icon { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+        .mode-card .icon { font-size: 1.5rem; display: block; margin-bottom: 2px; }
         .mode-card.active-party { border-color: var(--accent); background: rgba(255, 190, 59, 0.08); }
         .mode-card.active-travel { border-color: var(--primary); background: rgba(255, 94, 87, 0.08); }
+        .mode-card.active-solo { border-color: var(--success); background: rgba(11, 232, 129, 0.08); }
 
-        .mode-card h4 { margin: 0; font-size: 0.9rem; font-weight: 800; }
-        .mode-card p { margin: 2px 0 0 0; font-size: 0.68rem; color: var(--text-muted); }
+        .mode-card h4 { margin: 0; font-size: 0.78rem; font-weight: 800; }
+        .mode-card p { margin: 2px 0 0 0; font-size: 0.6rem; color: var(--text-muted); }
 
         input[type="text"] {
             width: 100%;
@@ -415,28 +416,34 @@
     <div id="setup-screen" class="card">
         <h1 class="game-title">TRIVIA PRO</h1>
         <p style="text-align:center; color: var(--text-muted); font-size: 0.85rem; margin-top: 0; margin-bottom: 12px;">
-            Elige el modo de juego y añade a los jugadores.
+            Elige el modo de juego y configura tu partida.
         </p>
 
         <div class="mode-selector">
             <div id="select-party" class="mode-card active-party" onclick="selectMode('party')">
                 <span class="icon">🍻</span>
-                <h4>Modo Fiesta</h4>
-                <p>Bote de tragos</p>
+                <h4>Fiesta</h4>
+                <p>Bote tragos</p>
             </div>
             <div id="select-travel" class="mode-card" onclick="selectMode('travel')">
                 <span class="icon">🚗</span>
-                <h4>Modo Viaje</h4>
-                <p>Puntos por rondas</p>
+                <h4>Viaje</h4>
+                <p>Puntos rondas</p>
+            </div>
+            <div id="select-solo" class="mode-card" onclick="selectMode('solo')">
+                <span class="icon">👤</span>
+                <h4>Solitario</h4>
+                <p>Supervivencia</p>
             </div>
         </div>
 
-        <div style="display: flex; gap: 8px; margin-bottom: 6px;">
-            <input type="text" id="player-name-input" placeholder="Nombre del jugador..." onkeypress="handleEnter(event)">
-            <button class="btn-arcade btn-purple" style="width: 55px; margin-bottom: 0; font-size: 1.3rem;" onclick="addPlayer()">+</button>
+        <div id="players-section">
+            <div style="display: flex; gap: 8px; margin-bottom: 6px;">
+                <input type="text" id="player-name-input" placeholder="Nombre del jugador..." onkeypress="handleEnter(event)">
+                <button class="btn-arcade btn-purple" style="width: 55px; margin-bottom: 0; font-size: 1.3rem;" onclick="addPlayer()">+</button>
+            </div>
+            <ul id="player-list" class="player-list"></ul>
         </div>
-
-        <ul id="player-list" class="player-list"></ul>
 
         <div class="settings-divider">
             <button class="btn-arcade btn-settings" onclick="openSettingsModal()">
@@ -511,6 +518,21 @@
         <button class="btn-arcade btn-green" onclick="continueAfterDrink()">Siguiente jugador ➡️</button>
     </div>
 
+    <!-- PANTALLA 3.5: GAME OVER SOLITARIO -->
+    <div id="solo-gameover-screen" class="card hidden" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: 2px;">💀</div>
+        <h2 style="color: var(--primary); font-size: 1.8rem; margin: 0;">¡FIN DE LA PARTIDA!</h2>
+        <p style="color: var(--text-muted); font-weight: 700; margin: 6px 0 14px 0;" id="solo-correct-reveal"></p>
+        
+        <div style="background: #121019; border: 3px solid var(--card-border); border-radius: 20px; padding: 18px; margin-bottom: 20px;">
+            <p style="font-size: 0.95rem; font-weight: 800; margin: 0; color: var(--text-muted);">Puntuación conseguida:</p>
+            <div class="badge-font" id="solo-final-score" style="font-size: 3.2rem; font-weight: 900; color: var(--success); margin: 4px 0;">0 PTS</div>
+        </div>
+
+        <button class="btn-arcade btn-green" onclick="restartSoloGame()">🔄 Jugar otra vez</button>
+        <button class="btn-arcade btn-purple" onclick="returnToMenu()">🏠 Volver al menú</button>
+    </div>
+
     <!-- PANTALLA 4: PODIO VIAJE -->
     <div id="leaderboard-screen" class="card hidden">
         <div style="text-align: center; margin-bottom: 16px;">
@@ -537,6 +559,7 @@
     let currentRound = 1;
     let availableQuestions = [];
     let currentQuestion = null;
+    let soloScore = 0;
 
     let selectedTypes = {
         standard: true,
@@ -690,6 +713,19 @@
         gameMode = mode;
         document.getElementById('select-party').className = mode === 'party' ? 'mode-card active-party' : 'mode-card';
         document.getElementById('select-travel').className = mode === 'travel' ? 'mode-card active-travel' : 'mode-card';
+        document.getElementById('select-solo').className = mode === 'solo' ? 'mode-card active-solo' : 'mode-card';
+
+        const playersSection = document.getElementById('players-section');
+        const startBtn = document.getElementById('start-btn');
+
+        if (mode === 'solo') {
+            playersSection.classList.add('hidden');
+            startBtn.disabled = false;
+            startBtn.textContent = '🚀 ¡COMENZAR MODO SOLITARIO!';
+        } else {
+            playersSection.classList.remove('hidden');
+            renderPlayers();
+        }
     }
 
     function handleEnter(e) { if (e.key === 'Enter') addPlayer(); }
@@ -710,6 +746,7 @@
     }
 
     function renderPlayers() {
+        if (gameMode === 'solo') return;
         const list = document.getElementById('player-list');
         list.innerHTML = '';
         players.forEach((p, idx) => {
@@ -738,6 +775,7 @@
         document.getElementById('game-topbar').classList.add('hidden');
         document.getElementById('game-screen').classList.add('hidden');
         document.getElementById('party-fail-screen').classList.add('hidden');
+        document.getElementById('solo-gameover-screen').classList.add('hidden');
         document.getElementById('leaderboard-screen').classList.add('hidden');
         document.getElementById('setup-screen').classList.remove('hidden');
     }
@@ -750,7 +788,12 @@
             return;
         }
 
-        players.forEach(p => { p.score = 0; p.questionsPlayed = 0; });
+        if (gameMode !== 'solo') {
+            players.forEach(p => { p.score = 0; p.questionsPlayed = 0; });
+        } else {
+            soloScore = 0;
+        }
+
         currentPlayerIndex = 0;
         pot = 0;
         answeredInCurrentTurn = 0;
@@ -762,21 +805,34 @@
         document.getElementById('game-topbar').classList.remove('hidden');
         document.getElementById('game-screen').classList.remove('hidden');
 
-        document.getElementById('active-mode-badge').innerHTML = gameMode === 'party' ? '🍻 Fiesta' : '🚗 Viaje';
+        let modeText = '🍻 Fiesta';
+        if (gameMode === 'travel') modeText = '🚗 Viaje';
+        if (gameMode === 'solo') modeText = '👤 Solitario';
+
+        document.getElementById('active-mode-badge').innerHTML = modeText;
         updateUI();
         loadNextQuestion();
     }
 
+    function restartSoloGame() {
+        document.getElementById('solo-gameover-screen').classList.add('hidden');
+        startGame();
+    }
+
     function updateUI() {
-        const currentPlayer = players[currentPlayerIndex];
         const banner = document.getElementById('status-banner');
 
         if (gameMode === 'party') {
+            const currentPlayer = players[currentPlayerIndex];
             banner.innerHTML = `🍺 Bote: <span id="pot-display">${pot}</span> ${pot === 1 ? 'trago' : 'tragos'}`;
             document.getElementById('current-player-display').textContent = `Turno: ${currentPlayer.name}`;
-        } else {
+        } else if (gameMode === 'travel') {
+            const currentPlayer = players[currentPlayerIndex];
             banner.innerHTML = `🚗 Ronda ${currentRound} • ${currentPlayer.name}: ${currentPlayer.score} pts`;
             document.getElementById('current-player-display').textContent = `Turno: ${currentPlayer.name}`;
+        } else if (gameMode === 'solo') {
+            banner.innerHTML = `👤 Puntuación actual: <span style="color: var(--success);">${soloScore} pts</span>`;
+            document.getElementById('current-player-display').textContent = `Modo Supervivencia`;
         }
     }
 
@@ -811,7 +867,7 @@
         const container = document.getElementById('question-interaction-container');
         container.innerHTML = '';
 
-        const basePoints = currentQuestion.level || 1; // Nivel 1=1pt, Nivel 2=2pts, Nivel 3=3pts
+        const basePoints = currentQuestion.level || 1;
 
         if (type === 'true_false') {
             container.innerHTML = `
@@ -834,7 +890,6 @@
             });
             container.appendChild(optionsGrid);
         } else {
-            // Estándar: Permite escribir directo (vale DOBLE) o pedir opciones (valor normal de nivel)
             const doublePoints = basePoints * 2;
             container.innerHTML = `
                 <div id="direct-answer-section">
@@ -900,7 +955,7 @@
                 triggerShake();
                 setTimeout(() => showPartyFailScreen(), 300);
             }
-        } else {
+        } else if (gameMode === 'travel') {
             const player = players[currentPlayerIndex];
             player.questionsPlayed++;
 
@@ -925,6 +980,22 @@
                 `;
             }
             updateUI();
+        } else if (gameMode === 'solo') {
+            if (isCorrect) {
+                launchConfetti();
+                soloScore += pointsValue;
+                updateUI();
+                document.getElementById('question-interaction-container').innerHTML = `
+                    <div style="margin-top: 5px;">
+                        <h3 style="font-size: 1.4rem; color: var(--success); margin: 0 0 4px 0;">¡CORRECTO! (+${pointsValue} pts)</h3>
+                        <p style="color: var(--text-muted); margin: 0 0 16px 0; font-weight: 700;">Total acumulado: ${soloScore} pts</p>
+                        <button class="btn-arcade btn-green" onclick="loadNextQuestion()">Siguiente pregunta ➡️</button>
+                    </div>
+                `;
+            } else {
+                triggerShake();
+                setTimeout(() => showSoloGameOverScreen(), 300);
+            }
         }
     }
 
@@ -948,6 +1019,14 @@
         document.getElementById('party-correct-reveal').textContent = `Era: ${currentQuestion.answer}`;
         document.getElementById('loser-message').textContent = `${loserName} bebe:`;
         document.getElementById('final-drinks').textContent = `${drinksToTake} ${drinksToTake === 1 ? 'TRAGO' : 'TRAGOS'}`;
+    }
+
+    function showSoloGameOverScreen() {
+        document.getElementById('game-screen').classList.add('hidden');
+        document.getElementById('solo-gameover-screen').classList.remove('hidden');
+
+        document.getElementById('solo-correct-reveal').textContent = `La respuesta correcta era: ${currentQuestion.answer}`;
+        document.getElementById('solo-final-score').textContent = `${soloScore} PTS`;
     }
 
     function continueAfterDrink() {
