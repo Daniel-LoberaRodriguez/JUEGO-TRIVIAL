@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Trivia Party">
-    <title>Trivia Party & Road</title>
+    <meta name="apple-mobile-web-app-title" content="Trivia Pro">
+    <title>Trivia Pro & Custom</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -65,13 +65,12 @@
         }
 
         .container {
-            max-width: 420px;
+            max-width: 430px;
             width: 100%;
             position: relative;
             z-index: 10;
         }
 
-        /* Barra superior en partida */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -86,7 +85,6 @@
             border-radius: 99px;
             font-size: 0.85rem;
             font-weight: 800;
-            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -110,7 +108,6 @@
             background: #362f4d;
         }
 
-        /* Tarjetas de juego sólidas y limpias */
         .card {
             background-color: var(--card-bg);
             border: 3px solid var(--card-border);
@@ -131,13 +128,10 @@
             40%, 80% { transform: translateX(6px); }
         }
 
-        .shake-anim {
-            animation: shake 0.35s ease-in-out;
-        }
+        .shake-anim { animation: shake 0.35s ease-in-out; }
 
-        /* Título del juego */
         .game-title {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             text-align: center;
             margin: 0 0 4px 0;
             color: #fff;
@@ -145,56 +139,30 @@
             letter-spacing: 1px;
         }
 
-        /* Selector de modo de juego tipo tarjeta gruesa */
         .mode-selector {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 20px 0;
+            gap: 10px;
+            margin: 16px 0;
         }
 
         .mode-card {
             background: #121019;
             border: 3px solid #362f4d;
-            border-radius: 20px;
-            padding: 14px 10px;
+            border-radius: 18px;
+            padding: 12px 8px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .mode-card .icon {
-            font-size: 2.2rem;
-            display: block;
-            margin-bottom: 6px;
-        }
+        .mode-card .icon { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+        .mode-card.active-party { border-color: var(--accent); background: rgba(255, 190, 59, 0.08); }
+        .mode-card.active-travel { border-color: var(--primary); background: rgba(255, 94, 87, 0.08); }
 
-        .mode-card.active-party {
-            border-color: var(--accent);
-            background: rgba(255, 190, 59, 0.08);
-            box-shadow: 0 0 15px rgba(255, 190, 59, 0.15);
-        }
+        .mode-card h4 { margin: 0; font-size: 0.9rem; font-weight: 800; }
+        .mode-card p { margin: 2px 0 0 0; font-size: 0.68rem; color: var(--text-muted); }
 
-        .mode-card.active-travel {
-            border-color: var(--primary);
-            background: rgba(255, 94, 87, 0.08);
-            box-shadow: 0 0 15px rgba(255, 94, 87, 0.15);
-        }
-
-        .mode-card h4 {
-            margin: 0;
-            font-size: 0.95rem;
-            font-weight: 800;
-        }
-
-        .mode-card p {
-            margin: 4px 0 0 0;
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            line-height: 1.3;
-        }
-
-        /* Entradas de texto */
         input[type="text"] {
             width: 100%;
             padding: 14px 16px;
@@ -205,18 +173,14 @@
             font-size: 1rem;
             font-weight: 700;
             outline: none;
-            transition: border-color 0.2s;
             user-select: text;
         }
 
-        input[type="text"]:focus {
-            border-color: var(--primary);
-        }
+        input[type="text"]:focus { border-color: var(--primary); }
 
-        /* Botones estilo arcade plano con relieve duro */
         .btn-arcade {
             width: 100%;
-            padding: 15px 18px;
+            padding: 14px 18px;
             border-radius: 16px;
             border: none;
             font-size: 1.05rem;
@@ -225,30 +189,38 @@
             color: white;
             position: relative;
             transition: transform 0.06s, box-shadow 0.06s;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            letter-spacing: 0.5px;
         }
 
-        .btn-arcade:active:not(:disabled) {
-            transform: translateY(4px);
-            box-shadow: 0 0px 0 transparent !important;
-        }
-
-        .btn-arcade:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none !important;
-        }
+        .btn-arcade:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 0px 0 transparent !important; }
+        .btn-arcade:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none !important; }
 
         .btn-red { background: var(--primary); box-shadow: 0 6px 0 var(--primary-shadow); }
         .btn-yellow { background: var(--accent); color: #121019; box-shadow: 0 6px 0 var(--accent-shadow); }
         .btn-green { background: var(--success); color: #121019; box-shadow: 0 6px 0 var(--success-shadow); }
         .btn-purple { background: var(--purple); box-shadow: 0 6px 0 var(--purple-shadow); }
+
+        .settings-divider {
+            margin: 16px 0 16px 0;
+            padding: 12px 0;
+            border-top: 2px dashed #2d2640;
+            border-bottom: 2px dashed #2d2640;
+        }
+
+        .btn-settings {
+            background: #252033;
+            border: 2px solid #483d66;
+            box-shadow: 0 5px 0 #171321;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .btn-settings:active { border-color: var(--accent); }
         
         .btn-option {
             background: #121019;
@@ -261,129 +233,172 @@
             font-weight: 800;
         }
 
-        .btn-option:active {
-            border-color: var(--accent);
-        }
-
-        /* Lista de jugadores */
-        .player-list {
-            list-style: none;
-            padding: 0;
-            margin: 14px 0;
-            max-height: 180px;
-            overflow-y: auto;
-        }
-
+        .player-list { list-style: none; padding: 0; margin: 12px 0 0 0; max-height: 130px; overflow-y: auto; }
         .player-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
+            background: #121019; border: 2px solid #2d2640; padding: 8px 12px; border-radius: 12px; margin-bottom: 6px;
+        }
+        .turn-number {
+            background: var(--purple); color: white; width: 22px; height: 22px; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 900; margin-right: 8px;
+        }
+        .remove-btn { background: rgba(255, 94, 87, 0.15); color: var(--primary); border: none; border-radius: 6px; padding: 4px 8px; font-weight: 900; cursor: pointer; }
+
+        /* Estilos del Menú de Ajustes Avanzado */
+        .settings-container-scroll {
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin-bottom: 12px;
+        }
+
+        .settings-section-title {
+            font-size: 0.82rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin: 14px 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Chips de tipos de pregunta */
+        .type-chips-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .type-chip {
+            background: #121019;
+            border: 2px solid #362f4d;
+            border-radius: 14px;
+            padding: 10px 8px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            transition: all 0.15s;
+        }
+
+        .type-chip.selected {
+            background: rgba(255, 190, 59, 0.12);
+            border-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .cat-config-row {
             background: #121019;
             border: 2px solid #2d2640;
-            padding: 10px 14px;
             border-radius: 14px;
-            margin-bottom: 8px;
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
         }
 
-        .turn-number {
-            background: var(--purple);
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: inline-flex;
+        .cat-config-row.active-cat {
+            border-color: var(--purple);
+            background: rgba(136, 84, 208, 0.08);
+        }
+
+        .cat-toggle-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .cat-checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            border: 2px solid #483d66;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 900;
-            margin-right: 10px;
+            color: #121019;
+            background: transparent;
+            flex-shrink: 0;
         }
 
-        .remove-btn {
-            background: rgba(255, 94, 87, 0.15);
-            color: var(--primary);
-            border: none;
+        .cat-config-row.active-cat .cat-checkbox {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .cat-name-label {
+            font-weight: 800;
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .cat-config-row.active-cat .cat-name-label { color: #ffffff; }
+
+        .cat-levels-group { display: flex; gap: 4px; }
+
+        .mini-lvl-btn {
+            background: #1c1827;
+            border: 2px solid #362f4d;
+            color: var(--text-muted);
             border-radius: 8px;
-            padding: 5px 10px;
+            padding: 4px 6px;
+            font-size: 0.7rem;
             font-weight: 900;
             cursor: pointer;
         }
 
-        /* Banner de estado en partida */
-        .status-banner {
-            background: #252033;
-            border: 3px solid #362f4d;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 20px;
-            text-align: center;
-            font-weight: 900;
-            font-size: 1.2rem;
-            margin-bottom: 14px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+        .mini-lvl-btn.selected {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #121019;
         }
 
-        .player-pill {
-            background: #252033;
-            border: 2px solid #362f4d;
-            color: var(--accent);
-            padding: 6px 16px;
-            border-radius: 99px;
-            font-size: 0.95rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
+        .cat-config-row:not(.active-cat) .mini-lvl-btn { opacity: 0.3; }
 
-        .question-box {
-            background: #121019;
-            border: 3px solid #2d2640;
-            border-radius: 20px;
-            padding: 22px 16px;
-            margin: 12px 0 20px 0;
-            font-size: 1.25rem;
+        .warning-toast {
+            background: rgba(255, 94, 87, 0.15);
+            border: 1px solid var(--primary);
+            color: #fca5a5;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
             font-weight: 800;
             text-align: center;
-            line-height: 1.4;
-        }
-
-        /* Podio */
-        .leaderboard-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #121019;
-            border: 2px solid #2d2640;
-            padding: 12px 16px;
-            border-radius: 16px;
             margin-bottom: 10px;
         }
 
-        .leaderboard-item.rank-1 {
-            border-color: var(--accent);
-            background: rgba(255, 190, 59, 0.08);
+        .status-banner {
+            background: #252033; border: 3px solid #362f4d; color: white; padding: 12px 18px; border-radius: 20px;
+            text-align: center; font-weight: 900; font-size: 1.1rem; margin-bottom: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .player-pill {
+            background: #252033; border: 2px solid #362f4d; color: var(--accent); padding: 6px 16px; border-radius: 99px;
+            font-size: 0.9rem; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; display: inline-block;
+        }
+        .question-box {
+            background: #121019; border: 3px solid #2d2640; border-radius: 20px; padding: 20px 16px; margin: 10px 0 16px 0;
+            font-size: 1.2rem; font-weight: 800; text-align: center; line-height: 1.4;
+        }
+        .category-tag {
+            background: rgba(136, 84, 208, 0.2); border: 1px solid var(--purple); color: #d8b4fe; padding: 3px 10px;
+            border-radius: 99px; font-size: 0.75rem; font-weight: 800; display: inline-block; margin-bottom: 8px;
         }
 
-        .rank-medal {
-            font-size: 1.3rem;
-            margin-right: 10px;
-            width: 30px;
-            text-align: center;
+        .leaderboard-item {
+            display: flex; align-items: center; justify-content: space-between; background: #121019; border: 2px solid #2d2640;
+            padding: 12px 16px; border-radius: 16px; margin-bottom: 10px;
         }
-
-        .points-tag {
-            background: #252033;
-            padding: 4px 12px;
-            border-radius: 99px;
-            font-weight: 900;
-            color: var(--success);
-        }
+        .leaderboard-item.rank-1 { border-color: var(--accent); background: rgba(255, 190, 59, 0.08); }
+        .points-tag { background: #252033; padding: 4px 12px; border-radius: 99px; font-weight: 900; color: var(--success); }
 
         .hidden { display: none !important; }
     </style>
@@ -393,16 +408,15 @@
 <canvas id="confetti-canvas"></canvas>
 
 <div class="container">
-    <!-- BARRA SUPERIOR -->
     <div id="game-topbar" class="top-bar hidden">
         <div class="mode-pill" id="active-mode-badge">🍻 Fiesta</div>
         <button class="btn-home" onclick="confirmReturnMenu()">🏠 Menú</button>
     </div>
 
-    <!-- PANTALLA 1: MENÚ -->
+    <!-- PANTALLA 1: MENÚ PRINCIPAL -->
     <div id="setup-screen" class="card">
-        <h1 class="game-title">TRIVIA</h1>
-        <p style="text-align:center; color: var(--text-muted); font-size: 0.88rem; margin-top: 0; margin-bottom: 14px;">
+        <h1 class="game-title">TRIVIA PRO</h1>
+        <p style="text-align:center; color: var(--text-muted); font-size: 0.85rem; margin-top: 0; margin-bottom: 12px;">
             Elige el modo de juego y añade a los jugadores.
         </p>
 
@@ -410,24 +424,64 @@
             <div id="select-party" class="mode-card active-party" onclick="selectMode('party')">
                 <span class="icon">🍻</span>
                 <h4>Modo Fiesta</h4>
-                <p>Bote acumulado de tragos.</p>
+                <p>Bote de tragos</p>
             </div>
             <div id="select-travel" class="mode-card" onclick="selectMode('travel')">
                 <span class="icon">🚗</span>
                 <h4>Modo Viaje</h4>
-                <p>Puntos por rondas.</p>
+                <p>Puntos por rondas</p>
             </div>
         </div>
 
-        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+        <div style="display: flex; gap: 8px; margin-bottom: 6px;">
             <input type="text" id="player-name-input" placeholder="Nombre del jugador..." onkeypress="handleEnter(event)">
-            <button class="btn-arcade btn-purple" style="width: 60px; margin-bottom: 0; font-size: 1.4rem;" onclick="addPlayer()">+</button>
+            <button class="btn-arcade btn-purple" style="width: 55px; margin-bottom: 0; font-size: 1.3rem;" onclick="addPlayer()">+</button>
         </div>
 
         <ul id="player-list" class="player-list"></ul>
 
-        <button id="start-btn" class="btn-arcade btn-green" onclick="startGame()" disabled>
-            🚀 ¡EMPEZAR PARTIDA!
+        <div class="settings-divider">
+            <button class="btn-arcade btn-settings" onclick="openSettingsModal()">
+                ⚙️ Ajustes de Preguntas & Tipos
+            </button>
+            <div id="active-filter-summary" style="text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 6px; font-weight: 700;">
+                Modo Aleatorio Total (Todo activo)
+            </div>
+        </div>
+
+        <button id="start-btn" class="btn-arcade btn-green" onclick="startGame()" disabled>🚀 ¡EMPEZAR PARTIDA!</button>
+    </div>
+
+    <!-- PANTALLA 1.5: MENÚ DE AJUSTES AVANZADO -->
+    <div id="settings-screen" class="card hidden">
+        <h2 style="font-size: 1.4rem; text-align: center; margin: 0 0 4px 0;">⚙️ Configurar Partida</h2>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin: 0 0 10px 0;">
+            Elige tipos de preguntas, categorías y niveles deseados.
+        </p>
+        
+        <button class="btn-arcade btn-purple" style="margin-bottom: 10px; padding: 10px;" onclick="selectAllRandom()">
+            🎲 Marcar Todo (Aleatorio Total)
+        </button>
+
+        <div id="settings-warning" class="warning-toast hidden"></div>
+
+        <div class="settings-container-scroll">
+            <!-- Tipos de Pregunta -->
+            <div class="settings-section-title">Tipos de Pregunta</div>
+            <div class="type-chips-grid">
+                <div class="type-chip selected" id="type-standard" onclick="toggleQuestionType('standard')">📝 Estándar / Test</div>
+                <div class="type-chip selected" id="type-true_false" onclick="toggleQuestionType('true_false')">⚖️ Verdadero / Falso</div>
+                <div class="type-chip selected" id="type-find_false" onclick="toggleQuestionType('find_false')">🕵️‍♂️ Hallar la Falsa</div>
+                <div class="type-chip selected" id="type-find_true" onclick="toggleQuestionType('find_true')">🎯 Hallar la Verdadera</div>
+            </div>
+
+            <!-- Categorías y Niveles -->
+            <div class="settings-section-title">Categorías y Niveles</div>
+            <div id="categories-config-list"></div>
+        </div>
+
+        <button class="btn-arcade btn-green" style="margin-top: 4px; margin-bottom: 0;" onclick="closeSettingsModal()">
+            ✅ Guardar y Volver
         </button>
     </div>
 
@@ -438,33 +492,14 @@
         </div>
 
         <div id="question-card" class="card" style="text-align: center;">
-            <div class="player-pill" id="current-player-display">Turno de: Jugador</div>
+            <span class="category-tag" id="current-category-tag">Deportes • Nivel 1</span>
+            <br>
+            <div class="player-pill" id="current-player-display">Turno: Jugador</div>
             <div class="question-box" id="question-display">¿Cargando pregunta?</div>
 
-            <!-- Fase 1 -->
-            <div id="direct-answer-section">
-                <input type="text" id="direct-input" placeholder="Escribe tu respuesta..." autocomplete="off" onkeypress="handleDirectEnter(event)" style="margin-bottom: 12px;">
-                <button class="btn-arcade btn-green" onclick="checkDirectAnswer()">✍️ Responder directo (+2)</button>
-                <button class="btn-arcade btn-yellow" onclick="showOptions()">💡 Pedir 4 opciones (+1)</button>
-            </div>
-
-            <!-- Fase 2 -->
-            <div id="options-section" class="hidden"></div>
-
-            <!-- Fase 3A: Fiesta -->
-            <div id="party-decision-section" class="hidden" style="margin-top: 15px;">
-                <p style="color: var(--success); font-weight: 900; font-size: 1.15rem; margin: 0 0 14px 0;">
-                    🎉 ¡ACERTASTE! Bote: <span id="decision-pot">0</span>
-                </p>
-                <button class="btn-arcade btn-purple" onclick="nextQuestionSamePlayer()">🔥 Arriesgar otra</button>
-                <button id="pass-btn" class="btn-arcade btn-green" onclick="passTurnParty()">➡️ Pasar turno</button>
-            </div>
-
-            <!-- Fase 3B: Viaje -->
-            <div id="travel-result-section" class="hidden" style="margin-top: 15px;">
-                <h3 id="travel-feedback-title" style="font-size: 1.4rem; margin: 0 0 4px 0;">¡CORRECTO!</h3>
-                <p id="travel-feedback-sub" style="color: var(--text-muted); margin: 0 0 16px 0; font-weight: 700;"></p>
-                <button class="btn-arcade btn-green" onclick="nextTurnTravel()">Siguiente ➡️</button>
+            <!-- Contenedor dinámico según tipo de pregunta -->
+            <div id="question-interaction-container">
+                <!-- Se inyecta la interfaz correspondiente (input escrito/test o botones especiales v/f) -->
             </div>
         </div>
     </div>
@@ -510,22 +545,164 @@
     let availableQuestions = [];
     let currentQuestion = null;
 
+    // Configuración de Tipos de Pregunta activos
+    let selectedTypes = {
+        standard: true,
+        true_false: true,
+        find_false: true,
+        find_true: true
+    };
+
+    // Configuración por categoría
+    let categorySettings = {};
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (typeof questionsDB !== 'undefined') {
+            const allCats = [...new Set(questionsDB.map(q => q.category || 'general'))];
+            allCats.forEach(cat => {
+                categorySettings[cat] = { enabled: true, levels: [1, 2, 3] };
+            });
+            renderCategorySettings();
+            updateFilterSummary();
+        }
+    });
+
+    function showSettingsWarning(msg) {
+        const warn = document.getElementById('settings-warning');
+        warn.textContent = msg;
+        warn.classList.remove('hidden');
+        clearTimeout(warn._timer);
+        warn._timer = setTimeout(() => warn.classList.add('hidden'), 2600);
+    }
+
+    function toggleQuestionType(typeKey) {
+        const activeTypesCount = Object.values(selectedTypes).filter(Boolean).length;
+        if (selectedTypes[typeKey] && activeTypesCount <= 1) {
+            showSettingsWarning("⚠️ Debe quedar al menos un tipo de pregunta activo.");
+            return;
+        }
+        selectedTypes[typeKey] = !selectedTypes[typeKey];
+        const chip = document.getElementById(`type-${typeKey}`);
+        if (selectedTypes[typeKey]) chip.classList.add('selected');
+        else chip.classList.remove('selected');
+    }
+
+    function renderCategorySettings() {
+        const container = document.getElementById('categories-config-list');
+        container.innerHTML = '';
+
+        Object.keys(categorySettings).forEach(cat => {
+            const cfg = categorySettings[cat];
+            const row = document.createElement('div');
+            row.className = `cat-config-row ${cfg.enabled ? 'active-cat' : ''}`;
+
+            row.innerHTML = `
+                <div class="cat-toggle-area" onclick="toggleCategory('${cat}')">
+                    <div class="cat-checkbox">${cfg.enabled ? '✓' : ''}</div>
+                    <span class="cat-name-label">${cat}</span>
+                </div>
+                <div class="cat-levels-group">
+                    <button type="button" class="mini-lvl-btn ${cfg.enabled && cfg.levels.includes(1) ? 'selected' : ''}" onclick="toggleCategoryLevel('${cat}', 1)">N1</button>
+                    <button type="button" class="mini-lvl-btn ${cfg.enabled && cfg.levels.includes(2) ? 'selected' : ''}" onclick="toggleCategoryLevel('${cat}', 2)">N2</button>
+                    <button type="button" class="mini-lvl-btn ${cfg.enabled && cfg.levels.includes(3) ? 'selected' : ''}" onclick="toggleCategoryLevel('${cat}', 3)">N3</button>
+                </div>
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    function toggleCategory(cat) {
+        const cfg = categorySettings[cat];
+        if (cfg.enabled) {
+            const enabledCount = Object.values(categorySettings).filter(c => c.enabled).length;
+            if (enabledCount <= 1) {
+                showSettingsWarning("⚠️ Debe quedar al menos una categoría activa.");
+                return;
+            }
+            cfg.enabled = false;
+        } else {
+            cfg.enabled = true;
+            if (cfg.levels.length === 0) cfg.levels = [1];
+        }
+        renderCategorySettings();
+    }
+
+    function toggleCategoryLevel(cat, lvl) {
+        const cfg = categorySettings[cat];
+        if (!cfg.enabled) {
+            cfg.enabled = true;
+            cfg.levels = [lvl];
+            renderCategorySettings();
+            return;
+        }
+
+        const idx = cfg.levels.indexOf(lvl);
+        if (idx > -1) {
+            if (cfg.levels.length <= 1) {
+                showSettingsWarning(`⚠️ "${cat.toUpperCase()}": debe tener al menos 1 nivel.`);
+                return;
+            }
+            cfg.levels.splice(idx, 1);
+        } else {
+            cfg.levels.push(lvl);
+            cfg.levels.sort();
+        }
+        renderCategorySettings();
+    }
+
+    function selectAllRandom() {
+        selectedTypes = { standard: true, true_false: true, find_false: true, find_true: true };
+        ['standard', 'true_false', 'find_false', 'find_true'].forEach(t => document.getElementById(`type-${t}`).classList.add('selected'));
+
+        Object.keys(categorySettings).forEach(cat => {
+            categorySettings[cat] = { enabled: true, levels: [1, 2, 3] };
+        });
+        document.getElementById('settings-warning').classList.add('hidden');
+        renderCategorySettings();
+    }
+
+    function openSettingsModal() {
+        document.getElementById('settings-warning').classList.add('hidden');
+        document.getElementById('setup-screen').classList.add('hidden');
+        document.getElementById('settings-screen').classList.remove('hidden');
+    }
+
+    function closeSettingsModal() {
+        const anyCatEnabled = Object.values(categorySettings).some(c => c.enabled && c.levels.length > 0);
+        const anyTypeEnabled = Object.values(selectedTypes).some(Boolean);
+
+        if (!anyTypeEnabled || !anyCatEnabled) {
+            showSettingsWarning("⚠️ Selecciona al menos un tipo de pregunta y una categoría.");
+            return;
+        }
+        updateFilterSummary();
+        document.getElementById('settings-screen').classList.add('hidden');
+        document.getElementById('setup-screen').classList.remove('hidden');
+    }
+
+    function updateFilterSummary() {
+        const summaryEl = document.getElementById('active-filter-summary');
+        summaryEl.textContent = "🎲 Filtros personalizados aplicados";
+    }
+
+    function getFilteredQuestions() {
+        return questionsDB.filter(q => {
+            const cat = q.category || 'general';
+            const lvl = q.level || 1;
+            const qType = q.type || 'standard';
+            const cfg = categorySettings[cat];
+            
+            return selectedTypes[qType] && cfg && cfg.enabled && cfg.levels.includes(lvl);
+        });
+    }
+
     function selectMode(mode) {
         gameMode = mode;
-        const partyCard = document.getElementById('select-party');
-        const travelCard = document.getElementById('select-travel');
-
-        if (mode === 'party') {
-            partyCard.className = 'mode-card active-party';
-            travelCard.className = 'mode-card';
-        } else {
-            partyCard.className = 'mode-card';
-            travelCard.className = 'mode-card active-travel';
-        }
+        document.getElementById('select-party').className = mode === 'party' ? 'mode-card active-party' : 'mode-card';
+        document.getElementById('select-travel').className = mode === 'travel' ? 'mode-card active-travel' : 'mode-card';
     }
 
     function handleEnter(e) { if (e.key === 'Enter') addPlayer(); }
-    function handleDirectEnter(e) { if (e.key === 'Enter') checkDirectAnswer(); }
 
     function addPlayer() {
         const input = document.getElementById('player-name-input');
@@ -576,12 +753,20 @@
     }
 
     function startGame() {
+        const filtered = getFilteredQuestions();
+
+        if (filtered.length === 0) {
+            alert("No hay preguntas disponibles con los filtros actuales de categorías, niveles y tipos de preguntas. Revisa los Ajustes.");
+            return;
+        }
+
         players.forEach(p => { p.score = 0; p.questionsPlayed = 0; });
         currentPlayerIndex = 0;
         pot = 0;
         answeredInCurrentTurn = 0;
         currentRound = 1;
-        availableQuestions = [...questionsDB].sort(() => Math.random() - 0.5);
+        
+        availableQuestions = [...filtered].sort(() => Math.random() - 0.5);
 
         document.getElementById('setup-screen').classList.add('hidden');
         document.getElementById('game-topbar').classList.remove('hidden');
@@ -607,9 +792,20 @@
 
     function loadNextQuestion() {
         if (availableQuestions.length === 0) {
-            availableQuestions = [...questionsDB].sort(() => Math.random() - 0.5);
+            availableQuestions = [...getFilteredQuestions()].sort(() => Math.random() - 0.5);
         }
         currentQuestion = availableQuestions.shift();
+
+        const catName = (currentQuestion.category || 'general').toUpperCase();
+        const lvlNum = currentQuestion.level || 1;
+        const qType = currentQuestion.type || 'standard';
+        
+        let typeLabel = "ESTÁNDAR";
+        if (qType === 'true_false') typeLabel = "VERDADERO / FALSO";
+        if (qType === 'find_false') typeLabel = "ENCUENTRA LA FALSA";
+        if (qType === 'find_true') typeLabel = "ENCUENTRA LA VERDADERA";
+
+        document.getElementById('current-category-tag').textContent = `${catName} • Nivel ${lvlNum} • ${typeLabel}`;
 
         const qCard = document.getElementById('question-card');
         qCard.style.animation = 'none';
@@ -617,26 +813,60 @@
         qCard.style.animation = 'popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 
         document.getElementById('question-display').textContent = currentQuestion.q;
-        document.getElementById('direct-input').value = '';
 
-        document.getElementById('direct-answer-section').classList.remove('hidden');
-        document.getElementById('options-section').classList.add('hidden');
-        document.getElementById('party-decision-section').classList.add('hidden');
-        document.getElementById('travel-result-section').classList.add('hidden');
+        // Renderizar controles según el tipo de pregunta
+        renderInteractionContainer(qType);
     }
 
-    function normalizeText(str) {
-        return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+    function renderInteractionContainer(type) {
+        const container = document.getElementById('question-interaction-container');
+        container.innerHTML = '';
+
+        if (type === 'true_false') {
+            // Botones Verdadero o Falso
+            container.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button class="btn-arcade btn-green" onclick="processAnswer(currentQuestion.answer === true || currentQuestion.answer === 'Verdadero', 2)">✅ VERDADERO</button>
+                    <button class="btn-arcade btn-red" onclick="processAnswer(currentQuestion.answer === false || currentQuestion.answer === 'Falso', 2)">❌ FALSO</button>
+                </div>
+            `;
+        } else if (type === 'find_false' || type === 'find_true' || type === 'standard' && currentQuestion.options) {
+            // Opciones múltiples (A, B, C, D)
+            const optionsGrid = document.createElement('div');
+            const shuffled = [...currentQuestion.options].sort(() => Math.random() - 0.5);
+            const letters = ['A', 'B', 'C', 'D'];
+
+            shuffled.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-arcade btn-option';
+                btn.innerHTML = `<span style="background: rgba(255,255,255,0.08); padding: 3px 8px; border-radius: 6px; margin-right: 8px; color: var(--accent);">${letters[i]}</span> ${opt}`;
+                btn.onclick = () => processAnswer(opt === currentQuestion.answer, 2);
+                optionsGrid.appendChild(btn);
+            });
+            container.appendChild(optionsGrid);
+        } else {
+            // Respuesta directa escrita + opción de pistas
+            container.innerHTML = `
+                <div id="direct-answer-section">
+                    <input type="text" id="direct-input" placeholder="Escribe tu respuesta..." autocomplete="off" onkeypress="handleDirectEnter(event)" style="margin-bottom: 12px;">
+                    <button class="btn-arcade btn-green" onclick="checkDirectAnswer()">✍️ Responder directo (+2)</button>
+                    <button class="btn-arcade btn-yellow" onclick="showOptionsFromStandard()">💡 Pedir 4 opciones (+1)</button>
+                </div>
+                <div id="options-section" class="hidden"></div>
+            `;
+        }
     }
+
+    function handleDirectEnter(e) { if (e.key === 'Enter') checkDirectAnswer(); }
 
     function checkDirectAnswer() {
-        const userAns = normalizeText(document.getElementById('direct-input').value);
+        const userAns = (document.getElementById('direct-input').value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         if (!userAns) return;
-        const isCorrect = currentQuestion.accept.some(valid => normalizeText(valid) === userAns);
+        const isCorrect = currentQuestion.accept.some(valid => valid.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() === userAns);
         processAnswer(isCorrect, 2);
     }
 
-    function showOptions() {
+    function showOptionsFromStandard() {
         document.getElementById('direct-answer-section').classList.add('hidden');
         const optionsGrid = document.getElementById('options-section');
         optionsGrid.innerHTML = '';
@@ -655,8 +885,7 @@
     }
 
     function processAnswer(isCorrect, pointsValue) {
-        document.getElementById('direct-answer-section').classList.add('hidden');
-        document.getElementById('options-section').classList.add('hidden');
+        document.getElementById('question-interaction-container').innerHTML = '';
 
         if (gameMode === 'party') {
             if (isCorrect) {
@@ -664,8 +893,17 @@
                 pot += pointsValue;
                 answeredInCurrentTurn++;
                 updateUI();
-                document.getElementById('decision-pot').textContent = `${pot} tragos`;
-                document.getElementById('party-decision-section').classList.remove('hidden');
+                
+                const container = document.getElementById('question-interaction-container');
+                container.innerHTML = `
+                    <div style="margin-top: 5px;">
+                        <p style="color: var(--success); font-weight: 900; font-size: 1.15rem; margin: 0 0 14px 0;">
+                            🎉 ¡ACERTASTE! Bote: <span id="decision-pot">${pot} tragos</span>
+                        </p>
+                        <button class="btn-arcade btn-purple" onclick="nextQuestionSamePlayer()">🔥 Arriesgar otra</button>
+                        <button class="btn-arcade btn-green" onclick="passTurnParty()">➡️ Pasar turno</button>
+                    </div>
+                `;
             } else {
                 triggerShake();
                 setTimeout(() => showPartyFailScreen(), 300);
@@ -673,24 +911,28 @@
         } else {
             const player = players[currentPlayerIndex];
             player.questionsPlayed++;
-            const resSection = document.getElementById('travel-result-section');
-            const title = document.getElementById('travel-feedback-title');
-            const sub = document.getElementById('travel-feedback-sub');
 
             if (isCorrect) {
                 launchConfetti();
                 player.score += pointsValue;
-                title.textContent = `🎉 ¡CORRECTO! (+${pointsValue} pts)`;
-                title.style.color = 'var(--success)';
-                sub.textContent = `${player.name} acumula ${player.score} puntos.`;
+                document.getElementById('question-interaction-container').innerHTML = `
+                    <div style="margin-top: 5px;">
+                        <h3 style="font-size: 1.4rem; color: var(--success); margin: 0 0 4px 0;">¡CORRECTO! (+${pointsValue} pts)</h3>
+                        <p style="color: var(--text-muted); margin: 0 0 16px 0; font-weight: 700;">${player.name} acumula ${player.score} puntos.</p>
+                        <button class="btn-arcade btn-green" onclick="nextTurnTravel()">Siguiente ➡️</button>
+                    </div>
+                `;
             } else {
                 triggerShake();
-                title.textContent = `❌ ¡FALLASTE! (0 pts)`;
-                title.style.color = 'var(--primary)';
-                sub.textContent = `Era: ${currentQuestion.answer}`;
+                document.getElementById('question-interaction-container').innerHTML = `
+                    <div style="margin-top: 5px;">
+                        <h3 style="font-size: 1.4rem; color: var(--primary); margin: 0 0 4px 0;">¡FALLASTE! (0 pts)</h3>
+                        <p style="color: var(--text-muted); margin: 0 0 16px 0; font-weight: 700;">Era: ${currentQuestion.answer}</p>
+                        <button class="btn-arcade btn-green" onclick="nextTurnTravel()">Siguiente ➡️</button>
+                    </div>
+                `;
             }
             updateUI();
-            resSection.classList.remove('hidden');
         }
     }
 
