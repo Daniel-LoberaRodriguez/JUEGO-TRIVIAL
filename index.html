@@ -244,7 +244,6 @@
         }
         .remove-btn { background: rgba(255, 94, 87, 0.15); color: var(--primary); border: none; border-radius: 6px; padding: 4px 8px; font-weight: 900; cursor: pointer; }
 
-        /* Estilos del Menú de Ajustes Avanzado */
         .settings-container-scroll {
             max-height: 380px;
             overflow-y: auto;
@@ -261,7 +260,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Chips de tipos de pregunta */
         .type-chips-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -452,7 +450,7 @@
         <button id="start-btn" class="btn-arcade btn-green" onclick="startGame()" disabled>🚀 ¡EMPEZAR PARTIDA!</button>
     </div>
 
-    <!-- PANTALLA 1.5: MENÚ DE AJUSTES AVANZADO -->
+    <!-- PANTALLA 1.5: MENÚ DE AJUSTES -->
     <div id="settings-screen" class="card hidden">
         <h2 style="font-size: 1.4rem; text-align: center; margin: 0 0 4px 0;">⚙️ Configurar Partida</h2>
         <p style="text-align: center; color: var(--text-muted); font-size: 0.75rem; margin: 0 0 10px 0;">
@@ -466,7 +464,6 @@
         <div id="settings-warning" class="warning-toast hidden"></div>
 
         <div class="settings-container-scroll">
-            <!-- Tipos de Pregunta -->
             <div class="settings-section-title">Tipos de Pregunta</div>
             <div class="type-chips-grid">
                 <div class="type-chip selected" id="type-standard" onclick="toggleQuestionType('standard')">📝 Estándar / Test</div>
@@ -475,7 +472,6 @@
                 <div class="type-chip selected" id="type-find_true" onclick="toggleQuestionType('find_true')">🎯 Hallar la Verdadera</div>
             </div>
 
-            <!-- Categorías y Niveles -->
             <div class="settings-section-title">Categorías y Niveles</div>
             <div id="categories-config-list"></div>
         </div>
@@ -497,10 +493,7 @@
             <div class="player-pill" id="current-player-display">Turno: Jugador</div>
             <div class="question-box" id="question-display">¿Cargando pregunta?</div>
 
-            <!-- Contenedor dinámico según tipo de pregunta -->
-            <div id="question-interaction-container">
-                <!-- Se inyecta la interfaz correspondiente (input escrito/test o botones especiales v/f) -->
-            </div>
+            <div id="question-interaction-container"></div>
         </div>
     </div>
 
@@ -545,7 +538,6 @@
     let availableQuestions = [];
     let currentQuestion = null;
 
-    // Configuración de Tipos de Pregunta activos
     let selectedTypes = {
         standard: true,
         true_false: true,
@@ -553,7 +545,6 @@
         find_true: true
     };
 
-    // Configuración por categoría
     let categorySettings = {};
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -681,8 +672,7 @@
     }
 
     function updateFilterSummary() {
-        const summaryEl = document.getElementById('active-filter-summary');
-        summaryEl.textContent = "🎲 Filtros personalizados aplicados";
+        document.getElementById('active-filter-summary').textContent = "🎲 Filtros personalizados aplicados";
     }
 
     function getFilteredQuestions() {
@@ -814,7 +804,6 @@
 
         document.getElementById('question-display').textContent = currentQuestion.q;
 
-        // Renderizar controles según el tipo de pregunta
         renderInteractionContainer(qType);
     }
 
@@ -822,16 +811,16 @@
         const container = document.getElementById('question-interaction-container');
         container.innerHTML = '';
 
+        const basePoints = currentQuestion.level || 1; // Nivel 1=1pt, Nivel 2=2pts, Nivel 3=3pts
+
         if (type === 'true_false') {
-            // Botones Verdadero o Falso
             container.innerHTML = `
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <button class="btn-arcade btn-green" onclick="processAnswer(currentQuestion.answer === true || currentQuestion.answer === 'Verdadero', 2)">✅ VERDADERO</button>
-                    <button class="btn-arcade btn-red" onclick="processAnswer(currentQuestion.answer === false || currentQuestion.answer === 'Falso', 2)">❌ FALSO</button>
+                    <button class="btn-arcade btn-green" onclick="processAnswer(currentQuestion.answer === true || currentQuestion.answer === 'Verdadero', ${basePoints})">✅ VERDADERO (+${basePoints})</button>
+                    <button class="btn-arcade btn-red" onclick="processAnswer(currentQuestion.answer === false || currentQuestion.answer === 'Falso', ${basePoints})">❌ FALSO (+${basePoints})</button>
                 </div>
             `;
-        } else if (type === 'find_false' || type === 'find_true' || type === 'standard' && currentQuestion.options) {
-            // Opciones múltiples (A, B, C, D)
+        } else if (type === 'find_false' || type === 'find_true') {
             const optionsGrid = document.createElement('div');
             const shuffled = [...currentQuestion.options].sort(() => Math.random() - 0.5);
             const letters = ['A', 'B', 'C', 'D'];
@@ -840,33 +829,37 @@
                 const btn = document.createElement('button');
                 btn.className = 'btn-arcade btn-option';
                 btn.innerHTML = `<span style="background: rgba(255,255,255,0.08); padding: 3px 8px; border-radius: 6px; margin-right: 8px; color: var(--accent);">${letters[i]}</span> ${opt}`;
-                btn.onclick = () => processAnswer(opt === currentQuestion.answer, 2);
+                btn.onclick = () => processAnswer(opt === currentQuestion.answer, basePoints);
                 optionsGrid.appendChild(btn);
             });
             container.appendChild(optionsGrid);
         } else {
-            // Respuesta directa escrita + opción de pistas
+            // Estándar: Permite escribir directo (vale DOBLE) o pedir opciones (valor normal de nivel)
+            const doublePoints = basePoints * 2;
             container.innerHTML = `
                 <div id="direct-answer-section">
-                    <input type="text" id="direct-input" placeholder="Escribe tu respuesta..." autocomplete="off" onkeypress="handleDirectEnter(event)" style="margin-bottom: 12px;">
-                    <button class="btn-arcade btn-green" onclick="checkDirectAnswer()">✍️ Responder directo (+2)</button>
-                    <button class="btn-arcade btn-yellow" onclick="showOptionsFromStandard()">💡 Pedir 4 opciones (+1)</button>
+                    <p style="font-size: 0.8rem; color: var(--accent); margin: 0 0 8px 0; font-weight: 800;">
+                        🔥 Escribe respuesta directa = ${doublePoints} pts | 💡 Pide opciones = ${basePoints} pt${basePoints > 1 ? 's' : ''}
+                    </p>
+                    <input type="text" id="direct-input" placeholder="Escribe tu respuesta..." autocomplete="off" onkeypress="handleDirectEnter(event, ${doublePoints})" style="margin-bottom: 12px;">
+                    <button class="btn-arcade btn-green" onclick="checkDirectAnswer(${doublePoints})">✍️ Responder directo (+${doublePoints})</button>
+                    <button class="btn-arcade btn-yellow" onclick="showOptionsFromStandard(${basePoints})">💡 Pedir 4 opciones (+${basePoints})</button>
                 </div>
                 <div id="options-section" class="hidden"></div>
             `;
         }
     }
 
-    function handleDirectEnter(e) { if (e.key === 'Enter') checkDirectAnswer(); }
+    function handleDirectEnter(e, points) { if (e.key === 'Enter') checkDirectAnswer(points); }
 
-    function checkDirectAnswer() {
+    function checkDirectAnswer(points) {
         const userAns = (document.getElementById('direct-input').value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
         if (!userAns) return;
         const isCorrect = currentQuestion.accept.some(valid => valid.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim() === userAns);
-        processAnswer(isCorrect, 2);
+        processAnswer(isCorrect, points);
     }
 
-    function showOptionsFromStandard() {
+    function showOptionsFromStandard(points) {
         document.getElementById('direct-answer-section').classList.add('hidden');
         const optionsGrid = document.getElementById('options-section');
         optionsGrid.innerHTML = '';
@@ -879,7 +872,7 @@
             const btn = document.createElement('button');
             btn.className = 'btn-arcade btn-option';
             btn.innerHTML = `<span style="background: rgba(255,255,255,0.08); padding: 3px 8px; border-radius: 6px; margin-right: 8px; color: var(--accent);">${letters[i]}</span> ${opt}`;
-            btn.onclick = () => processAnswer(opt === currentQuestion.answer, 1);
+            btn.onclick = () => processAnswer(opt === currentQuestion.answer, points);
             optionsGrid.appendChild(btn);
         });
     }
@@ -894,8 +887,7 @@
                 answeredInCurrentTurn++;
                 updateUI();
                 
-                const container = document.getElementById('question-interaction-container');
-                container.innerHTML = `
+                document.getElementById('question-interaction-container').innerHTML = `
                     <div style="margin-top: 5px;">
                         <p style="color: var(--success); font-weight: 900; font-size: 1.15rem; margin: 0 0 14px 0;">
                             🎉 ¡ACERTASTE! Bote: <span id="decision-pot">${pot} tragos</span>
