@@ -5,262 +5,533 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Tragos Trivia">
-    <title>Tragos Trivia</title>
+    <meta name="apple-mobile-web-app-title" content="Trivia Party">
+    <title>Trivia Party & Road</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0f172a;
-            --card: #1e293b;
-            --primary: #3b82f6;
-            --accent: #f59e0b;
-            --danger: #ef4444;
-            --success: #10b981;
-            --text: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-base: #121019;
+            --card-bg: #1c1827;
+            --card-border: #2d2640;
+            --primary: #ff5e57;
+            --primary-shadow: #c73630;
+            --accent: #ffbe3b;
+            --accent-shadow: #c78f23;
+            --success: #0be881;
+            --success-shadow: #059c55;
+            --purple: #8854d0;
+            --purple-shadow: #5d3399;
+            --text: #ffffff;
+            --text-muted: #958da5;
         }
 
         * {
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Nunito', -apple-system, sans-serif;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+
+        h1, h2, h3, .badge-font {
+            font-family: 'Fredoka', sans-serif;
         }
 
         body {
             margin: 0;
-            padding: 20px;
-            padding-top: env(safe-area-inset-top, 20px);
-            background-color: var(--bg);
+            padding: 16px;
+            padding-top: max(env(safe-area-inset-top), 20px);
+            padding-bottom: max(env(safe-area-inset-bottom), 20px);
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(136, 84, 208, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 94, 87, 0.12) 0%, transparent 40%);
             color: var(--text);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            align-items: center;
             justify-content: center;
+            overflow-x: hidden;
+        }
+
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
         }
 
         .container {
-            max-width: 450px;
+            max-width: 420px;
             width: 100%;
-            margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
-        .card {
-            background-color: var(--card);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            margin-bottom: 16px;
+        /* Barra superior en partida */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
         }
 
-        h1, h2 {
-            margin-top: 0;
-            text-align: center;
-        }
-
-        .pot-badge {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 14px;
-            text-align: center;
+        .mode-pill {
+            background: #252033;
+            border: 2px solid #362f4d;
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 0.85rem;
             font-weight: 800;
-            font-size: 1.3rem;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .player-turn {
+        .btn-home {
+            background: #252033;
+            border: 2px solid #362f4d;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-home:active {
+            transform: scale(0.95);
+            color: white;
+            background: #362f4d;
+        }
+
+        /* Tarjetas de juego sólidas y limpias */
+        .card {
+            background-color: var(--card-bg);
+            border: 3px solid var(--card-border);
+            border-radius: 28px;
+            padding: 24px 20px;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.94) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+
+        .shake-anim {
+            animation: shake 0.35s ease-in-out;
+        }
+
+        /* Título del juego */
+        .game-title {
+            font-size: 2.5rem;
             text-align: center;
-            color: var(--primary);
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
+            margin: 0 0 4px 0;
+            color: #fff;
+            text-shadow: 3px 3px 0px var(--primary);
             letter-spacing: 1px;
-            margin-bottom: 8px;
         }
 
-        .question-text {
-            font-size: 1.35rem;
-            font-weight: 600;
-            text-align: center;
+        /* Selector de modo de juego tipo tarjeta gruesa */
+        .mode-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             margin: 20px 0;
-            line-height: 1.4;
         }
 
+        .mode-card {
+            background: #121019;
+            border: 3px solid #362f4d;
+            border-radius: 20px;
+            padding: 14px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mode-card .icon {
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .mode-card.active-party {
+            border-color: var(--accent);
+            background: rgba(255, 190, 59, 0.08);
+            box-shadow: 0 0 15px rgba(255, 190, 59, 0.15);
+        }
+
+        .mode-card.active-travel {
+            border-color: var(--primary);
+            background: rgba(255, 94, 87, 0.08);
+            box-shadow: 0 0 15px rgba(255, 94, 87, 0.15);
+        }
+
+        .mode-card h4 {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 800;
+        }
+
+        .mode-card p {
+            margin: 4px 0 0 0;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        /* Entradas de texto */
         input[type="text"] {
             width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 2px solid #334155;
-            background-color: #0f172a;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 3px solid #362f4d;
+            background-color: #121019;
             color: white;
             font-size: 1rem;
-            margin-bottom: 12px;
+            font-weight: 700;
             outline: none;
+            transition: border-color 0.2s;
+            user-select: text;
         }
 
         input[type="text"]:focus {
             border-color: var(--primary);
         }
 
-        button {
+        /* Botones estilo arcade plano con relieve duro */
+        .btn-arcade {
             width: 100%;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 15px 18px;
+            border-radius: 16px;
             border: none;
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 1.05rem;
+            font-weight: 900;
             cursor: pointer;
-            transition: transform 0.1s, opacity 0.2s;
-            margin-bottom: 10px;
+            color: white;
+            position: relative;
+            transition: transform 0.06s, box-shadow 0.06s;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
         }
 
-        button:active { transform: scale(0.98); }
-        button:disabled { opacity: 0.4; cursor: not-allowed; }
+        .btn-arcade:active:not(:disabled) {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 transparent !important;
+        }
 
-        .btn-primary { background-color: var(--primary); color: white; }
-        .btn-accent { background-color: var(--accent); color: #0f172a; }
-        .btn-success { background-color: var(--success); color: white; }
-        .btn-outline { background-color: transparent; border: 2px solid #475569; color: var(--text); }
+        .btn-arcade:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none !important;
+        }
 
+        .btn-red { background: var(--primary); box-shadow: 0 6px 0 var(--primary-shadow); }
+        .btn-yellow { background: var(--accent); color: #121019; box-shadow: 0 6px 0 var(--accent-shadow); }
+        .btn-green { background: var(--success); color: #121019; box-shadow: 0 6px 0 var(--success-shadow); }
+        .btn-purple { background: var(--purple); box-shadow: 0 6px 0 var(--purple-shadow); }
+        
+        .btn-option {
+            background: #121019;
+            border: 3px solid #362f4d;
+            box-shadow: 0 5px 0 #282138;
+            color: var(--text);
+            text-align: left;
+            justify-content: flex-start;
+            padding: 14px 16px;
+            font-weight: 800;
+        }
+
+        .btn-option:active {
+            border-color: var(--accent);
+        }
+
+        /* Lista de jugadores */
         .player-list {
             list-style: none;
             padding: 0;
-            margin: 15px 0;
+            margin: 14px 0;
+            max-height: 180px;
+            overflow-y: auto;
         }
 
         .player-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #0f172a;
-            padding: 10px 15px;
-            border-radius: 10px;
+            background: #121019;
+            border: 2px solid #2d2640;
+            padding: 10px 14px;
+            border-radius: 14px;
             margin-bottom: 8px;
         }
 
-        .remove-btn {
-            width: auto;
-            padding: 5px 10px;
-            margin: 0;
-            background: var(--danger);
-            font-size: 0.8rem;
+        .turn-number {
+            background: var(--purple);
             color: white;
-            border-radius: 6px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 900;
+            margin-right: 10px;
         }
 
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-            margin-top: 15px;
+        .remove-btn {
+            background: rgba(255, 94, 87, 0.15);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-weight: 900;
+            cursor: pointer;
         }
 
-        .hidden { display: none !important; }
-
-        .drink-alert {
+        /* Banner de estado en partida */
+        .status-banner {
+            background: #252033;
+            border: 3px solid #362f4d;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 20px;
             text-align: center;
-            padding: 20px 0;
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .drink-alert h2 {
-            color: var(--danger);
-            font-size: 2rem;
+        .player-pill {
+            background: #252033;
+            border: 2px solid #362f4d;
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: 0.95rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .question-box {
+            background: #121019;
+            border: 3px solid #2d2640;
+            border-radius: 20px;
+            padding: 22px 16px;
+            margin: 12px 0 20px 0;
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* Podio */
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #121019;
+            border: 2px solid #2d2640;
+            padding: 12px 16px;
+            border-radius: 16px;
             margin-bottom: 10px;
         }
 
-        .drink-count {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: var(--accent);
-            margin: 15px 0;
+        .leaderboard-item.rank-1 {
+            border-color: var(--accent);
+            background: rgba(255, 190, 59, 0.08);
         }
+
+        .rank-medal {
+            font-size: 1.3rem;
+            margin-right: 10px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .points-tag {
+            background: #252033;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-weight: 900;
+            color: var(--success);
+        }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
+<canvas id="confetti-canvas"></canvas>
+
 <div class="container">
-    <!-- PANTALLA 1: MENÚ DE JUGADORES -->
+    <!-- BARRA SUPERIOR -->
+    <div id="game-topbar" class="top-bar hidden">
+        <div class="mode-pill" id="active-mode-badge">🍻 Fiesta</div>
+        <button class="btn-home" onclick="confirmReturnMenu()">🏠 Menú</button>
+    </div>
+
+    <!-- PANTALLA 1: MENÚ -->
     <div id="setup-screen" class="card">
-        <h1>🍻 Cultura & Tragos</h1>
-        <p style="text-align:center; color: var(--text-muted); font-size: 0.9rem;">
-            Acumula puntos o pasa el turno. El que falle, bebe todo el bote.
+        <h1 class="game-title">TRIVIA</h1>
+        <p style="text-align:center; color: var(--text-muted); font-size: 0.88rem; margin-top: 0; margin-bottom: 14px;">
+            Elige el modo de juego y añade a los jugadores.
         </p>
-        
-        <div style="display: flex; gap: 8px;">
+
+        <div class="mode-selector">
+            <div id="select-party" class="mode-card active-party" onclick="selectMode('party')">
+                <span class="icon">🍻</span>
+                <h4>Modo Fiesta</h4>
+                <p>Bote acumulado de tragos.</p>
+            </div>
+            <div id="select-travel" class="mode-card" onclick="selectMode('travel')">
+                <span class="icon">🚗</span>
+                <h4>Modo Viaje</h4>
+                <p>Puntos por rondas.</p>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
             <input type="text" id="player-name-input" placeholder="Nombre del jugador..." onkeypress="handleEnter(event)">
-            <button class="btn-primary" style="width: auto; padding: 0 20px;" onclick="addPlayer()">+</button>
+            <button class="btn-arcade btn-purple" style="width: 60px; margin-bottom: 0; font-size: 1.4rem;" onclick="addPlayer()">+</button>
         </div>
 
         <ul id="player-list" class="player-list"></ul>
 
-        <button id="start-btn" class="btn-success" onclick="startGame()" disabled>JUGAR (Mín. 2 jugadores)</button>
+        <button id="start-btn" class="btn-arcade btn-green" onclick="startGame()" disabled>
+            🚀 ¡EMPEZAR PARTIDA!
+        </button>
     </div>
 
     <!-- PANTALLA 2: JUEGO -->
     <div id="game-screen" class="hidden">
-        <div class="pot-badge">
-            🍺 Bote acumulado: <span id="pot-display">0</span> tragos
+        <div id="status-banner" class="status-banner badge-font">
+            🍺 Bote: <span id="pot-display">0</span> tragos
         </div>
 
-        <div class="card">
-            <div class="player-turn" id="current-player-display">Turno de: Jugador</div>
-            <div class="question-text" id="question-display">¿Pregunta?</div>
+        <div id="question-card" class="card" style="text-align: center;">
+            <div class="player-pill" id="current-player-display">Turno de: Jugador</div>
+            <div class="question-box" id="question-display">¿Cargando pregunta?</div>
 
-            <!-- Fase 1: Respuesta directa o pedir opciones -->
+            <!-- Fase 1 -->
             <div id="direct-answer-section">
-                <input type="text" id="direct-input" placeholder="Escribe tu respuesta (+2 pts)..." autocomplete="off" onkeypress="handleDirectEnter(event)">
-                <button class="btn-primary" onclick="checkDirectAnswer()">Responder (+2 tragos)</button>
-                <button class="btn-accent" onclick="showOptions()">Pedir 4 opciones (+1 trago)</button>
+                <input type="text" id="direct-input" placeholder="Escribe tu respuesta..." autocomplete="off" onkeypress="handleDirectEnter(event)" style="margin-bottom: 12px;">
+                <button class="btn-arcade btn-green" onclick="checkDirectAnswer()">✍️ Responder directo (+2)</button>
+                <button class="btn-arcade btn-yellow" onclick="showOptions()">💡 Pedir 4 opciones (+1)</button>
             </div>
 
-            <!-- Fase 2: 4 Opciones -->
-            <div id="options-section" class="options-grid hidden"></div>
+            <!-- Fase 2 -->
+            <div id="options-section" class="hidden"></div>
 
-            <!-- Fase 3: Acierto -> ¿Continuar o Pasar? -->
-            <div id="decision-section" class="hidden" style="margin-top: 20px;">
-                <p style="text-align: center; color: var(--success); font-weight: bold; font-size: 1.2rem;">
-                    ¡CORRECTO! 🎉
+            <!-- Fase 3A: Fiesta -->
+            <div id="party-decision-section" class="hidden" style="margin-top: 15px;">
+                <p style="color: var(--success); font-weight: 900; font-size: 1.15rem; margin: 0 0 14px 0;">
+                    🎉 ¡ACERTASTE! Bote: <span id="decision-pot">0</span>
                 </p>
-                <button class="btn-primary" onclick="nextQuestionSamePlayer()">Seguir jugando (otra pregunta)</button>
-                <button id="pass-btn" class="btn-outline" onclick="passTurn()">Pasar turno al siguiente</button>
+                <button class="btn-arcade btn-purple" onclick="nextQuestionSamePlayer()">🔥 Arriesgar otra</button>
+                <button id="pass-btn" class="btn-arcade btn-green" onclick="passTurnParty()">➡️ Pasar turno</button>
+            </div>
+
+            <!-- Fase 3B: Viaje -->
+            <div id="travel-result-section" class="hidden" style="margin-top: 15px;">
+                <h3 id="travel-feedback-title" style="font-size: 1.4rem; margin: 0 0 4px 0;">¡CORRECTO!</h3>
+                <p id="travel-feedback-sub" style="color: var(--text-muted); margin: 0 0 16px 0; font-weight: 700;"></p>
+                <button class="btn-arcade btn-green" onclick="nextTurnTravel()">Siguiente ➡️</button>
             </div>
         </div>
     </div>
 
-    <!-- PANTALLA 3: FALLO / BEBER -->
-    <div id="fail-screen" class="card hidden drink-alert">
-        <h2>¡HAS FALLADO! ❌</h2>
-        <p id="correct-answer-reveal" style="color: var(--text-muted);"></p>
-        <p id="loser-message" style="font-size: 1.3rem; font-weight: bold; margin-top: 20px;"></p>
-        <div class="drink-count" id="final-drinks">0 TRAGOS</div>
-        <button class="btn-primary" onclick="continueAfterDrink()">Siguiente jugador</button>
+    <!-- PANTALLA 3: FALLO FIESTA -->
+    <div id="party-fail-screen" class="card hidden" style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: 2px;">💥</div>
+        <h2 style="color: var(--primary); font-size: 1.8rem; margin: 0;">¡HAS FALLADO!</h2>
+        <p id="party-correct-reveal" style="color: var(--text-muted); font-weight: 700; margin: 8px 0 16px 0;"></p>
+        
+        <div style="background: #121019; border: 3px dashed var(--primary); border-radius: 20px; padding: 16px; margin-bottom: 20px;">
+            <p id="loser-message" style="font-size: 1.1rem; font-weight: 800; margin: 0;"></p>
+            <div class="badge-font" id="final-drinks" style="font-size: 3rem; font-weight: 900; color: var(--accent); margin: 6px 0;">0 TRAGOS</div>
+        </div>
+
+        <button class="btn-arcade btn-green" onclick="continueAfterDrink()">Siguiente jugador ➡️</button>
+    </div>
+
+    <!-- PANTALLA 4: PODIO VIAJE -->
+    <div id="leaderboard-screen" class="card hidden">
+        <div style="text-align: center; margin-bottom: 16px;">
+            <span style="font-size: 2.5rem;">🏆</span>
+            <h2 id="leaderboard-title" style="font-size: 1.6rem; margin: 4px 0;">Clasificación</h2>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">Tabla de puntos actual</p>
+        </div>
+
+        <div id="leaderboard-list" style="margin-bottom: 20px;"></div>
+
+        <button id="continue-travel-btn" class="btn-arcade btn-green" onclick="continueTravelGame()">▶️ Continuar (5 rondas más)</button>
+        <button id="finish-travel-btn" class="btn-arcade btn-red" onclick="endTravelGame()">🏁 Terminar partida</button>
     </div>
 </div>
 
-<!-- IMPORTANTE: Cargamos el archivo externo con las preguntas -->
 <script src="preguntas.js"></script>
 
 <script>
+    let gameMode = 'party';
     let players = [];
     let currentPlayerIndex = 0;
     let pot = 0;
     let answeredInCurrentTurn = 0;
+    let currentRound = 1;
     let availableQuestions = [];
     let currentQuestion = null;
 
-    function handleEnter(e) {
-        if (e.key === 'Enter') addPlayer();
+    function selectMode(mode) {
+        gameMode = mode;
+        const partyCard = document.getElementById('select-party');
+        const travelCard = document.getElementById('select-travel');
+
+        if (mode === 'party') {
+            partyCard.className = 'mode-card active-party';
+            travelCard.className = 'mode-card';
+        } else {
+            partyCard.className = 'mode-card';
+            travelCard.className = 'mode-card active-travel';
+        }
     }
 
-    function handleDirectEnter(e) {
-        if (e.key === 'Enter') checkDirectAnswer();
-    }
+    function handleEnter(e) { if (e.key === 'Enter') addPlayer(); }
+    function handleDirectEnter(e) { if (e.key === 'Enter') checkDirectAnswer(); }
 
     function addPlayer() {
         const input = document.getElementById('player-name-input');
         const name = input.value.trim();
-        if (name && !players.includes(name)) {
-            players.push(name);
+        if (name && !players.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+            players.push({ name: name, score: 0, questionsPlayed: 0 });
             input.value = '';
             renderPlayers();
         }
@@ -277,48 +548,81 @@
         players.forEach((p, idx) => {
             list.innerHTML += `
                 <li class="player-item">
-                    <span>${idx + 1}. <strong>${p}</strong></span>
-                    <button class="remove-btn" onclick="removePlayer(${idx})">X</button>
+                    <div>
+                        <span class="turn-number">${idx + 1}</span>
+                        <strong>${p.name}</strong>
+                    </div>
+                    <button class="remove-btn" onclick="removePlayer(${idx})">✕</button>
                 </li>
             `;
         });
         const startBtn = document.getElementById('start-btn');
         startBtn.disabled = players.length < 2;
-        startBtn.textContent = players.length < 2 ? 'JUGAR (Mín. 2 jugadores)' : `JUGAR (${players.length} jugadores)`;
+        startBtn.textContent = players.length < 2 ? 'Mínimo 2 jugadores' : `🚀 ¡EMPEZAR! (${players.length})`;
+    }
+
+    function confirmReturnMenu() {
+        if (confirm("¿Volver al menú principal? Se perderá la partida actual.")) {
+            returnToMenu();
+        }
+    }
+
+    function returnToMenu() {
+        document.getElementById('game-topbar').classList.add('hidden');
+        document.getElementById('game-screen').classList.add('hidden');
+        document.getElementById('party-fail-screen').classList.add('hidden');
+        document.getElementById('leaderboard-screen').classList.add('hidden');
+        document.getElementById('setup-screen').classList.remove('hidden');
     }
 
     function startGame() {
-        // MEZCLA ALEATORIA DE TODAS LAS PREGUNTAS AL INICIAR
-        availableQuestions = [...questionsDB].sort(() => Math.random() - 0.5);
+        players.forEach(p => { p.score = 0; p.questionsPlayed = 0; });
         currentPlayerIndex = 0;
         pot = 0;
         answeredInCurrentTurn = 0;
-        
+        currentRound = 1;
+        availableQuestions = [...questionsDB].sort(() => Math.random() - 0.5);
+
         document.getElementById('setup-screen').classList.add('hidden');
+        document.getElementById('game-topbar').classList.remove('hidden');
         document.getElementById('game-screen').classList.remove('hidden');
+
+        document.getElementById('active-mode-badge').innerHTML = gameMode === 'party' ? '🍻 Fiesta' : '🚗 Viaje';
         updateUI();
         loadNextQuestion();
     }
 
     function updateUI() {
-        document.getElementById('pot-display').textContent = pot;
-        document.getElementById('current-player-display').textContent = `Turno de: ${players[currentPlayerIndex]}`;
+        const currentPlayer = players[currentPlayerIndex];
+        const banner = document.getElementById('status-banner');
+
+        if (gameMode === 'party') {
+            banner.innerHTML = `🍺 Bote: <span id="pot-display">${pot}</span> ${pot === 1 ? 'trago' : 'tragos'}`;
+            document.getElementById('current-player-display').textContent = `Turno: ${currentPlayer.name}`;
+        } else {
+            banner.innerHTML = `🚗 Ronda ${currentRound} • ${currentPlayer.name}: ${currentPlayer.score} pts`;
+            document.getElementById('current-player-display').textContent = `Turno: ${currentPlayer.name}`;
+        }
     }
 
     function loadNextQuestion() {
-        if (availableQuestions.length ===0) {
-            // Si se acaban todas las preguntas de la base de datos, se vuelve a barajar
+        if (availableQuestions.length === 0) {
             availableQuestions = [...questionsDB].sort(() => Math.random() - 0.5);
         }
-        // Saca la primera pregunta de la lista ya barajada
         currentQuestion = availableQuestions.shift();
+
+        const qCard = document.getElementById('question-card');
+        qCard.style.animation = 'none';
+        qCard.offsetHeight;
+        qCard.style.animation = 'popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 
         document.getElementById('question-display').textContent = currentQuestion.q;
         document.getElementById('direct-input').value = '';
-        
+
         document.getElementById('direct-answer-section').classList.remove('hidden');
         document.getElementById('options-section').classList.add('hidden');
-        document.getElementById('decision-section').classList.add('hidden');
+        document.getElementById('party-decision-section').classList.add('hidden');
+        document.getElementById('travel-result-section').classList.add('hidden');
     }
 
     function normalizeText(str) {
@@ -328,14 +632,8 @@
     function checkDirectAnswer() {
         const userAns = normalizeText(document.getElementById('direct-input').value);
         if (!userAns) return;
-
         const isCorrect = currentQuestion.accept.some(valid => normalizeText(valid) === userAns);
-
-        if (isCorrect) {
-            handleCorrect(2);
-        } else {
-            handleFail();
-        }
+        processAnswer(isCorrect, 2);
     }
 
     function showOptions() {
@@ -344,50 +642,61 @@
         optionsGrid.innerHTML = '';
         optionsGrid.classList.remove('hidden');
 
-        // Mezclar también las 4 opciones al azar para que la respuesta correcta no esté siempre en el mismo sitio
-        const shuffledOptions = [...currentQuestion.options].sort(() => Math.random() - 0.5);
+        const shuffled = [...currentQuestion.options].sort(() => Math.random() - 0.5);
+        const letters = ['A', 'B', 'C', 'D'];
 
-        shuffledOptions.forEach(opt => {
+        shuffled.forEach((opt, i) => {
             const btn = document.createElement('button');
-            btn.className = 'btn-outline';
-            btn.textContent = opt;
-            btn.onclick = () => {
-                if (opt === currentQuestion.answer) {
-                    handleCorrect(1);
-                } else {
-                    handleFail();
-                }
-            };
+            btn.className = 'btn-arcade btn-option';
+            btn.innerHTML = `<span style="background: rgba(255,255,255,0.08); padding: 3px 8px; border-radius: 6px; margin-right: 8px; color: var(--accent);">${letters[i]}</span> ${opt}`;
+            btn.onclick = () => processAnswer(opt === currentQuestion.answer, 1);
             optionsGrid.appendChild(btn);
         });
     }
 
-    function handleCorrect(points) {
-        pot += points;
-        answeredInCurrentTurn++;
-        updateUI();
-
+    function processAnswer(isCorrect, pointsValue) {
         document.getElementById('direct-answer-section').classList.add('hidden');
         document.getElementById('options-section').classList.add('hidden');
-        
-        // Bloquear el botón de pasar si no ha respondido al menos una pregunta en este turno
-        const passBtn = document.getElementById('pass-btn');
-        if (answeredInCurrentTurn >= 1) {
-            passBtn.disabled = false;
-            passBtn.style.opacity = "1";
+
+        if (gameMode === 'party') {
+            if (isCorrect) {
+                launchConfetti();
+                pot += pointsValue;
+                answeredInCurrentTurn++;
+                updateUI();
+                document.getElementById('decision-pot').textContent = `${pot} tragos`;
+                document.getElementById('party-decision-section').classList.remove('hidden');
+            } else {
+                triggerShake();
+                setTimeout(() => showPartyFailScreen(), 300);
+            }
         } else {
-            passBtn.disabled = true;
-            passBtn.style.opacity = "0.4";
+            const player = players[currentPlayerIndex];
+            player.questionsPlayed++;
+            const resSection = document.getElementById('travel-result-section');
+            const title = document.getElementById('travel-feedback-title');
+            const sub = document.getElementById('travel-feedback-sub');
+
+            if (isCorrect) {
+                launchConfetti();
+                player.score += pointsValue;
+                title.textContent = `🎉 ¡CORRECTO! (+${pointsValue} pts)`;
+                title.style.color = 'var(--success)';
+                sub.textContent = `${player.name} acumula ${player.score} puntos.`;
+            } else {
+                triggerShake();
+                title.textContent = `❌ ¡FALLASTE! (0 pts)`;
+                title.style.color = 'var(--primary)';
+                sub.textContent = `Era: ${currentQuestion.answer}`;
+            }
+            updateUI();
+            resSection.classList.remove('hidden');
         }
-
-        document.getElementById('decision-section').classList.remove('hidden');
     }
 
-    function nextQuestionSamePlayer() {
-        loadNextQuestion();
-    }
+    function nextQuestionSamePlayer() { loadNextQuestion(); }
 
-    function passTurn() {
+    function passTurnParty() {
         if (answeredInCurrentTurn < 1) return;
         currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
         answeredInCurrentTurn = 0;
@@ -395,15 +704,15 @@
         loadNextQuestion();
     }
 
-    function handleFail() {
+    function showPartyFailScreen() {
         document.getElementById('game-screen').classList.add('hidden');
-        document.getElementById('fail-screen').classList.remove('hidden');
+        document.getElementById('party-fail-screen').classList.remove('hidden');
 
-        const loserName = players[currentPlayerIndex];
+        const loserName = players[currentPlayerIndex].name;
         const drinksToTake = pot > 0 ? pot : 1;
 
-        document.getElementById('correct-answer-reveal').textContent = `La respuesta era: ${currentQuestion.answer}`;
-        document.getElementById('loser-message').textContent = `${loserName} tiene que beber:`;
+        document.getElementById('party-correct-reveal').textContent = `Era: ${currentQuestion.answer}`;
+        document.getElementById('loser-message').textContent = `${loserName} bebe:`;
         document.getElementById('final-drinks').textContent = `${drinksToTake} ${drinksToTake === 1 ? 'TRAGO' : 'TRAGOS'}`;
     }
 
@@ -411,12 +720,121 @@
         pot = 0;
         answeredInCurrentTurn = 0;
         currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-
-        document.getElementById('fail-screen').classList.add('hidden');
+        document.getElementById('party-fail-screen').classList.add('hidden');
         document.getElementById('game-screen').classList.remove('hidden');
-        
         updateUI();
         loadNextQuestion();
+    }
+
+    function nextTurnTravel() {
+        if (currentPlayerIndex === players.length - 1) {
+            if (currentRound % 5 === 0) {
+                showLeaderboard(false);
+                return;
+            }
+            currentRound++;
+            currentPlayerIndex = 0;
+        } else {
+            currentPlayerIndex++;
+        }
+        updateUI();
+        loadNextQuestion();
+    }
+
+    function showLeaderboard(isFinal) {
+        document.getElementById('game-screen').classList.add('hidden');
+        document.getElementById('leaderboard-screen').classList.remove('hidden');
+
+        const title = document.getElementById('leaderboard-title');
+        const continueBtn = document.getElementById('continue-travel-btn');
+        const finishBtn = document.getElementById('finish-travel-btn');
+
+        if (isFinal) {
+            launchConfetti();
+            title.textContent = `🏆 ¡PODIO FINAL!`;
+            continueBtn.classList.add('hidden');
+            finishBtn.textContent = `🏠 Volver al Menú`;
+            finishBtn.onclick = returnToMenu;
+        } else {
+            title.textContent = `📊 Ronda ${currentRound} Completada`;
+            continueBtn.classList.remove('hidden');
+            finishBtn.textContent = `🏁 Terminar partida`;
+            finishBtn.onclick = endTravelGame;
+        }
+
+        const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+        const list = document.getElementById('leaderboard-list');
+        list.innerHTML = '';
+        const medals = ['🥇', '🥈', '🥉'];
+
+        sortedPlayers.forEach((p, idx) => {
+            const rankClass = idx === 0 ? 'rank-1' : '';
+            const medal = medals[idx] || `${idx + 1}º`;
+            list.innerHTML += `
+                <div class="leaderboard-item ${rankClass}">
+                    <div style="display: flex; align-items: center;">
+                        <span class="rank-medal">${medal}</span>
+                        <strong>${p.name}</strong>
+                    </div>
+                    <span class="points-tag">${p.score} pts</span>
+                </div>
+            `;
+        });
+    }
+
+    function continueTravelGame() {
+        currentRound++;
+        currentPlayerIndex = 0;
+        document.getElementById('leaderboard-screen').classList.add('hidden');
+        document.getElementById('game-screen').classList.remove('hidden');
+        updateUI();
+        loadNextQuestion();
+    }
+
+    function endTravelGame() { showLeaderboard(true); }
+
+    function triggerShake() {
+        const card = document.getElementById('question-card');
+        card.classList.remove('shake-anim');
+        void card.offsetWidth;
+        card.classList.add('shake-anim');
+    }
+
+    function launchConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        const colors = ['#ff5e57', '#ffbe3b', '#0be881', '#8854d0'];
+
+        for (let i = 0; i < 50; i++) {
+            particles.push({
+                x: canvas.width / 2, y: canvas.height / 2,
+                vx: (Math.random() - 0.5) * 14, vy: (Math.random() - 0.7) * 14,
+                size: Math.random() * 7 + 3,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                alpha: 1
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let active = false;
+            particles.forEach(p => {
+                if (p.alpha > 0) {
+                    active = true;
+                    p.x += p.vx; p.y += p.vy;
+                    p.vy += 0.4; p.alpha -= 0.025;
+                    ctx.globalAlpha = Math.max(0, p.alpha);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.size, p.size);
+                }
+            });
+            if (active) requestAnimationFrame(animate);
+            else ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        animate();
     }
 </script>
 
