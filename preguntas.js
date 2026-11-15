@@ -1,1214 +1,598 @@
 const questionsDB = [
-    // --- 1. CULTURA GENERAL ---
-    {
-        q: "¿De qué país es originaria la famosa bebida alcohólica llamada tequila?",
-        category: "culturageneral", level: 1, type: "standard",
-        accept: ["mexico", "méxico"],
-        options: ["México", "Colombia", "España", "Cuba"],
-        answer: "México"
-    },
-    {
-        q: "¿Es cierto que una persona adulta tiene exactamente 206 huesos en su esqueleto en condiciones normales?",
-        category: "culturageneral", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "De los siguientes elementos y símbolos químicos, ¿cuál corresponde al elemento 'Fe' en la tabla periódica?",
-        category: "culturageneral", level: 3, type: "standard",
-        accept: ["hierro"],
-        options: ["Hierro", "Flúor", "Fósforo", "Francio"],
-        answer: "Hierro"
-    },
-    {
-        q: "¿Cuál es el idioma más hablado del mundo como lengua materna?",
-        category: "culturageneral", level: 1, type: "standard",
-        accept: ["chino mandarin", "mandarin", "chino"],
-        options: ["Chino mandarín", "Español", "Inglés", "Hindi"],
-        answer: "Chino mandarín"
-    },
-    {
-        q: "¿En qué continente se encuentra el desierto de Kalahari?",
-        category: "culturageneral", level: 1, type: "standard",
-        accept: ["africa", "áfrica"],
-        options: ["África", "Asia", "Oceanía", "América del Sur"],
-        answer: "África"
-    },
-    {
-        q: "¿Es cierto que los diamantes y el grafito están compuestos exactamente por el mismo elemento químico (carbono)?",
-        category: "culturageneral", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos monumentos son maravillas del mundo moderno, pero uno NO lo es. ¿Cuál es el intruso?",
-        category: "culturageneral", level: 3, type: "find_false",
-        options: ["Gran Muralla China", "Coliseo de Roma", "Pirámide de Guiza", "Chichén Itzá"],
-        answer: "Pirámide de Guiza"
-    },
-    {
-        q: "¿Qué moneda oficial se utiliza en el país de Japón?",
-        category: "culturageneral", level: 1, type: "standard",
-        accept: ["yen", "yenes"],
-        options: ["Yen", "Yuan", "Won", "Dólar"],
-        answer: "Yen"
-    },
-    {
-        q: "¿Cuál es el órgano interno más grande del cuerpo humano?",
-        category: "culturageneral", level: 2, type: "standard",
-        accept: ["el higado", "higado"],
-        options: ["El hígado", "El corazón", "El intestino delgado", "Los pulmones"],
-        answer: "El hígado"
-    },
-    {
-        q: "De las siguientes afirmaciones sobre elementos geográficos y astronómicos, ¿cuál es la ÚNICA verdadera?",
-        category: "culturageneral", level: 3, type: "find_true",
-        options: [
-            "La línea del Ecuador cruza exactamente por el centro de Europa.",
-            "La estrella más cercana a la Tierra (aparte del Sol) es Próxima Centauri.",
-            "El monte Everest es el volcán más activo del planeta.",
-            "El Océano Atlántico es el más profundo de todos los océanos."
-        ],
-        answer: "La estrella más cercana a la Tierra (aparte del Sol) es Próxima Centauri."
-    },
-    {
-        q: "¿En qué año tuvo lugar el famoso hundimiento del transatlántico Titanic?",
-        category: "culturageneral", level: 1, type: "standard",
-        accept: ["1912"],
-        options: ["1910", "1912", "1915", "1905"],
-        answer: "1912"
-    },
-    {
-        q: "¿Es cierto que las zanahorias eran originalmente de color morado o amarillo antes de ser cultivadas en su tonalidad naranja actual?",
-        category: "culturageneral", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿Cuál es el metal más caro del mundo en los mercados internacionales habitualmente?",
-        category: "culturageneral", level: 3, type: "standard",
-        accept: ["rodio", "el rodio"],
-        options: ["Rodio", "Oro", "Platino", "Paladio"],
-        answer: "Rodio"
-    },
-    {
-        q: "¿Cómo se llama el punto más alto de la superficie terrestre ubicado en la cordillera del Himalaya?",
-        category: "culturageneral", level: 1, type: "standard",
-        accept: ["everest", "monte everest"],
-        options: ["Monte Everest", "K2", "Kilimanjaro", "Aconcagua"],
-        answer: "Monte Everest"
-    },
-    {
-        q: "¿Cuál es el animal terrestre capaz de alcanzar mayor velocidad en carrera corta?",
-        category: "culturageneral", level: 1, type: "standard",
-        accept: ["guepardo", "chita"],
-        options: ["Guepardo", "León", "Gacela", "Antílope"],
-        answer: "Guepardo"
-    },
-    {
-        q: "¿Es cierto que el sonido viaja más rápido en el agua que en el aire?",
-        category: "culturageneral", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos países tienen frontera terrestre con España, pero uno NO. ¿Cuál es el intruso?",
-        category: "culturageneral", level: 2, type: "find_false",
-        options: ["Portugal", "Francia", "Italia", "Andorra"],
-        answer: "Italia"
-    },
-    {
-        q: "¿Qué físico alemán formuló la famosa teoría de la relatividad especial y general?",
-        category: "culturageneral", level: 1, type: "standard",
-        accept: ["albert einstein", "einstein"],
-        options: ["Albert Einstein", "Isaac Newton", "Galileo Galilei", "Nikola Tesla"],
-        answer: "Albert Einstein"
-    },
+  // =========================================================================
+  // 1. ESTÁNDAR - NIVEL 1 (50 PREGUNTAS: 1 a 50)
+  // =========================================================================
+  { q: "¿En qué año se aprobó la actual Constitución Española?", category: "culturageneral", level: 1, type: "standard", accept: ["1978"], options: ["1978", "1975", "1981", "1976"], answer: "1978" },
+  { q: "¿Qué filósofo griego escribió 'La República' y formuló la teoría de las Ideas?", category: "culturageneral", level: 1, type: "standard", accept: ["platon", "platón"], options: ["Platón", "Aristóteles", "Sócrates", "Epicuro"], answer: "Platón" },
+  { q: "¿Cuál es la unidad básica estructural y funcional de todos los seres vivos?", category: "culturageneral", level: 1, type: "standard", accept: ["celula", "célula", "la celula"], options: ["La célula", "El átomo", "El tejido", "La mitocondria"], answer: "La célula" },
+  { q: "¿Quién escribió 'La Casa de Bernarda Alba'?", category: "culturageneral", level: 1, type: "standard", accept: ["federico garcia lorca", "lorca", "garcia lorca"], options: ["Federico García Lorca", "Rafael Alberti", "Luis Cernuda", "Antonio Machado"], answer: "Federico García Lorca" },
+  { q: "¿Qué gas es el más abundante en la atmósfera terrestre?", category: "culturageneral", level: 1, type: "standard", accept: ["nitrogeno", "nitrógeno"], options: ["Nitrógeno", "Oxígeno", "Dióxido de carbono", "Argón"], answer: "Nitrógeno" },
+  { q: "¿En qué año comenzó la Revolución Francesa?", category: "culturageneral", level: 1, type: "standard", accept: ["1789"], options: ["1789", "1776", "1804", "1812"], answer: "1789" },
+  { q: "¿Cuál es la derivada de la función f(x) = x²?", category: "culturageneral", level: 1, type: "standard", accept: ["2x"], options: ["2x", "x", "x²", "2"], answer: "2x" },
+  { q: "¿Qué orgánulo celular se encarga principalmente de la respiración celular y producción de ATP?", category: "culturageneral", level: 1, type: "standard", accept: ["mitocondria", "las mitocondrias"], options: ["Mitocondria", "Ribosoma", "Cloroplasto", "Lisosoma"], answer: "Mitocondria" },
+  { q: "¿En qué año estalló la Guerra Civil Española?", category: "culturageneral", level: 1, type: "standard", accept: ["1936"], options: ["1936", "1939", "1931", "1934"], answer: "1936" },
+  { q: "¿Qué filósofo pronunció la célebre frase 'Pienso, luego existo'?", category: "culturageneral", level: 1, type: "standard", accept: ["rene descartes", "descartes"], options: ["René Descartes", "Immanuel Kant", "David Hume", "John Locke"], answer: "René Descartes" },
+  { q: "¿Cuál es el símbolo químico del sodio en la tabla periódica?", category: "culturageneral", level: 1, type: "standard", accept: ["na"], options: ["Na", "So", "Sd", "K"], answer: "Na" },
+  { q: "¿Qué movimiento literario del siglo XIX exaltaba los sentimientos, la libertad y lo subjetivo?", category: "culturageneral", level: 1, type: "standard", accept: ["romanticismo", "el romanticismo"], options: ["Romanticismo", "Realismo", "Neoclasicismo", "Barroco"], answer: "Romanticismo" },
+  { q: "¿En qué año cayó el Imperio Romano de Occidente?", category: "culturageneral", level: 1, type: "standard", accept: ["476"], options: ["476 d.C.", "1453 d.C.", "313 d.C.", "410 d.C."], answer: "476 d.C." },
+  { q: "¿Qué nombre recibe el cambio de estado de sólido a gas sin pasar por líquido?", category: "culturageneral", level: 1, type: "standard", accept: ["sublimacion", "sublimación"], options: ["Sublimación", "Vaporización", "Condensación", "Fusión"], answer: "Sublimación" },
+  { q: "¿Cuál es el pico más alto de la Península Ibérica?", category: "culturageneral", level: 1, type: "standard", accept: ["mulhacen", "mulhacén"], options: ["Mulhacén", "Teide", "Aneto", "Veleta"], answer: "Mulhacén" },
+  { q: "¿Qué ácido nucleico contiene la información genética hereditaria en la mayoría de organismos?", category: "culturageneral", level: 1, type: "standard", accept: ["adn"], options: ["ADN", "ARN", "ATP", "AMP"], answer: "ADN" },
+  { q: "¿En qué año se proclamó la Segunda República Española?", category: "culturageneral", level: 1, type: "standard", accept: ["1931"], options: ["1931", "1936", "1923", "1873"], answer: "1931" },
+  { q: "¿Qué autor escribió 'Campos de Castilla'?", category: "culturageneral", level: 1, type: "standard", accept: ["antonio machado", "machado"], options: ["Antonio Machado", "Juan Ramón Jiménez", "Miguel de Unamuno", "Pío Baroja"], answer: "Antonio Machado" },
+  { q: "¿Cuál es la unidad de medida de la fuerza en el Sistema Internacional?", category: "culturageneral", level: 1, type: "standard", accept: ["newton", "newtons"], options: ["Newton", "Julio", "Vatio", "Pascal"], answer: "Newton" },
+  { q: "¿Qué nombre recibe la línea imaginaria que divide la Tierra en hemisferio norte y sur?", category: "culturageneral", level: 1, type: "standard", accept: ["ecuador", "el ecuador"], options: ["Ecuador", "Meridiano de Greenwich", "Trópico de Cáncer", "Trópico de Capricornio"], answer: "Ecuador" },
+  { q: "¿En qué siglo se desarrolló principalmente el Siglo de Oro español?", category: "culturageneral", level: 1, type: "standard", accept: ["xvi y xvii", "16 y 17", "xvii"], options: ["XVI y XVII", "XV y XVI", "XVII y XVIII", "XIV y XV"], answer: "XVI y XVII" },
+  { q: "¿Qué macromolécula está formada por la unión de aminoácidos?", category: "culturageneral", level: 1, type: "standard", accept: ["proteina", "proteínas", "proteinas"], options: ["Proteína", "Lípido", "Glúcido", "Ácido nucleico"], answer: "Proteína" },
+  { q: "¿En qué año llegó Cristóbal Colón a América?", category: "culturageneral", level: 1, type: "standard", accept: ["1492"], options: ["1492", "1498", "1502", "1488"], answer: "1492" },
+  { q: "¿Qué filosofo alemán afirmó que 'Dios ha muerto'?", category: "culturageneral", level: 1, type: "standard", accept: ["friedrich nietzsche", "nietzsche"], options: ["Friedrich Nietzsche", "Karl Marx", "Arthur Schopenhauer", "Georg Hegel"], answer: "Friedrich Nietzsche" },
+  { q: "¿Cuál es el valor aproximado de la aceleración de la gravedad en la superficie terrestre?", category: "culturageneral", level: 1, type: "standard", accept: ["9.8", "9,8", "9.8 m/s2"], options: ["9,8 m/s²", "10,8 m/s²", "8,9 m/s²", "6,67 m/s²"], answer: "9,8 m/s²" },
+  { q: "¿Qué tipo de enlace químico se forma al compartir pares de electrones entre no metales?", category: "culturageneral", level: 1, type: "standard", accept: ["covalente", "enlace covalente"], options: ["Covalente", "Iónico", "Metálico", "Puente de hidrógeno"], answer: "Covalente" },
+  { q: "¿Quién pintó 'Las Meninas'?", category: "culturageneral", level: 1, type: "standard", accept: ["diego velazquez", "velazquez", "velázquez"], options: ["Diego Velázquez", "Francisco de Goya", "El Greco", "Murillo"], answer: "Diego Velázquez" },
+  { q: "¿Cuál es el río más caudaloso de la Península Ibérica?", category: "culturageneral", level: 1, type: "standard", accept: ["ebro", "el ebro"], options: ["Ebro", "Tajo", "Duero", "Guadalquivir"], answer: "Ebro" },
+  { q: "¿En qué año comenzó la Primera Guerra Mundial?", category: "culturageneral", level: 1, type: "standard", accept: ["1914"], options: ["1914", "1918", "1939", "1917"], answer: "1914" },
+  { q: "¿Qué obra anónima inaugura la novela picaresca española en 1554?", category: "culturageneral", level: 1, type: "standard", accept: ["el lazarillo de tormes", "lazarillo de tormes", "lazarillo"], options: ["El Lazarillo de Tormes", "El Buscón", "Guzmán de Alfarache", "La Celestina"], answer: "El Lazarillo de Tormes" },
+  { q: "¿Qué partícula subatómica tiene carga eléctrica negativa?", category: "culturageneral", level: 1, type: "standard", accept: ["electron", "electrón"], options: ["Electrón", "Protón", "Neutrón", "Positrón"], answer: "Electrón" },
+  { q: "¿Cómo se llama el proceso por el cual las plantas convierten energía lumínica en química?", category: "culturageneral", level: 1, type: "standard", accept: ["fotosintesis", "fotosíntesis"], options: ["Fotosíntesis", "Quimiosíntesis", "Glucólisis", "Fermentación"], answer: "Fotosíntesis" },
+  { q: "¿Qué ciudad fue el epicentro del Renacimiento italiano en el siglo XV?", category: "culturageneral", level: 1, type: "standard", accept: ["florencia"], options: ["Florencia", "Venecia", "Milán", "Nápoles"], answer: "Florencia" },
+  { q: "¿Qué rey español fue conocido como 'El Rey Planeta'?", category: "culturageneral", level: 1, type: "standard", accept: ["felipe iv", "felipe 4"], options: ["Felipe IV", "Felipe II", "Carlos I", "Carlos III"], answer: "Felipe IV" },
+  { q: "¿Cuál es el pH neutro de una disolución acuosa a 25 °C?", category: "culturageneral", level: 1, type: "standard", accept: ["7", "siete"], options: ["7", "0", "14", "5"], answer: "7" },
+  { q: "¿Qué autor escribió 'La Regenta'?", category: "culturageneral", level: 1, type: "standard", accept: ["leopoldo alas clarin", "clarin", "clarín"], options: ["Leopoldo Alas 'Clarín'", "Benito Pérez Galdós", "Emilia Pardo Bazán", "Juan Valera"], answer: "Leopoldo Alas 'Clarín'" },
+  { q: "¿Cuál es el único mamífero capaz de volar activamente?", category: "culturageneral", level: 1, type: "standard", accept: ["murcielago", "el murcielago", "murciélago"], options: ["Murciélago", "Ardilla voladora", "Colugo", "Ornitorrinco"], answer: "Murciélago" },
+  { q: "¿En qué año terminó la Segunda Guerra Mundial?", category: "culturageneral", level: 1, type: "standard", accept: ["1945"], options: ["1945", "1944", "1946", "1942"], answer: "1945" },
+  { q: "¿Qué nombre recibe el triángulo que tiene todos sus lados y ángulos iguales?", category: "culturageneral", level: 1, type: "standard", accept: ["equilatero", "equilátero"], options: ["Equilátero", "Isósceles", "Escaleno", "Rectángulo"], answer: "Equilátero" },
+  { q: "¿Qué tratado puso fin a la Primera Guerra Mundial en 1919?", category: "culturageneral", level: 1, type: "standard", accept: ["versalles", "tratado de versalles"], options: ["Tratado de Versalles", "Tratado de Utrecht", "Paz de Westfalia", "Tratado de París"], answer: "Tratado de Versalles" },
+  { q: "¿Qué científico propuso la teoría de la evolución por selección natural?", category: "culturageneral", level: 1, type: "standard", accept: ["charles darwin", "darwin"], options: ["Charles Darwin", "Jean-Baptiste Lamarck", "Gregor Mendel", "Louis Pasteur"], answer: "Charles Darwin" },
+  { q: "¿Cuál es la capital de la comunidad autónoma de Extremadura?", category: "culturageneral", level: 1, type: "standard", accept: ["merida", "mérida"], options: ["Mérida", "Badajoz", "Cáceres", "Plasencia"], answer: "Mérida" },
+  { q: "¿Qué figura retórica consiste en la exageración intencionada de la realidad?", category: "culturageneral", level: 1, type: "standard", accept: ["hiperbole", "hipérbole"], options: ["Hipérbole", "Metáfora", "Metonimia", "Antítesis"], answer: "Hipérbole" },
+  { q: "¿Cuál es el símbolo químico del hierro?", category: "culturageneral", level: 1, type: "standard", accept: ["fe"], options: ["Fe", "Hi", "Ir", "He"], answer: "Fe" },
+  { q: "¿En qué año se promulgó la primera Constitución española, 'La Pepa'?", category: "culturageneral", level: 1, type: "standard", accept: ["1812"], options: ["1812", "1808", "1837", "1869"], answer: "1812" },
+  { q: "¿Qué filósofo es considerado el padre del empirismo moderno junto a Locke y Berkeley?", category: "culturageneral", level: 1, type: "standard", accept: ["david hume", "hume"], options: ["David Hume", "Baruch Spinoza", "Gottfried Leibniz", "Thomas Hobbes"], answer: "David Hume" },
+  { q: "¿Qué tipo de división celular produce cuatro células hijas haploides?", category: "culturageneral", level: 1, type: "standard", accept: ["meiosis"], options: ["Meiosis", "Mitosis", "Bipartición", "Gemación"], answer: "Meiosis" },
+  { q: "¿Cuál es la unidad de resistencia eléctrica en el Sistema Internacional?", category: "culturageneral", level: 1, type: "standard", accept: ["ohmio", "ohmios"], options: ["Ohmio", "Voltio", "Amperio", "Faradio"], answer: "Ohmio" },
+  { q: "¿Quién escribió 'Niebla' y fue figura clave de la Generación del 98?", category: "culturageneral", level: 1, type: "standard", accept: ["miguel de unamuno", "unamuno"], options: ["Miguel de Unamuno", "Azorín", "Ramiro de Maeztu", "Valle-Inclán"], answer: "Miguel de Unamuno" },
+  { q: "¿Cómo se llama el punto de la superficie terrestre situado directamente encima del hipocentro de un terremoto?", category: "culturageneral", level: 1, type: "standard", accept: ["epicentro"], options: ["Epicentro", "Falla", "Cráter", "Dorsal"], answer: "Epicentro" },
 
-    // --- 2. DEPORTES ---
-    {
-        q: "¿Qué piloto logró el campeonato mundial de Fórmula 1 en la temporada 2023?",
-        category: "deportes", level: 1, type: "standard",
-        accept: ["max verstappen", "verstappen"],
-        options: ["Max Verstappen", "Lewis Hamilton", "Fernando Alonso", "Charles Leclerc"],
-        answer: "Max Verstappen"
-    },
-    {
-        q: "¿Es cierto que Usain Bolt ostenta el récord mundial oficial en la prueba de los 100 metros lisos?",
-        category: "deportes", level: 1, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos tenistas ganaron múltiples Grand Slams en tierra batida, pero uno NUNCA ganó Roland Garros. ¿Quién es el intruso?",
-        category: "deportes", level: 3, type: "find_false",
-        options: ["Rafael Nadal", "Björn Borg", "Pete Sampras", "Gustavo Kuerten"],
-        answer: "Pete Sampras"
-    },
-    {
-        q: "¿En qué país se inventó el deporte del baloncesto a finales del siglo XIX?",
-        category: "deportes", level: 2, type: "standard",
-        accept: ["estados unidos", "eeuu", "usa"],
-        options: ["Estados Unidos", "Canadá", "Inglaterra", "Francia"],
-        answer: "Estados Unidos"
-    },
-    {
-        q: "¿Cuántos jugadores forman un equipo titular sobre el terreno de juego en un partido de fútbol oficial?",
-        category: "deportes", level: 1, type: "standard",
-        accept: ["11", "once"],
-        options: ["11", "10", "12", "9"],
-        answer: "11"
-    },
-    {
-        q: "¿Es cierto que en el golf el objetivo consiste en completar el recorrido introduciendo la bola en el hoyo con el menor número posible de golpes?",
-        category: "deportes", level: 1, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "De los siguientes deportistas, ¿cuál ostenta el récord histórico de medallas de oro olímpicas ganadas?",
-        category: "deportes", level: 2, type: "standard",
-        accept: ["michael phelps", "phelps"],
-        options: ["Michael Phelps", "Usain Bolt", "Carl Lewis", "Mark Spitz"],
-        answer: "Michael Phelps"
-    },
-    {
-        q: "¿Qué selección nacional ganó la Copa Mundial de Fútbol de la FIFA celebrada en Brasil en 2014?",
-        category: "deportes", level: 2, type: "standard",
-        accept: ["alemania"],
-        options: ["Alemania", "Argentina", "Brasil", "España"],
-        answer: "Alemania"
-    },
-    {
-        q: "De las siguientes afirmaciones sobre el Tour de Francia, ¿cuál es la ÚNICA verdadera?",
-        category: "deportes", level: 3, type: "find_true",
-        options: [
-            "El líder de la clasificación general viste un maillot de color amarillo.",
-            "La carrera siempre finaliza obligatoriamente en los Campos Elíseos de Marsella.",
-            "Está permitido recibir ayuda mecánica continua de vehículos a motor durante todo el recorrido.",
-            "El maillot de lunares rojos premia al mejor velocista."
-        ],
-        answer: "El líder de la clasificación general viste un maillot de color amarillo."
-    },
-    {
-        q: "¿Cuántos anillos forman el símbolo olímpico oficial de los Juegos Olímpicos?",
-        category: "deportes", level: 1, type: "standard",
-        accept: ["5", "cinco"],
-        options: ["5", "4", "6", "7"],
-        answer: "5"
-    },
-    {
-        q: "¿Es cierto que el boxeo profesional actual se disputa habitualmente en cuadriláteros que reciben el nombre popular de 'ring'?",
-        category: "deportes", level: 1, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos equipos compiten en la NBA de baloncesto, pero uno de ellos pertenece a otra liga profesional. ¿Cuál es el intruso?",
-        category: "deportes", level: 2, type: "find_false",
-        options: ["Los Angeles Lakers", "Chicago Bulls", "Real Madrid Baloncesto", "Golden State Warriors"],
-        answer: "Real Madrid Baloncesto"
-    },
-    {
-        q: "¿Qué tenista suizo es considerado uno de los más grandes de la historia y es famoso por su elegancia y su revés a una mano?",
-        category: "deportes", level: 2, type: "standard",
-        accept: ["roger federer", "federer"],
-        options: ["Roger Federer", "Rafael Nadal", "Novak Djokovic", "Andy Murray"],
-        answer: "Roger Federer"
-    },
-    {
-        q: "¿En qué deporte se utiliza una escoba y piedras de granito deslizantes sobre una pista de hielo?",
-        category: "deportes", level: 2, type: "standard",
-        accept: ["curling"],
-        options: ["Curling", "Hockey sobre hielo", "Biatlón", "Patinaje artístico"],
-        answer: "Curling"
-    },
-    {
-        q: "¿Qué país organizó los Juegos Olímpicos de Verano en el año 2008?",
-        category: "deportes", level: 2, type: "standard",
-        accept: ["china", "pekín"],
-        options: ["China", "Grecia", "Reino Unido", "Brasil"],
-        answer: "China"
-    },
-    {
-        q: "De los siguientes torneos de tenis del Grand Slam, ¿cuál se juega tradicionalmente sobre superficie de tierra batida?",
-        category: "deportes", level: 2, type: "standard",
-        accept: ["roland garros", "abierto de francia"],
-        options: ["Roland Garros", "Wimbledon", "Abierto de Australia", "Abierto de Estados Unidos"],
-        answer: "Roland Garros"
-    },
-    {
-        q: "¿Es cierto que en el rugby está permitido pasar el balón con las manos hacia adelante durante el juego en curso?",
-        category: "deportes", level: 3, type: "true_false",
-        answer: "Falso"
-    },
-    {
-        q: "¿Cuál es la distancia oficial en metros de una carrera de maratón completa?",
-        category: "deportes", level: 3, type: "standard",
-        accept: ["42195", "42.195", "42 kilometros", "42 km"],
-        options: ["42.195 metros", "40.000 metros", "45.000 metros", "50.000 metros"],
-        answer: "42.195 metros"
-    },
+  // =========================================================================
+  // 2. ESTÁNDAR - NIVEL 2 (125 PREGUNTAS: 51 a 175)
+  // =========================================================================
+  { q: "¿Qué tratado de 1713 puso fin a la Guerra de Sucesión Española y cedió Gibraltar a Gran Bretaña?", category: "culturageneral", level: 2, type: "standard", accept: ["utrecht", "tratado de utrecht"], options: ["Tratado de Utrecht", "Paz de los Pirineos", "Tratado de Rastatt", "Tratado de Tordesillas"], answer: "Tratado de Utrecht" },
+  { q: "¿Cómo llama Kant a los juicios universales y necesarios que amplían nuestro conocimiento?", category: "culturageneral", level: 2, type: "standard", accept: ["sinteticos a priori", "juicios sinteticos a priori"], options: ["Sintéticos a priori", "Analíticos a priori", "Sintéticos a posteriori", "Categóricos"], answer: "Sintéticos a priori" },
+  { q: "¿Qué enzima desenrolla la doble hélice de ADN durante la replicación?", category: "culturageneral", level: 2, type: "standard", accept: ["helicasa"], options: ["Helicasa", "ADN polimerasa", "Ligasa", "Primasa"], answer: "Helicasa" },
+  { q: "¿Qué subgénero teatral breve y cómico de Siglo de Oro escribió Cervantes con obras como 'El retablo de las maravillas'?", category: "culturageneral", level: 2, type: "standard", accept: ["entremes", "entremés", "entremeses"], options: ["Entremés", "Auto sacramental", "Sainete", "Loa"], answer: "Entremés" },
+  { q: "¿Qué ley de los gases establece que a temperatura constante el volumen es inversamente proporcional a la presión?", category: "culturageneral", level: 2, type: "standard", accept: ["ley de boyle", "boyle", "boyle-mariotte"], options: ["Ley de Boyle-Mariotte", "Ley de Charles", "Ley de Gay-Lussac", "Ley de Avogadro"], answer: "Ley de Boyle-Mariotte" },
+  { q: "¿Cómo se llamó el golpe de Estado fallido en España el 23 de febrero de 1981?", category: "culturageneral", level: 2, type: "standard", accept: ["23f", "23-f"], options: ["23-F", "18-J", "10-A", "20-N"], answer: "23-F" },
+  { q: "¿Qué filósofo define al ser humano como un 'animal político' (zoon politikon)?", category: "culturageneral", level: 2, type: "standard", accept: ["aristoteles", "aristóteles"], options: ["Aristóteles", "Platón", "Cicerón", "Séneca"], answer: "Aristóteles" },
+  { q: "¿Cuál es la integral indefinida de f(x) = 1/x?", category: "culturageneral", level: 2, type: "standard", accept: ["ln|x| + c", "ln(x)", "logaritmo neperiano de x"], options: ["ln|x| + C", "e^x + C", "-1/x² + C", "x⁰ + C"], answer: "ln|x| + C" },
+  { q: "¿Qué ministro español impulsó la desamortización eclesiástica de 1836?", category: "culturageneral", level: 2, type: "standard", accept: ["mendizabal", "juan alvarez mendizabal", "mendizábal"], options: ["Juan Álvarez Mendizábal", "Pascual Madoz", "Baldomero Espartero", "Ramón María Narváez"], answer: "Juan Álvarez Mendizábal" },
+  { q: "¿Qué nombre recibe el conjunto de reacciones metabólicas que degradan moléculas complejas para obtener energía?", category: "culturageneral", level: 2, type: "standard", accept: ["catabolismo"], options: ["Catabolismo", "Anabolismo", "Homeostasis", "Osmosis"], answer: "Catabolismo" },
+  { q: "¿Qué poeta del 27 escribió 'Poeta en Nueva York'?", category: "culturageneral", level: 2, type: "standard", accept: ["federico garcia lorca", "lorca"], options: ["Federico García Lorca", "Vicente Aleixandre", "Pedro Salinas", "Jorge Guillén"], answer: "Federico García Lorca" },
+  { q: "¿Qué magnitud física se mide en julios (J) y equivale al producto escalar de fuerza por desplazamiento?", category: "culturageneral", level: 2, type: "standard", accept: ["trabajo", "trabajo mecanico"], options: ["Trabajo", "Potencia", "Impulso", "Momento lineal"], answer: "Trabajo" },
+  { q: "¿Qué tipo de clima predomina en la mayor parte del interior de la Península Ibérica?", category: "culturageneral", level: 2, type: "standard", accept: ["mediterraneo continentalizado", "mediterraneo interior"], options: ["Mediterráneo continentalizado", "Oceánico", "Subtropical", "De montaña"], answer: "Mediterráneo continentalizado" },
+  { q: "¿En qué año ocurrió el Crack bursátil de Nueva York que originó la Gran Depresión?", category: "culturageneral", level: 2, type: "standard", accept: ["1929"], options: ["1929", "1927", "1933", "1921"], answer: "1929" },
+  { q: "¿Qué filósofo contractulista escribió 'Leviatán' defendiendo el absolutismo para evitar la guerra de todos contra todos?", category: "culturageneral", level: 2, type: "standard", accept: ["thomas hobbes", "hobbes"], options: ["Thomas Hobbes", "Jean-Jacques Rousseau", "John Locke", "Montesquieu"], answer: "Thomas Hobbes" },
+  { q: "¿Qué base nitrogenada está presente en el ARN pero ausente en el ADN?", category: "culturageneral", level: 2, type: "standard", accept: ["uracilo"], options: ["Uracilo", "Timina", "Citosina", "Guanina"], answer: "Uracilo" },
+  { q: "¿Qué vanguardia artística fundó Filippo Tommaso Marinetti exaltando la velocidad y las máquinas?", category: "culturageneral", level: 2, type: "standard", accept: ["futurismo", "el futurismo"], options: ["Futurismo", "Surrealismo", "Dadaísmo", "Cubismo"], answer: "Futurismo" },
+  { q: "¿Qué número cuántico determina la forma del orbital atómico (s, p, d, f)?", category: "culturageneral", level: 2, type: "standard", accept: ["secundario", "azimutal", "l"], options: ["Secundario (l)", "Principal (n)", "Magnético (m)", "De espín (s)"], answer: "Secundario (l)" },
+  { q: "¿Quién fue el dictador español que gobernó entre 1923 y 1930 durante el reinado de Alfonso XIII?", category: "culturageneral", level: 2, type: "standard", accept: ["miguel primo de rivera", "primo de rivera"], options: ["Miguel Primo de Rivera", "Francisco Franco", "Dámaso Berenguer", "Manuel Azaña"], answer: "Miguel Primo de Rivera" },
+  { q: "¿Qué concepto marxista designa la diferencia entre el valor producido por el trabajador y el salario que recibe?", category: "culturageneral", level: 2, type: "standard", accept: ["plusvalia", "plusvalía"], options: ["Plusvalía", "Alienación", "Infraestructura", "Lucha de clases"], answer: "Plusvalía" },
+  { q: "¿Cuál es el determinante de una matriz identidad de orden 3?", category: "culturageneral", level: 2, type: "standard", accept: ["1", "uno"], options: ["1", "3", "0", "-1"], answer: "1" },
+  { q: "¿Qué fenómeno atmosférico ocurre cuando una masa de aire cálido se sitúa sobre una capa de aire frío impidiendo su ascenso?", category: "culturageneral", level: 2, type: "standard", accept: ["inversion termica", "inversión térmica"], options: ["Inversión térmica", "Efecto Foehn", "Gota fría (DANA)", "Ciclogénesis"], answer: "Inversión térmica" },
+  { q: "¿En qué ciudad española se firmó la Constitución de 1812?", category: "culturageneral", level: 2, type: "standard", accept: ["cadiz", "cádiz"], options: ["Cádiz", "Madrid", "Sevilla", "Valencia"], answer: "Cádiz" },
+  { q: "¿Qué autor teatral creó el 'esperpento' con obras como 'Luces de bohemia'?", category: "culturageneral", level: 2, type: "standard", accept: ["ramon maria del valle inclan", "valle inclan", "valle-inclán"], options: ["Ramón María del Valle-Inclán", "Jacinto Benavente", "Carlos Arniches", "Pedro Muñoz Seca"], answer: "Ramón María del Valle-Inclán" },
+  { q: "¿Qué ácido orgánico se produce en las células musculares durante la fermentación láctica en ausencia de oxígeno?", category: "culturageneral", level: 2, type: "standard", accept: ["acido lactico", "ácido láctico", "lactato"], options: ["Ácido láctico", "Ácido pirúvico", "Ácido cítrico", "Ácido acético"], answer: "Ácido láctico" },
+  { q: "¿Qué principio físico explica por qué un cuerpo sumergido en un fluido experimenta un empuje vertical hacia arriba?", category: "culturageneral", level: 2, type: "standard", accept: ["principio de arquimedes", "arquimedes"], options: ["Principio de Arquímedes", "Principio de Pascal", "Principio de Bernoulli", "Ley de Hooke"], answer: "Principio de Arquímedes" },
+  { q: "¿Qué batalla de 1212 marcó el declive definitivo del imperio almohade en la Península Ibérica?", category: "culturageneral", level: 2, type: "standard", accept: ["las navas de tolosa", "navas de tolosa"], options: ["Las Navas de Tolosa", "Batalla de Covadonga", "Batalla de Guadalete", "Batalla del Salado"], answer: "Las Navas de Tolosa" },
+  { q: "¿Qué filósofo existencialista francés escribió 'El ser y la nada' y afirmó que 'el hombre está condenado a ser libre'?", category: "culturageneral", level: 2, type: "standard", accept: ["jean paul sartre", "sartre"], options: ["Jean-Paul Sartre", "Albert Camus", "Simone de Beauvoir", "Martin Heidegger"], answer: "Jean-Paul Sartre" },
+  { q: "¿Qué glándula endocrina produce la insulina y el glucagón?", category: "culturageneral", level: 2, type: "standard", accept: ["pancreas", "páncreas"], options: ["Páncreas", "Tiroides", "Hipófisis", "Suprarrenal"], answer: "Páncreas" },
+  { q: "¿Cuál es la obra cumbre del mester de clerecía escrita por Gonzalo de Berceo?", category: "culturageneral", level: 2, type: "standard", accept: ["milagros de nuestra señora"], options: ["Milagros de Nuestra Señora", "Libro de buen amor", "Libro de Alexandre", "Cantar de Mio Cid"], answer: "Milagros de Nuestra Señora" },
+  { q: "¿Qué ley de la termodinámica establece que la entropía del universo tiende siempre a aumentar?", category: "culturageneral", level: 2, type: "standard", accept: ["segunda ley", "segundo principio"], options: ["Segunda ley", "Primera ley", "Tercera ley", "Ley cero"], answer: "Segunda ley" },
+  { q: "¿Cómo se denominó el sistema político de alternancia pacífica entre liberales y conservadores en la Restauración española?", category: "culturageneral", level: 2, type: "standard", accept: ["turnismo", "turno pacifico"], options: ["Turnismo", "Caciquismo", "Regeneracionismo", "Cantonalismo"], answer: "Turnismo" },
+  { q: "¿Qué corriente económica defiende la mínima intervención del Estado y fue impulsada por Adam Smith?", category: "culturageneral", level: 2, type: "standard", accept: ["liberalismo economico", "liberalismo clásico", "liberalismo"], options: ["Liberalismo económico", "Keynesianismo", "Mercantilismo", "Fisiocracia"], answer: "Liberalismo económico" },
+  { q: "¿Cuál es la probabilidad de obtener dos caras seguidas al lanzar una moneda equilibrada dos veces?", category: "culturageneral", level: 2, type: "standard", accept: ["0.25", "1/4", "25%"], options: ["1/4 (25%)", "1/2 (50%)", "1/3 (33%)", "1/8 (12,5%)"], answer: "1/4 (25%)" },
+  { q: "¿Qué estilo arquitectónico medieval se caracteriza por el arco apuntado, la bóveda de crucería y grandes vidrieras?", category: "culturageneral", level: 2, type: "standard", accept: ["gotico", "gótico"], options: ["Gótico", "Románico", "Prerrománico", "Mudéjar"], answer: "Gótico" },
+  { q: "¿Qué científico descubrió la penicilina en 1928?", category: "culturageneral", level: 2, type: "standard", accept: ["alexander fleming", "fleming"], options: ["Alexander Fleming", "Louis Pasteur", "Robert Koch", "Edward Jenner"], answer: "Alexander Fleming" },
+  { q: "¿Qué estrofa de catorce versos endecasílabos divididos en dos cuartetos y dos tercetos es típica del Renacimiento?", category: "culturageneral", level: 2, type: "standard", accept: ["soneto", "el soneto"], options: ["Soneto", "Lira", "Silva", "Romance"], answer: "Soneto" },
+  { q: "¿Qué nombre recibe la reacción química en la que una especie cede electrones?", category: "culturageneral", level: 2, type: "standard", accept: ["oxidacion", "oxidación"], options: ["Oxidación", "Reducción", "Neutralización", "Hidrólisis"], answer: "Oxidación" },
+  { q: "¿En qué año tuvo lugar la Revolución Rusa que llevó a los bolcheviques al poder?", category: "culturageneral", level: 2, type: "standard", accept: ["1917"], options: ["1917", "1905", "1922", "1914"], answer: "1917" },
+  { q: "¿Qué filosofo propuso el 'imperativo categórico' como fundamento de su ética formal?", category: "culturageneral", level: 2, type: "standard", accept: ["immanuel kant", "kant"], options: ["Immanuel Kant", "John Stuart Mill", "Jeremy Bentham", "Aristóteles"], answer: "Immanuel Kant" },
+  { q: "¿Qué estructura celular regula el paso de sustancias hacia el interior y exterior de la célula?", category: "culturageneral", level: 2, type: "standard", accept: ["membrana plasmatica", "membrana celular"], options: ["Membrana plasmática", "Pared celular", "Citoesqueleto", "Retículo endoplasmático"], answer: "Membrana plasmática" },
+  { q: "¿Quién escribió 'La colmena' y ganó el Premio Nobel de Literatura en 1989?", category: "culturageneral", level: 2, type: "standard", accept: ["camilo jose cela", "cela"], options: ["Camilo José Cela", "Miguel Delibes", "Carmen Laforet", "Gonzalo Torrente Ballester"], answer: "Camilo José Cela" },
+  { q: "¿Cuál es la unidad de frecuencia en el Sistema Internacional?", category: "culturageneral", level: 2, type: "standard", accept: ["hercio", "hertz", "hz"], options: ["Hercio (Hz)", "Decibelio", "Tesla", "Weber"], answer: "Hercio (Hz)" },
+  { q: "¿Qué cordillera separa España de Francia?", category: "culturageneral", level: 2, type: "standard", accept: ["pirineos", "los pirineos"], options: ["Pirineos", "Sistema Central", "Cordillera Cantábrica", "Alpes"], answer: "Pirineos" },
+  { q: "¿Qué partido político fundó Pablo Iglesias Posse en Madrid en 1879?", category: "culturageneral", level: 2, type: "standard", accept: ["psoe", "partido socialista obrero español"], options: ["PSOE", "PCE", "UGT", "CNT"], answer: "PSOE" },
+  { q: "¿Cómo se llama el paso de ARN mensajero a secuencia de aminoácidos en los ribosomas?", category: "culturageneral", level: 2, type: "standard", accept: ["traduccion", "traducción"], options: ["Traducción", "Transcripción", "Replicación", "Maduración"], answer: "Traducción" },
+  { q: "¿Qué corriente barroca española se caracterizó por la complejidad conceptual y juegos de palabras, liderada por Quevedo?", category: "culturageneral", level: 2, type: "standard", accept: ["conceptismo"], options: ["Conceptismo", "Culteranismo", "Petrarquismo", "Modernismo"], answer: "Conceptismo" },
+  { q: "¿Qué magnitud mide la cantidad de sustancia en el Sistema Internacional?", category: "culturageneral", level: 2, type: "standard", accept: ["mol"], options: ["Mol", "Gramo", "Litro", "Candela"], answer: "Mol" },
+  { q: "¿Qué plan económico estadounidense ayudó a reconstruir Europa Occidental tras la Segunda Guerra Mundial?", category: "culturageneral", level: 2, type: "standard", accept: ["plan marshall"], options: ["Plan Marshall", "Plan Dawes", "New Deal", "Plan Young"], answer: "Plan Marshall" },
+  { q: "¿Qué filósofo ilustrado defendió la división de poderes en ejecutivo, legislativo y judicial?", category: "culturageneral", level: 2, type: "standard", accept: ["montesquieu"], options: ["Montesquieu", "Voltaire", "Rousseau", "Diderot"], answer: "Montesquieu" },
+  { q: "¿Cuál es el valor de cos(0) en radianes o grados?", category: "culturageneral", level: 2, type: "standard", accept: ["1", "uno"], options: ["1", "0", "-1", "1/2"], answer: "1" },
+  { q: "¿Qué rey abdicó en 1873 dando paso a la Primera República Española?", category: "culturageneral", level: 2, type: "standard", accept: ["amadeo i", "amadeo de saboya"], options: ["Amadeo I de Saboya", "Isabel II", "Alfonso XII", "Fernando VII"], answer: "Amadeo I de Saboya" },
+  { q: "¿Qué tipo de inmunidad se adquiere tras recibir una vacuna con antígenos atenuados?", category: "culturageneral", level: 2, type: "standard", accept: ["activa artificial", "inmunidad activa artificial"], options: ["Activa artificial", "Pasiva artificial", "Activa natural", "Pasiva natural"], answer: "Activa artificial" },
+  { q: "¿Quién escribió 'Nada', novela ganadora del primer Premio Nadal en 1944?", category: "culturageneral", level: 2, type: "standard", accept: ["carmen laforet", "laforet"], options: ["Carmen Laforet", "Ana María Matute", "Mercè Rodoreda", "Carmen Martín Gaite"], answer: "Carmen Laforet" },
+  { q: "¿Qué partícula subatómica determina el número atómico (Z) de un elemento químico?", category: "culturageneral", level: 2, type: "standard", accept: ["proton", "protón"], options: ["Protón", "Neutrón", "Electrón", "Quark"], answer: "Protón" },
+  { q: "¿Qué indicador macroeconómico mide el valor monetario de todos los bienes y servicios finales producidos en un país?", category: "culturageneral", level: 2, type: "standard", accept: ["pib", "producto interior bruto"], options: ["PIB", "IPC", "PNB", "IDH"], answer: "PIB" },
+  { q: "¿En qué batalla naval de 1805 fue derrotada la flota franco-española por la armada británica de Nelson?", category: "culturageneral", level: 2, type: "standard", accept: ["trafalgar", "batalla de trafalgar"], options: ["Trafalgar", "Lepanto", "San Vicente", "Cabo Finisterre"], answer: "Trafalgar" },
+  { q: "¿Cómo llama Platón al mundo sensible donde habitan los objetos materiales cambiantes?", category: "culturageneral", level: 2, type: "standard", accept: ["mundo sensible", "doxa"], options: ["Mundo sensible", "Mundo inteligible", "Topos Uranos", "Demiurgo"], answer: "Mundo sensible" },
+  { q: "¿Qué hormona vegetativa regula el cierre de estomas y la dormición de semillas frente al estrés hídrico?", category: "culturageneral", level: 2, type: "standard", accept: ["acido abscisico", "ácido abscísico"], options: ["Ácido abscísico", "Auxina", "Giberelina", "Etileno"], answer: "Ácido abscísico" },
+  { q: "¿Qué autor modernista nicaragüense publicó 'Azul...' en 1888?", category: "culturageneral", level: 2, type: "standard", accept: ["ruben dario", "rubén darío"], options: ["Rubén Darío", "José Martí", "Amado Nervo", "Manuel Machado"], answer: "Rubén Darío" },
+  { q: "¿Qué tipo de lente óptica es más gruesa en el centro que en los bordes y hace converger los rayos de luz?", category: "culturageneral", level: 2, type: "standard", accept: ["convergente", "biconvexa"], options: ["Convergente", "Divergente", "Cóncava", "Cilíndrica"], answer: "Convergente" },
+  { q: "¿Qué pacto de 1939 firmaron Alemania y la URSS acordando no agredirse y repartirse Europa Oriental?", category: "culturageneral", level: 2, type: "standard", accept: ["ribbentrop-molotov", "pacto germano-sovietico"], options: ["Pacto Ribbentrop-Mólotov", "Pacto de Acero", "Pacto Antikomintern", "Acuerdos de Múnich"], answer: "Pacto Ribbentrop-Mólotov" },
+  { q: "¿Qué término orteguiano resume su filosofía diciendo 'Yo soy yo y mi circunstancia'?", category: "culturageneral", level: 2, type: "standard", accept: ["raciovitalismo", "circunstancia"], options: ["Raciovitalismo", "Perspectivismo", "Existencialismo", "Positivismo"], answer: "Raciovitalismo" },
+  { q: "¿Cuál es la pendiente de la recta cuya ecuación es y = 3x - 5?", category: "culturageneral", level: 2, type: "standard", accept: ["3", "tres"], options: ["3", "-5", "5", "1/3"], answer: "3" },
+  { q: "¿Qué accidente geográfico español es una albufera separada del mar Mediterráneo por La Manga?", category: "culturageneral", level: 2, type: "standard", accept: ["mar menor"], options: ["Mar Menor", "Albufera de Valencia", "Delta del Ebro", "Marismas del Guadalquivir"], answer: "Mar Menor" },
+  { q: "¿Qué ley proclamada por Fernando VII en 1830 permitió reinar a su hija Isabel II?", category: "culturageneral", level: 2, type: "standard", accept: ["pragmatica sancion", "pragmática sanción"], options: ["Pragmática Sanción", "Ley Sálica", "Estatuto Real", "Decretos de Nueva Planta"], answer: "Pragmática Sanción" },
+  { q: "¿Qué biomolécula almacena energía a largo plazo y forma la bicapa de las membranas celulares?", category: "culturageneral", level: 2, type: "standard", accept: ["lipidos", "lípidos", "fosfolipidos"], options: ["Lípidos", "Glúcidos", "Proteínas", "Vitaminas"], answer: "Lípidos" },
+  { q: "¿Quién escribió 'El árbol de la ciencia'?", category: "culturageneral", level: 2, type: "standard", accept: ["pio baroja", "baroja", "pío baroja"], options: ["Pío Baroja", "Miguel de Unamuno", "Azorín", "Blasco Ibáñez"], answer: "Pío Baroja" },
+  { q: "¿Cuál es el estado de oxidación habitual del oxígeno en la mayoría de los óxidos?", category: "culturageneral", level: 2, type: "standard", accept: ["-2"], options: ["-2", "+2", "-1", "0"], answer: "-2" },
+  { q: "¿Qué organismo internacional sustituyó a la Sociedad de Naciones en 1945?", category: "culturageneral", level: 2, type: "standard", accept: ["onu", "organizacion de las naciones unidas"], options: ["ONU", "OTAN", "OCDE", "UNESCO"], answer: "ONU" },
+  { q: "¿Qué filósofo medieval formuló las 'Cinco Vías' para demostrar racionalmente la existencia de Dios?", category: "culturageneral", level: 2, type: "standard", accept: ["tomas de aquino", "santo tomas", "tomás de aquino"], options: ["Tomás de Aquino", "Agustín de Hipona", "Guillermo de Ockham", "Anselmo de Canterbury"], answer: "Tomás de Aquino" },
+  { q: "¿Qué par craneal o tejido transmite impulsos eléctricos desde el sistema nervioso central hacia los efectores?", category: "culturageneral", level: 2, type: "standard", accept: ["neurona motora", "motoneurona", "nervio motor"], options: ["Neurona motora", "Neurona sensitiva", "Interneurona", "Célula de Schwann"], answer: "Neurona motora" },
+  { q: "¿Qué obra teatral de Pedro Calderón de la Barca plantea la frontera entre la realidad y el sueño?", category: "culturageneral", level: 2, type: "standard", accept: ["la vida es sueño"], options: ["La vida es sueño", "El alcalde de Zalamea", "El gran teatro del mundo", "Fuenteovejuna"], answer: "La vida es sueño" },
+  { q: "¿Qué fenómeno ondulatorio ocurre cuando una onda rodea un obstáculo o atraviesa una rendija estrecha?", category: "culturageneral", level: 2, type: "standard", accept: ["difraccion", "difracción"], options: ["Difracción", "Refracción", "Reflexión", "Polarización"], answer: "Difracción" },
+  { q: "¿Qué plan económico de 1959 liberalizó la economía española poniendo fin a la autarquía franquista?", category: "culturageneral", level: 2, type: "standard", accept: ["plan de estabilizacion", "plan de estabilización"], options: ["Plan de Estabilización", "Planes de Desarrollo", "Pactos de la Moncloa", "Plan Badajoz"], answer: "Plan de Estabilización" },
+  { q: "¿Qué concepto económico describe una situación de mercado donde existe un único vendedor?", category: "culturageneral", level: 2, type: "standard", accept: ["monopolio"], options: ["Monopolio", "Oligopolio", "Monopsonio", "Competencia perfecta"], answer: "Monopolio" },
+  { q: "¿Cuál es la suma de los ángulos interiores de cualquier triángulo plano?", category: "culturageneral", level: 2, type: "standard", accept: ["180", "180 grados"], options: ["180°", "360°", "90°", "270°"], answer: "180°" },
+  { q: "¿Qué pintor español creó las 'Pinturas Negras' en la Quinta del Sordo?", category: "culturageneral", level: 2, type: "standard", accept: ["francisco de goya", "goya"], options: ["Francisco de Goya", "Diego Velázquez", "José de Ribera", "Francisco de Zurbarán"], answer: "Francisco de Goya" },
+  { q: "¿Qué científico enunció las tres leyes del movimiento planetario?", category: "culturageneral", level: 2, type: "standard", accept: ["johannes kepler", "kepler"], options: ["Johannes Kepler", "Tycho Brahe", "Nicolás Copérnico", "Galileo Galilei"], answer: "Johannes Kepler" },
+  { q: "¿Qué poeta del Siglo de Oro encabezó el culteranismo con obras como 'Fábula de Polifemo y Galatea'?", category: "culturageneral", level: 2, type: "standard", accept: ["luis de gongora", "gongora", "góngora"], options: ["Luis de Góngora", "Francisco de Quevedo", "Lope de Vega", "Garcilaso de la Vega"], answer: "Luis de Góngora" },
+  { q: "¿Qué tipo de enlace une a los aminoácidos formando cadenas polipeptídicas?", category: "culturageneral", level: 2, type: "standard", accept: ["enlace peptidico", "peptidico", "peptídico"], options: ["Enlace peptídico", "Enlace glucosídico", "Enlace éster", "Enlace fosfodiéster"], answer: "Enlace peptídico" },
+  { q: "¿En qué año cayó el Muro de Berlín?", category: "culturageneral", level: 2, type: "standard", accept: ["1989"], options: ["1989", "1991", "1985", "1961"], answer: "1989" },
+  { q: "¿Qué filósofo utilitarista afirmó que es mejor ser un Sócrates insatisfecho que un cerdo satisfecho?", category: "culturageneral", level: 2, type: "standard", accept: ["john stuart mill", "stuart mill"], options: ["John Stuart Mill", "Jeremy Bentham", "Epicuro", "David Hume"], answer: "John Stuart Mill" },
+  { q: "¿Cuál es la fórmula molecular del ácido sulfúrico?", category: "culturageneral", level: 2, type: "standard", accept: ["h2so4"], options: ["H2SO4", "HCl", "HNO3", "H2SO3"], answer: "H2SO4" },
+  { q: "¿Qué río desemboca formando un amplio estuario en Lisboa tras atravesar la Meseta española?", category: "culturageneral", level: 2, type: "standard", accept: ["tajo", "el tajo"], options: ["Tajo", "Duero", "Guadiana", "Miño"], answer: "Tajo" },
+  { q: "¿Qué movimiento político-social buscó modernizar España tras la pérdida de las últimas colonias en 1898?", category: "culturageneral", level: 2, type: "standard", accept: ["regeneracionismo", "el regeneracionismo"], options: ["Regeneracionismo", "Krausismo", "Carlismo", "Iberismo"], answer: "Regeneracionismo" },
+  { q: "¿Qué estructura de los cloroplastos contiene la clorofila y realiza la fase luminosa de la fotosíntesis?", category: "culturageneral", level: 2, type: "standard", accept: ["tilacoides", "tilacoide"], options: ["Tilacoides", "Estroma", "Crestas", "Matriz"], answer: "Tilacoides" },
+  { q: "¿Quién escribió 'La familia de Pascual Duarte' inaugurando el tremendismo literario?", category: "culturageneral", level: 2, type: "standard", accept: ["camilo jose cela", "cela"], options: ["Camilo José Cela", "Rafael Sánchez Ferlosio", "Ignacio Aldecoa", "Luis Martín-Santos"], answer: "Camilo José Cela" },
+  { q: "¿Qué principio establece que es imposible conocer simultáneamente con precisión exacta la posición y el momento de un electrón?", category: "culturageneral", level: 2, type: "standard", accept: ["incertidumbre de heisenberg", "heisenberg"], options: ["Incertidumbre de Heisenberg", "Exclusión de Pauli", "Dualidad onda-corpúsculo", "Superposición cuántica"], answer: "Incertidumbre de Heisenberg" },
+  { q: "¿En qué año se firmaron los Pactos de la Moncloa durante la Transición española?", category: "culturageneral", level: 2, type: "standard", accept: ["1977"], options: ["1977", "1978", "1976", "1979"], answer: "1977" },
+  { q: "¿Qué obra de Jean-Jacques Rousseau defiende que la soberanía reside en la voluntad general del pueblo?", category: "culturageneral", level: 2, type: "standard", accept: ["el contrato social", "contrato social"], options: ["El contrato social", "Emilio", "Discurso sobre el origen de la desigualdad", "Cartas filosóficas"], answer: "El contrato social" },
+  { q: "¿Qué nombre recibe el conjunto de vectores linealmente independientes que generan un espacio vectorial?", category: "culturageneral", level: 2, type: "standard", accept: ["base"], options: ["Base", "Rango", "Núcleo", "Traza"], answer: "Base" },
+  { q: "¿Qué tratado repartió en 1494 las tierras recién descubiertas entre Castilla y Portugal?", category: "culturageneral", level: 2, type: "standard", accept: ["tordesillas", "tratado de tordesillas"], options: ["Tratado de Tordesillas", "Tratado de Alcáçovas", "Tratado de Zaragoza", "Bulas Alejandrinas"], answer: "Tratado de Tordesillas" },
+  { q: "¿Qué orgánulo celular modifica, empaqueta y distribuye proteínas y lípidos en vesículas?", category: "culturageneral", level: 2, type: "standard", accept: ["aparato de golgi", "golgi"], options: ["Aparato de Golgi", "Retículo rugoso", "Peroxisoma", "Centriolo"], answer: "Aparato de Golgi" },
+  { q: "¿Qué dramaturgo español ganó el Nobel en 1922 con obras como 'Los intereses creados'?", category: "culturageneral", level: 2, type: "standard", accept: ["jacinto benavente", "benavente"], options: ["Jacinto Benavente", "José Echegaray", "Valle-Inclán", "García Lorca"], answer: "Jacinto Benavente" },
+  { q: "¿Cómo se llama la energía necesaria para arrancar un electrón de un átomo gaseoso en estado fundamental?", category: "culturageneral", level: 2, type: "standard", accept: ["energia de ionizacion", "energía de ionización"], options: ["Energía de ionización", "Afinidad electrónica", "Electronegatividad", "Energía reticular"], answer: "Energía de ionización" },
+  { q: "¿Qué crisis internacional enfrentó a EE. UU. y la URSS en octubre de 1962 por misiles nucleares en el Caribe?", category: "culturageneral", level: 2, type: "standard", accept: ["crisis de los misiles", "crisis de cuba"], options: ["Crisis de los misiles de Cuba", "Bloqueo de Berlín", "Guerra de Corea", "Crisis del Canal de Suez"], answer: "Crisis de los misiles de Cuba" },
+  { q: "¿Qué concepto freudiano representa la parte inconsciente regida por el principio del placer y los impulsos?", category: "culturageneral", level: 2, type: "standard", accept: ["ello", "el ello"], options: ["Ello", "Yo", "Superyó", "Sublimación"], answer: "Ello" },
+  { q: "¿Qué magnitud física se conserva en un sistema aislado sobre el que no actúan fuerzas exteriores netas?", category: "culturageneral", level: 2, type: "standard", accept: ["momento lineal", "cantidad de movimiento"], options: ["Momento lineal", "Energía cinética", "Aceleración", "Potencia"], answer: "Momento lineal" },
+  { q: "¿Qué archipiélago español tiene origen volcánico y clima subtropical?", category: "culturageneral", level: 2, type: "standard", accept: ["islas canarias", "canarias"], options: ["Islas Canarias", "Islas Baleares", "Islas Cíes", "Islas Columbretes"], answer: "Islas Canarias" },
+  { q: "¿Quién fue el primer presidente del Gobierno de la democracia tras las elecciones de 1977?", category: "culturageneral", level: 2, type: "standard", accept: ["adolfo suarez", "adolfo suárez"], options: ["Adolfo Suárez", "Leopoldo Calvo-Sotelo", "Felipe González", "Carlos Arias Navarro"], answer: "Adolfo Suárez" },
+  { q: "¿Qué enfermedad genética autosómica recesiva está causada por una mutación en la proteína hemoglobina?", category: "culturageneral", level: 2, type: "standard", accept: ["anemia falciforme", "drepanocitosis"], options: ["Anemia falciforme", "Hemofilia", "Daltonismo", "Síndrome de Down"], answer: "Anemia falciforme" },
+  { q: "¿Qué poemario de Juan Ramón Jiménez marca el inicio de su etapa de 'poesía pura'?", category: "culturageneral", level: 2, type: "standard", accept: ["diario de un poeta recien casado", "diario de un poeta recién casado"], options: ["Diario de un poeta recién casado", "Platero y yo", "Arias tristes", "Eternidades"], answer: "Diario de un poeta recién casado" },
+  { q: "¿Qué tipo de reacción orgánica convierte un alqueno en un alcano mediante adición de H2?", category: "culturageneral", level: 2, type: "standard", accept: ["hidrogenacion", "hidrogenación"], options: ["Hidrogenación", "Halogenación", "Esterificación", "Saponificación"], answer: "Hidrogenación" },
+  { q: "¿Qué conferencista y líder político pronunció el discurso 'I Have a Dream' en 1963?", category: "culturageneral", level: 2, type: "standard", accept: ["martin luther king", "luther king"], options: ["Martin Luther King Jr.", "Malcolm X", "Nelson Mandela", "John F. Kennedy"], answer: "Martin Luther King Jr." },
+  { q: "¿Qué filosofo presocrático afirmó que todo fluye ('panta rei') y que el arjé es el fuego?", category: "culturageneral", level: 2, type: "standard", accept: ["heraclito", "heráclito"], options: ["Heráclito", "Parménides", "Tales de Mileto", "Demócrito"], answer: "Heráclito" },
+  { q: "¿Cuál es la derivada de la función f(x) = sen(x)?", category: "culturageneral", level: 2, type: "standard", accept: ["cos(x)", "coseno de x"], options: ["cos(x)", "-cos(x)", "-sen(x)", "tg(x)"], answer: "cos(x)" },
+  { q: "¿Qué decretos promulgados por Felipe V abolieron los fueros de la Corona de Aragón?", category: "culturageneral", level: 2, type: "standard", accept: ["decretos de nueva planta", "nueva planta"], options: ["Decretos de Nueva Planta", "Leyes de Burgos", "Ordenanzas de Montalvo", "Fuero Juzgo"], answer: "Decretos de Nueva Planta" },
+  { q: "¿Qué etapa del ciclo celular comprende las fases G1, S y G2 antes de la división?", category: "culturageneral", level: 2, type: "standard", accept: ["interfase"], options: ["Interfase", "Profase", "Citocinesis", "Metafase"], answer: "Interfase" },
+  { q: "¿Qué novela de Gabriel García Márquez narra la historia de la familia Buendía en Macondo?", category: "culturageneral", level: 2, type: "standard", accept: ["cien años de soledad"], options: ["Cien años de soledad", "El amor en los tiempos del cólera", "Crónica de una muerte anunciada", "Pedro Páramo"], answer: "Cien años de soledad" },
+  { q: "¿Cuál es la unidad de carga eléctrica en el Sistema Internacional?", category: "culturageneral", level: 2, type: "standard", accept: ["culombio", "coulomb"], options: ["Culombio", "Amperio", "Voltio", "Ohmio"], answer: "Culombio" },
+  { q: "¿Qué tasa económica mide el porcentaje de población activa que busca empleo y no lo encuentra?", category: "culturageneral", level: 2, type: "standard", accept: ["tasa de paro", "tasa de desempleo"], options: ["Tasa de paro", "Tasa de actividad", "Tasa de ocupación", "Tasa de inflación"], answer: "Tasa de paro" },
+  { q: "¿En qué ciudad se inició el levantamiento popular del 2 de mayo de 1808 contra las tropas napoleónicas?", category: "culturageneral", level: 2, type: "standard", accept: ["madrid"], options: ["Madrid", "Zaragoza", "Bailén", "Móstoles"], answer: "Madrid" },
+  { q: "¿Qué término aristotélico designa el paso de la posibilidad al ser efectivo?", category: "culturageneral", level: 2, type: "standard", accept: ["acto", "del potencia al acto"], options: ["Acto", "Potencia", "Sustancia", "Accidente"], answer: "Acto" },
+  { q: "¿Qué células sanguíneas contienen hemoglobina y transportan oxígeno?", category: "culturageneral", level: 2, type: "standard", accept: ["eritrocitos", "globulos rojos", "hematies"], options: ["Eritrocitos", "Leucocitos", "Plaquetas", "Linfocitos"], answer: "Eritrocitos" },
+  { q: "¿Quién escribió 'El sí de las niñas', máxima expresión del teatro neoclásico español?", category: "culturageneral", level: 2, type: "standard", accept: ["leandro fernandez de moratin", "moratin", "moratín"], options: ["Leandro Fernández de Moratín", "Gaspar Melchor de Jovellanos", "José Cadalso", "Ramón de la Cruz"], answer: "Leandro Fernández de Moratín" },
+  { q: "¿Qué ley de Faraday relaciona la fuerza electromotriz inducida con la variación del flujo magnético?", category: "culturageneral", level: 2, type: "standard", accept: ["ley de faraday-lenz", "ley de induccion", "ley de faraday"], options: ["Ley de Faraday-Lenz", "Ley de Biot-Savart", "Ley de Ampère", "Ley de Gauss"], answer: "Ley de Faraday-Lenz" },
+  { q: "¿Qué conflicto armado enfrentó a Estados Unidos y España en 1898?", category: "culturageneral", level: 2, type: "standard", accept: ["guerra hispano-estadounidense", "guerra de cuba", "desastre del 98"], options: ["Guerra hispano-estadounidense", "Guerra de los Diez Años", "Guerra Chiquita", "Guerra de Independencia"], answer: "Guerra hispano-estadounidense" },
+  { q: "¿Qué filosofo británico formuló la navaja que afirma que no deben multiplicarse los entes sin necesidad?", category: "culturageneral", level: 2, type: "standard", accept: ["guillermo de ockham", "ockham"], options: ["Guillermo de Ockham", "Francis Bacon", "Duns Escoto", "Roger Bacon"], answer: "Guillermo de Ockham" },
+  { q: "¿Qué nombre recibe el conjunto de genes de un individuo para uno o varios caracteres?", category: "culturageneral", level: 2, type: "standard", accept: ["genotipo"], options: ["Genotipo", "Fenotipo", "Cariotipo", "Alelo"], answer: "Genotipo" },
+  { q: "¿Qué movimiento artístico del siglo XX incluye 'La persistencia de la memoria' de Salvador Dalí?", category: "culturageneral", level: 2, type: "standard", accept: ["surrealismo", "el surrealismo"], options: ["Surrealismo", "Expresionismo", "Cubismo", "Fauvismo"], answer: "Surrealismo" },
+  { q: "¿Qué tipo de enlace intermolecular explica el elevado punto de ebullición del agua?", category: "culturageneral", level: 2, type: "standard", accept: ["puente de hidrogeno", "enlaces de hidrogeno"], options: ["Puente de hidrógeno", "Fuerzas de London", "Enlace iónico", "Enlace metálico"], answer: "Puente de hidrógeno" },
+  { q: "¿Qué tratado fundacional creó la Comunidad Económica Europea en 1957?", category: "culturageneral", level: 2, type: "standard", accept: ["tratado de roma"], options: ["Tratado de Roma", "Tratado de Maastricht", "Tratado de Lisboa", "Tratado de Schengen"], answer: "Tratado de Roma" },
+  { q: "¿Cuál es el valor del límite cuando x tiende a 0 de sen(x)/x?", category: "culturageneral", level: 2, type: "standard", accept: ["1", "uno"], options: ["1", "0", "Infinito", "No existe"], answer: "1" },
 
-    // --- 3. HISTORIA ---
-    {
-        q: "¿En qué año se produjo la histórica caída del Muro de Berlín?",
-        category: "historia", level: 1, type: "standard",
-        accept: ["1989"],
-        options: ["1985", "1989", "1991", "1975"],
-        answer: "1989"
-    },
-    {
-        q: "¿Qué civilización precolombina construyó la ciudadela en piedra de Machu Picchu en los Andes?",
-        category: "historia", level: 2, type: "standard",
-        accept: ["los incas", "inca"],
-        options: ["Los Incas", "Los Mayas", "Los Aztecas", "Los Toltecas"],
-        answer: "Los Incas"
-    },
-    {
-        q: "¿Es cierto que Cleopatra, la última reina del Antiguo Egipto, era étnicamente de origen griego macedonio y no egipcio nativo?",
-        category: "historia", level: 3, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿En qué año llegó Cristóbal Colón al continente americano por primera vez?",
-        category: "historia", level: 1, type: "standard",
-        accept: ["1492"],
-        options: ["1492", "1500", "1485", "1512"],
-        answer: "1492"
-    },
-    {
-        q: "¿Qué líder político lideró la Revolución Rusa de 1917 y fundó la Unión Soviética?",
-        category: "historia", level: 2, type: "standard",
-        accept: ["vladimir lenin", "lenin"],
-        options: ["Vladimir Lenin", "Iósif Stalin", "León Trotski", "Nicolás II"],
-        answer: "Vladimir Lenin"
-    },
-    {
-        q: "Tres de estos imperios dominaron extensos territorios en la antigüedad, pero uno de ellos pertenece a la Edad Moderna. ¿Cuál es el intruso?",
-        category: "historia", level: 3, type: "find_false",
-        options: ["Imperio Romano", "Imperio Persa", "Imperio Británico", "Imperio Macedonio"],
-        answer: "Imperio Británico"
-    },
-    {
-        q: "¿Cuál fue el nombre del famoso emperador francés derrotado definitivamente en la batalla de Waterloo en 1815?",
-        category: "historia", level: 1, type: "standard",
-        accept: ["napoleon bonaparte", "napoleon"],
-        options: ["Napoleón Bonaparte", "Julio César", "Luis XIV", "Carlomagno"],
-        answer: "Napoleón Bonaparte"
-    },
-    {
-        q: "¿Es cierto que la Primera Guerra Mundial finalizó oficialmente con la firma del Tratado de Versalles en el año 1919?",
-        category: "historia", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "De los siguientes acontecimientos históricos, ¿cuál ocurrió primero en la línea temporal?",
-        category: "historia", level: 3, type: "standard",
-        accept: ["caida del imperio romano", "caida de roma"],
-        options: ["Caída del Imperio Romano de Occidente", "Descubrimiento de América", "Revolución Francesa", "Invención de la imprenta"],
-        answer: "Caída del Imperio Romano de Occidente"
-    },
-    {
-        q: "¿Qué civilización antigua construyó las famosas pirámides de Guiza para sus faraones?",
-        category: "historia", level: 1, type: "standard",
-        accept: ["egipcios", "antiguo egipto", "egipto"],
-        options: ["Los egipcios", "Los romanos", "Los griegos", "Los sumerios"],
-        answer: "Los egipcios"
-    },
-    {
-        q: "¿En qué año se firmó la Declaración de Independencia de los Estados Unidos de América?",
-        category: "historia", level: 2, type: "standard",
-        accept: ["1776"],
-        options: ["1776", "1812", "1789", "1750"],
-        answer: "1776"
-    },
-    {
-        q: "¿Es cierto que el Imperio Romano de Oriente sobrevivió a la caída de Roma durante casi mil años más bajo el nombre de Imperio Bizantino?",
-        category: "historia", level: 3, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos personajes históricos fueron presidentes de Estados Unidos, pero uno NO lo fue. ¿Quién es el intruso?",
-        category: "historia", level: 2, type: "find_false",
-        options: ["Abraham Lincoln", "George Washington", "Benjamin Franklin", "Thomas Jefferson"],
-        answer: "Benjamin Franklin"
-    },
-    {
-        q: "¿Qué muro físico dividió la capital alemana entre la zona capitalista y la comunista durante la Guerra Fría?",
-        category: "historia", level: 1, type: "standard",
-        accept: ["muro de berlin", "berlin"],
-        options: ["Muro de Berlín", "Muro de Adriano", "Muralla China", "Muro de Limes"],
-        answer: "Muro de Berlín"
-    },
-    {
-        q: "¿Cuál fue el nombre del primer ser humano en pisar la superficie de la Luna en 1969?",
-        category: "historia", level: 1, type: "standard",
-        accept: ["neil armstrong", "armstrong"],
-        options: ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "Michael Collins"],
-        answer: "Neil Armstrong"
-    },
-    {
-        q: "De las siguientes afirmaciones sobre la Revolución Francesa, ¿cuál es la ÚNICA verdadera?",
-        category: "historia", level: 3, type: "find_true",
-        options: [
-            "Se inició formalmente con la toma de la prisión de la Bastilla en 1789.",
-            "Supuso la restauración absoluta de la monarquía de los Luises para siempre.",
-            "Tuvo lugar íntegramente durante el siglo XX.",
-            "Napoleón Bonaparte gobernó Francia antes del estallido de la revolución."
-        ],
-        answer: "Se inició formalmente con la toma de la prisión de la Bastilla en 1789."
-    },
-    {
-        q: "¿En qué siglo comenzó la conocida como época histórica del Renacimiento en Europa?",
-        category: "historia", level: 2, type: "standard",
-        accept: ["siglo xv", "siglo 15", "15"],
-        options: ["Siglo XV", "Siglo XII", "Siglo XVIII", "Siglo X"],
-        answer: "Siglo XV"
-    },
-    {
-        q: "¿Es cierto que el Imperio Otomano conquistó la ciudad de Constantinopla en el año 1453 poniendo fin al Imperio Bizantino?",
-        category: "historia", level: 3, type: "true_false",
-        answer: "Verdadero"
-    },
+  // =========================================================================
+  // 3. ESTÁNDAR - NIVEL 3 (25 PREGUNTAS: 176 a 200)
+  // =========================================================================
+  { q: "¿Qué principio de exclusión cuántica impide que dos fermiones en un átomo tengan los cuatro números cuánticos iguales?", category: "culturageneral", level: 3, type: "standard", accept: ["principio de exclusion de pauli", "pauli"], options: ["Principio de Pauli", "Regla de Hund", "Principio de Aufbau", "Efecto Zeeman"], answer: "Principio de Pauli" },
+  { q: "¿Cómo denominó Kant a la realidad en sí misma, incognoscible para la razón teórica?", category: "culturageneral", level: 3, type: "standard", accept: ["noumeno", "noúmeno", "cosa en si"], options: ["Noúmeno", "Fenómeno", "Trascendental", "Entelequia"], answer: "Noúmeno" },
+  { q: "¿Qué complejo proteico transmembrana sintetiza ATP aprovechando el gradiente electroquímico de protones?", category: "culturageneral", level: 3, type: "standard", accept: ["atp sintasa"], options: ["ATP sintasa", "Citocromo c", "Rubisco", "NADH deshidrogenasa"], answer: "ATP sintasa" },
+  { q: "¿Qué pacto de 1866 firmaron progresistas y demócratas en Bélgica para derrocar a Isabel II?", category: "culturageneral", level: 3, type: "standard", accept: ["pacto de ostende"], options: ["Pacto de Ostende", "Pacto del Pardo", "Pacto de San Sebastián", "Convenio de Vergara"], answer: "Pacto de Ostende" },
+  { q: "¿Qué poetisa chilena fue la primera persona latinoamericana en recibir el Premio Nobel de Literatura en 1945?", category: "culturageneral", level: 3, type: "standard", accept: ["gabriela mistral"], options: ["Gabriela Mistral", "Alfonsina Storni", "Juana de Ibarbourou", "Isabel Allende"], answer: "Gabriela Mistral" },
+  { q: "¿Qué ecuación química relaciona la constante de equilibrio con la temperatura y la entalpía estándar de reacción?", category: "culturageneral", level: 3, type: "standard", accept: ["ecuacion de vant hoff", "van't hoff"], options: ["Ecuación de Van't Hoff", "Ecuación de Nernst", "Ecuación de Arrhenius", "Ley de Hess"], answer: "Ecuación de Van't Hoff" },
+  { q: "¿Qué figura política presidió la Primera República Española tras la dimisión de Estanislao Figueras y antes de Salmerón?", category: "culturageneral", level: 3, type: "standard", accept: ["francisco pi y margall", "pi y margall"], options: ["Francisco Pi y Margall", "Emilio Castelar", "Nicolás Salmerón", "Juan Prim"], answer: "Francisco Pi y Margall" },
+  { q: "¿Cómo llama Nietzsche a la moral que afirma la vida, la fuerza y la creación de valores propios?", category: "culturageneral", level: 3, type: "standard", accept: ["moral de señores", "moral de los señores"], options: ["Moral de señores", "Moral de esclavos", "Nihilismo pasivo", "Eterno retorno"], answer: "Moral de señores" },
+  { q: "¿Qué secuencia reguladora del operón lac en bacterias es el sitio de unión de la proteína represora?", category: "culturageneral", level: 3, type: "standard", accept: ["operador"], options: ["Operador", "Promotor", "Terminador", "Intrón"], answer: "Operador" },
+  { q: "¿Qué obra de Luis Martín-Santos publicada en 1962 renovó la novela española rompiendo con el realismo social?", category: "culturageneral", level: 3, type: "standard", accept: ["tiempo de silencio"], options: ["Tiempo de silencio", "Señas de identidad", "Últimas tardes con Teresa", "Cinco horas con Mario"], answer: "Tiempo de silencio" },
+  { q: "¿Qué teorema del cálculo diferencial garantiza que si f es continua en [a,b] y derivable en (a,b) con f(a)=f(b), existe c donde f'(c)=0?", category: "culturageneral", level: 3, type: "standard", accept: ["teorema de rolle", "rolle"], options: ["Teorema de Rolle", "Teorema de Bolzano", "Teorema de Cauchy", "Teorema de Weierstrass"], answer: "Teorema de Rolle" },
+  { q: "¿Qué efecto relativista explica el incremento de longitud de onda de un fotón al dispersarse con un electrón libre?", category: "culturageneral", level: 3, type: "standard", accept: ["efecto compton"], options: ["Efecto Compton", "Efecto fotoeléctrico", "Efecto Doppler", "Efecto Túnel"], answer: "Efecto Compton" },
+  { q: "¿Qué acuerdo secreto de 1916 dividió las esferas de influencia en Oriente Próximo entre Reino Unido y Francia?", category: "culturageneral", level: 3, type: "standard", accept: ["sykes-picot", "acuerdo sykes-picot"], options: ["Acuerdo Sykes-Picot", "Declaración Balfour", "Tratado de Sèvres", "Tratado de Lausana"], answer: "Acuerdo Sykes-Picot" },
+  { q: "¿Qué término utiliza Thomas Kuhn para describir un cambio radical de marco teórico en la historia de la ciencia?", category: "culturageneral", level: 3, type: "standard", accept: ["cambio de paradigma", "revolucion cientifica"], options: ["Cambio de paradigma", "Falsacionismo", "Anarquismo epistemológico", "Verificacionismo"], answer: "Cambio de paradigma" },
+  { q: "¿Qué enzima fija el CO2 atmosférico a la ribulosa-1,5-bisfosfato en el ciclo de Calvin?", category: "culturageneral", level: 3, type: "standard", accept: ["rubisco"], options: ["RuBisCO", "PEP carboxilasa", "Hexoquinasa", "Piruvato quinasa"], answer: "RuBisCO" },
+  { q: "¿Qué estrofa castellana empleó Jorge Manrique en las 'Coplas por la muerte de su padre'?", category: "culturageneral", level: 3, type: "standard", accept: ["copla de pie quebrado", "copla manriqueña"], options: ["Copla de pie quebrado", "Cuaderna vía", "Octava real", "Estancia"], answer: "Copla de pie quebrado" },
+  { q: "¿Cómo se llama el efecto por el cual una reacción redox espontánea genera corriente eléctrica en una celda?", category: "culturageneral", level: 3, type: "standard", accept: ["celda galvanica", "pila galvanica", "pila voltaica"], options: ["Celda galvánica", "Cuba electrolítica", "Puente salino", "Electrólisis"], answer: "Celda galvánica" },
+  { q: "¿Qué ley educativa española de 1857 estructuró por primera vez la enseñanza pública en tres niveles?", category: "culturageneral", level: 3, type: "standard", accept: ["ley moyano"], options: ["Ley Moyano", "Ley Villar Palasí", "LOGSE", "Institución Libre de Enseñanza"], answer: "Ley Moyano" },
+  { q: "¿Qué filosofo del círculo de Viena y autor del 'Tractatus Logico-Philosophicus' afirmó que los límites de mi lenguaje son los límites de mi mundo?", category: "culturageneral", level: 3, type: "standard", accept: ["ludwig wittgenstein", "wittgenstein"], options: ["Ludwig Wittgenstein", "Bertrand Russell", "Karl Popper", "Rudolf Carnap"], answer: "Ludwig Wittgenstein" },
+  { q: "¿Qué ley de la radiación establece que la longitud de onda de máxima emisión de un cuerpo negro es inversamente proporcional a su temperatura?", category: "culturageneral", level: 3, type: "standard", accept: ["ley de wien", "ley del desplazamiento de wien"], options: ["Ley de Wien", "Ley de Stefan-Boltzmann", "Ley de Planck", "Ley de Rayleigh-Jeans"], answer: "Ley de Wien" },
+  { q: "¿Qué tratado de 1648 puso fin a la Guerra de los Treinta Años e instauró el sistema moderno de soberanía estatal?", category: "culturageneral", level: 3, type: "standard", accept: ["paz de westfalia", "westfalia"], options: ["Paz de Westfalia", "Paz de Augsburgo", "Tratado de Nimega", "Paz de Cateau-Cambrésis"], answer: "Paz de Westfalia" },
+  { q: "¿Qué estructuras cromosómicas repetitivas protegen los extremos de los cromosomas eucariotas frente a la degradación?", category: "culturageneral", level: 3, type: "standard", accept: ["telomeros", "telómeros"], options: ["Telómeros", "Centrómeros", "Cinetocoros", "Cromátidas"], answer: "Telómeros" },
+  { q: "¿Qué concepto económico describe la situación en la que coexisten alta inflación y estancamiento económico?", category: "culturageneral", level: 3, type: "standard", accept: ["estanflacion", "estanflación"], options: ["Estanflación", "Deflación", "Hiperinflación", "Desinflación"], answer: "Estanflación" },
+  { q: "¿Qué novela de Juan Rulfo influyó decisivamente en el realismo mágico hispanoamericano con el viaje de Juan Preciado a Comala?", category: "culturageneral", level: 3, type: "standard", accept: ["pedro paramo", "pedro páramo"], options: ["Pedro Páramo", "El llano en llamas", "Rayuela", "La muerte de Artemio Cruz"], answer: "Pedro Páramo" },
+  { q: "¿Qué teorema afirma que todo polinomio de grado n ≥ 1 con coeficientes complejos tiene al menos una raíz compleja?", category: "culturageneral", level: 3, type: "standard", accept: ["teorema fundamental del algebra"], options: ["Fundamental del Álgebra", "De Gauss-Markov", "De Pitágoras", "De Bayes"], answer: "Fundamental del Álgebra" },
 
-    // --- 4. GEOGRAFÍA ---
-    {
-        q: "¿Cuál es la ciudad capital oficial del país de Australia?",
-        category: "geografia", level: 2, type: "standard",
-        accept: ["canberra"],
-        options: ["Canberra", "Sídney", "Melbourne", "Brisbane"],
-        answer: "Canberra"
-    },
-    {
-        q: "¿Qué estrecho marítimo separa las costas del continente europeo (España) del continente africano (Marruecos)?",
-        category: "geografia", level: 2, type: "standard",
-        accept: ["estrecho de gibraltar", "gibraltar"],
-        options: ["Estrecho de Gibraltar", "Estrecho de Bering", "Estrecho de Magallanes", "Bósforo"],
-        answer: "Estrecho de Gibraltar"
-    },
-    {
-        q: "De los siguientes ríos del continente europeo, ¿cuál es el que cuenta con mayor longitud total?",
-        category: "geografia", level: 3, type: "standard",
-        accept: ["volga", "rio volga"],
-        options: ["Río Volga", "Río Danubio", "Río Rin", "Río Támesis"],
-        answer: "Río Volga"
-    },
-    {
-        q: "¿Cuál es el país más extenso del mundo en superficie terrestre total?",
-        category: "geografia", level: 1, type: "standard",
-        accept: ["rusia"],
-        options: ["Rusia", "Canadá", "China", "Estados Unidos"],
-        answer: "Rusia"
-    },
-    {
-        q: "¿En qué continente se encuentra ubicado el famoso río Nilo?",
-        category: "geografia", level: 1, type: "standard",
-        accept: ["africa", "áfrica"],
-        options: ["África", "Asia", "América del Sur", "Europa"],
-        answer: "África"
-    },
-    {
-        q: "¿Es cierto que Canadá es el país con mayor cantidad de costa del mundo debido a sus innumerables lagos e islas?",
-        category: "geografia", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estas ciudades son capitales de países europeos, pero una NO lo es. ¿Cuál es el intruso?",
-        category: "geografia", level: 2, type: "find_false",
-        options: ["Lisboa", "Barcelona", "Viena", "Budapest"],
-        answer: "Barcelona"
-    },
-    {
-        q: "¿Cuál es el océano más grande y extenso de nuestro planeta Tierra?",
-        category: "geografia", level: 1, type: "standard",
-        accept: ["oceano pacifico", "pacifico"],
-        options: ["Océano Pacífico", "Océano Atlántico", "Océano Índico", "Océano Ártico"],
-        answer: "Océano Pacífico"
-    },
-    {
-        q: "¿Qué cordillera montañosa actúa como frontera natural principal entre Europa y Asia?",
-        category: "geografia", level: 3, type: "standard",
-        accept: ["los montes urales", "urales"],
-        options: ["Los Montes Urales", "Los Alpes", "Los Andes", "El Cáucaso"],
-        answer: "Los Montes Urales"
-    },
-    {
-        q: "De las siguientes afirmaciones geográficas, ¿cuál es la ÚNICA verdadera?",
-        category: "geografia", level: 3, type: "find_true",
-        options: [
-            "El desierto del Sahara es el desierto más frío de todo el planeta.",
-            "El río Amazonas descarga más agua dulce al mar que cualquier otro río del mundo.",
-            "Madagascar es una isla situada en el mar Caribe.",
-            "Italia es un país con forma de rectángulo perfecto."
-        ],
-        answer: "El río Amazonas descarga más agua dulce al mar que cualquier otro río del mundo."
-    },
-    {
-        q: "¿Cuál es el país más poblado del mundo actualmente?",
-        category: "geografia", level: 2, type: "standard",
-        accept: ["india"],
-        options: ["India", "China", "Estados Unidos", "Indonesia"],
-        answer: "India"
-    },
-    {
-        q: "¿Es cierto que el Vaticano es considerado el país independiente más pequeño del mundo en superficie?",
-        category: "geografia", level: 1, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿En qué país sudamericano se encuentra el famoso desierto de Atacama?",
-        category: "geografia", level: 2, type: "standard",
-        accept: ["chile"],
-        options: ["Chile", "Perú", "Argentina", "Bolivia"],
-        answer: "Chile"
-    },
-    {
-        q: "¿Qué canal artificial de navegación une el océano Atlántico con el océano Pacífico en Centroamérica?",
-        category: "geografia", level: 1, type: "standard",
-        accept: ["canal de panama", "panama"],
-        options: ["Canal de Panamá", "Canal de Suez", "Canal de Corinto", "Canal de Kiel"],
-        answer: "Canal de Panamá"
-    },
-    {
-        q: "¿Cuál es la capital del país de Argentina?",
-        category: "geografia", level: 1, type: "standard",
-        accept: ["buenos aires"],
-        options: ["Buenos Aires", "Córdoba", "Rosario", "Mendoza"],
-        answer: "Buenos Aires"
-    },
-    {
-        q: "Tres de estos países forman parte de la península escandinava, pero uno NO. ¿Cuál es el intruso?",
-        category: "geografia", level: 3, type: "find_false",
-        options: ["Suecia", "Noruega", "Finlandia", "Dinamarca"],
-        answer: "Dinamarca"
-    },
-    {
-        q: "¿Qué mar interior separa Europa meridional de África septentrional?",
-        category: "geografia", level: 1, type: "standard",
-        accept: ["mar mediterraneo", "mediterraneo"],
-        options: ["Mar Mediterráneo", "Mar Báltico", "Mar Negro", "Mar Caspio"],
-        answer: "Mar Mediterráneo"
-    },
-    {
-        q: "¿Es cierto que Islandia es conocida popularmente como 'la isla de hielo y fuego' debido a sus glaciares y volcanes activos?",
-        category: "geografia", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
+  // =========================================================================
+  // 4. VERDADERO / FALSO - NIVEL 1 (10 PREGUNTAS: 201 a 210)
+  // =========================================================================
+  { q: "La Segunda República Española se proclamó el 14 de abril de 1931 tras las elecciones municipales.", category: "culturageneral", level: 1, type: "true_false", answer: "Verdadero" },
+  { q: "En el mito de la caverna de Platón, los prisioneros encadenados contemplan directamente la luz del Sol desde el principio.", category: "culturageneral", level: 1, type: "true_false", answer: "Falso" },
+  { q: "Las células procariotas carecen de envoltura nuclear que separe su ADN del citoplasma.", category: "culturageneral", level: 1, type: "true_false", answer: "Verdadero" },
+  { q: "El Cantar de Mio Cid pertenece al género lírico trovadoresco del siglo XV.", category: "culturageneral", level: 1, type: "true_false", answer: "Falso" },
+  { q: "La velocidad de la luz en el vacío es aproximadamente 300.000 kilómetros por segundo.", category: "culturageneral", level: 1, type: "true_false", answer: "Verdadero" },
+  { q: "El Teide, situado en la isla de Tenerife, es el pico más alto de toda España.", category: "culturageneral", level: 1, type: "true_false", answer: "Verdadero" },
+  { q: "Los metales alcalinos pertenecen al grupo 17 de la tabla periódica.", category: "culturageneral", level: 1, type: "true_false", answer: "Falso" },
+  { q: "La Guerra Fría enfrentó indirectamente a los bloques liderados por Estados Unidos y la Unión Soviética.", category: "culturageneral", level: 1, type: "true_false", answer: "Verdadero" },
+  { q: "Una función continua en un punto siempre es derivable en ese mismo punto.", category: "culturageneral", level: 1, type: "true_false", answer: "Falso" },
+  { q: "Francisco de Goya retrató tanto a la familia de Carlos IV como los horrores de la Guerra de la Independencia.", category: "culturageneral", level: 1, type: "true_false", answer: "Verdadero" },
 
-    // --- 5. CURIOSIDADES ---
-    {
-        q: "¿Es cierto que las huellas dactilares de los koalas son tan sorprendentemente similares a las de los humanos que pueden llegar a confundir a la policía en una escena del crimen?",
-        category: "curiosidades", level: 1, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿Cuál es el animal terrestre que, a pesar de su enorme tamaño y aparente pesadez, es capaz de correr más rápido que un ser humano medio?",
-        category: "curiosidades", level: 2, type: "standard",
-        accept: ["hipopotamo", "el hipopotamo"],
-        options: ["El hipopótamo", "El elefante africano", "El rinoceronte blanco", "El oso pardo"],
-        answer: "El hipopótamo"
-    },
-    {
-        q: "De las siguientes afirmaciones sobre datos insólitos de nuestro planeta, ¿cuál es la ÚNICA FALSA (el intruso)?",
-        category: "curiosidades", level: 3, type: "find_false",
-        options: [
-            "En Venus, un día completo (rotación) dura más que un año entero (su órbita alrededor del Sol).",
-            "El agua caliente puede congelarse más rápido que el agua fría bajo ciertas condiciones (Efecto Mpemba).",
-            "Las jirafas necesitan dormir al menos 8 horas seguidas tumbadas en el suelo cada noche para sobrevivir.",
-            "Hay más árboles en la Tierra que estrellas en nuestra galaxia según estimaciones de la NASA."
-        ],
-        answer: "Las jirafas necesitan dormir al menos 8 horas seguidas tumbadas en el suelo cada noche para sobrevivir."
-    },
-    {
-        q: "¿Es cierto que los cerdos no pueden físicamente mirar hacia el cielo debido a la estructura anatómica de sus vértebras cervicales?",
-        category: "curiosidades", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿Qué fruta es técnicamente una baya y crece colgando de grandes plantas herbáceas que se confunden a menudo con árboles?",
-        category: "curiosidades", level: 2, type: "standard",
-        accept: ["platano", "banana"],
-        options: ["Plátano", "Manzana", "Fresa", "Melocotón"],
-        answer: "Plátano"
-    },
-    {
-        q: "¿Cuál es el único mamífero del mundo que posee la capacidad natural de volar de forma sostenida?",
-        category: "curiosidades", level: 1, type: "standard",
-        accept: ["murcielago", "el murcielago"],
-        options: ["El murciélago", "La ardilla voladora", "El lémur volador", "El colibrí"],
-        answer: "El murciélago"
-    },
-    {
-        q: "De las siguientes curiosidades sobre el cuerpo humano, ¿cuál es la ÚNICA verdadera?",
-        category: "curiosidades", level: 3, type: "find_true",
-        options: [
-            "El ácido del estómago humano es lo suficientemente fuerte como para disolver hojas de afeitar de metal.",
-            "Las uñas de las manos crecen exactamente a la misma velocidad que el cabello.",
-            "Los seres humanos nacemos con un número menor de huesos que los que tenemos de adultos.",
-            "El corazón humano nunca descansa ni un solo segundo a lo largo de toda la vida."
-        ],
-        answer: "El ácido del estómago humano es lo suficientemente fuerte como para disolver hojas de afeitar de metal."
-    },
-    {
-        q: "¿Es cierto que las torres de la catedral de Notre Dame en París tienen gárgolas que sirven como desagües pluviales para el agua de lluvia?",
-        category: "curiosidades", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿Qué animal marino cuenta con tres corazones y sangre de color azul?",
-        category: "curiosidades", level: 2, type: "standard",
-        accept: ["pulpo"],
-        options: ["Pulpo", "Tiburón", "Delfín", "Medusa"],
-        answer: "Pulpo"
-    },
-    {
-        q: "¿Es cierto que el ADN humano comparte aproximadamente un 50% de similitud genética con el de los plátanos?",
-        category: "curiosidades", level: 3, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos objetos fueron inventados en el siglo XX, pero uno de ellos es mucho más antiguo. ¿Cuál es el intruso?",
-        category: "curiosidades", level: 3, type: "find_false",
-        options: ["El teléfono móvil", "El horno microondas", "La imprenta moderna", "El velcro"],
-        answer: "La imprenta moderna"
-    },
-    {
-        q: "¿Cuál es el nombre del animal considerado el más venenoso del mundo, un anfibio pequeño de colores vivos?",
-        category: "curiosidades", level: 2, type: "standard",
-        accept: ["rana dardo venenosa", "rana de dardo", "rana flecha"],
-        options: ["Rana dardo venenosa", "Serpiente taipán", "Medusa caja", "Pulpo de anillos azules"],
-        answer: "Rana dardo venenosa"
-    },
-    {
-        q: "¿Es cierto que en el espacio exterior los astronautas no pueden llorar con lágrimas que caigan por la mejilla debido a la falta de gravedad?",
-        category: "curiosidades", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿Qué mamífero acuático es famoso por utilizar herramientas como piedras para romper conchas de moluscos mientras flota bocarriba?",
-        category: "curiosidades", level: 1, type: "standard",
-        accept: ["nutria marina", "nutria"],
-        options: ["Nutria marina", "Foca monje", "Morsa", "Delfín mular"],
-        answer: "Nutria marina"
-    },
-    {
-        q: "¿Cuál es el único planeta del sistema solar que gira sobre su eje de lado, prácticamente rodando sobre su órbita?",
-        category: "curiosidades", level: 3, type: "standard",
-        accept: ["urano"],
-        options: ["Urano", "Venus", "Neptuno", "Saturno"],
-        answer: "Urano"
-    },
-    {
-        q: "¿Es cierto que las abejas pueden llegar a reconocer rostros humanos individuales si se les entrena para ello?",
-        category: "curiosidades", level: 3, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos alimentos son considerados verduras u hortalizas botánicamente, pero uno es una fruta. ¿Cuál es el intruso?",
-        category: "curiosidades", level: 2, type: "find_false",
-        options: ["Zanahoria", "Lechuga", "Tomate", "Brócoli"],
-        answer: "Tomate"
-    },
-    {
-        q: "¿Qué animal es capaz de regenerar extremidades completas y órganos vitales si sufre una lesión grave?",
-        category: "curiosidades", level: 2, type: "standard",
-        accept: ["ajolote", "salamandra"],
-        options: ["Ajolote", "Estrella de mar", "Geco", "Cangrejo ermitaño"],
-        answer: "Ajolote"
-    },
+  // =========================================================================
+  // 5. VERDADERO / FALSO - NIVEL 2 (10 PREGUNTAS: 211 a 220)
+  // =========================================================================
+  { q: "El Estatuto Real de 1834 fue una carta otorgada impulsada durante la regencia de María Cristina de Borbón.", category: "culturageneral", level: 2, type: "true_false", answer: "Verdadero" },
+  { q: "Para David Hume, la idea de causalidad necesaria procede de una impresión sensible directa.", category: "culturageneral", level: 2, type: "true_false", answer: "Falso" },
+  { q: "Durante la fase S de la interfase celular se duplica el contenido de ADN cromosómico.", category: "culturageneral", level: 2, type: "true_false", answer: "Verdadero" },
+  { q: "La Generación del 98 adoptó un estilo puramente escapista desinteresado por el problema de España.", category: "culturageneral", level: 2, type: "true_false", answer: "Falso" },
+  { q: "Según la tercera ley de Newton, las fuerzas de acción y reacción actúan siempre sobre el mismo cuerpo.", category: "culturageneral", level: 2, type: "true_false", answer: "Falso" },
+  { q: "El efecto Foehn provoca lluvias abundantes en la ladera de barlovento y aire seco y cálido en sotavento.", category: "culturageneral", level: 2, type: "true_false", answer: "Verdadero" },
+  { q: "Un catalizador aumenta la velocidad de una reacción química disminuyendo su energía de activación.", category: "culturageneral", level: 2, type: "true_false", answer: "Verdadero" },
+  { q: "El Tratado de Maastricht de 1992 creó formalmente la Unión Europea y sentó las bases del euro.", category: "culturageneral", level: 2, type: "true_false", answer: "Verdadero" },
+  { q: "El producto escalar de dos vectores perpendiculares no nulos es siempre igual a 1.", category: "culturageneral", level: 2, type: "true_false", answer: "Falso" },
+  { q: "La novela picaresca suele estar narrada en primera persona con estructura autobiográfica.", category: "culturageneral", level: 2, type: "true_false", answer: "Verdadero" },
 
-    // --- 6. ARTE Y LITERATURA ---
-    {
-        q: "¿Quién es el autor de la célebre novela universal 'Don Quijote de la Mancha'?",
-        category: "arteyliteratura", level: 1, type: "standard",
-        accept: ["miguel de cervantes", "cervantes"],
-        options: ["Miguel de Cervantes", "Lope de Vega", "Federico García Lorca", "Quevedo"],
-        answer: "Miguel de Cervantes"
-    },
-    {
-        q: "¿Qué célebre pintor neerlandés se cortó parte de la oreja izquierda en un famoso episodio de crisis mental?",
-        category: "arteyliteratura", level: 2, type: "standard",
-        accept: ["vincent van gogh", "van gogh"],
-        options: ["Vincent van Gogh", "Claude Monet", "Pablo Picasso", "Salvador Dalí"],
-        answer: "Vincent van Gogh"
-    },
-    {
-        q: "De las siguientes obras maestras de la pintura universal, ¿cuál se encuentra expuesta de forma permanente en el Museo del Louvre de París?",
-        category: "arteyliteratura", level: 3, type: "find_true",
-        options: ["La Gioconda (Mona Lisa)", "Las Meninas", "El Guernica", "La noche estrellada"],
-        answer: "La Gioconda (Mona Lisa)"
-    },
-    {
-        q: "¿Cuál es el título de la famosa tragedia escrita por William Shakespeare sobre los amantes de Verona?",
-        category: "arteyliteratura", level: 1, type: "standard",
-        accept: ["romeo y julieta"],
-        options: ["Romeo y Julieta", "Hamlet", "Macbeth", "Otelo"],
-        answer: "Romeo y Julieta"
-    },
-    {
-        q: "¿Es cierto que Pablo Picasso fue uno de los fundadores principales del movimiento artístico conocido como cubismo?",
-        category: "arteyliteratura", level: 1, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos autores pertenecen a la literatura en lengua española, pero uno es un escritor británico clásico. ¿Quién es el intruso?",
-        category: "arteyliteratura", level: 2, type: "find_false",
-        options: ["Gabriel García Márquez", "Jorge Luis Borges", "Charles Dickens", "Isabel Allende"],
-        answer: "Charles Dickens"
-    },
-    {
-        q: "¿Qué escultor y pintor renacentista italiano creó la famosa estatua de mármol del David y los frescos de la Capilla Sixtina?",
-        category: "arteyliteratura", level: 2, type: "standard",
-        accept: ["miguel angel", "michelangelo"],
-        options: ["Miguel Ángel Buonarroti", "Leonardo da Vinci", "Rafael Sanzio", "Donatello"],
-        answer: "Miguel Ángel Buonarroti"
-    },
-    {
-        q: "¿En qué siglo se desarrolló principalmente el movimiento artístico del barroco en Europa?",
-        category: "arteyliteratura", level: 3, type: "standard",
-        accept: ["siglo xvii", "siglo 17", "17"],
-        options: ["Siglo XVII", "Siglo XIV", "Siglo XIX", "Siglo XVI"],
-        answer: "Siglo XVII"
-    },
-    {
-        q: "¿Es cierto que el famoso cuadro 'El Guernica' fue pintado por Salvador Dalí como homenaje a los surrealistas?",
-        category: "arteyliteratura", level: 2, type: "true_false",
-        answer: "Falso"
-    },
-    {
-        q: "¿Cuál es el nombre del protagonista y detective creado por el escritor Arthur Conan Doyle?",
-        category: "arteyliteratura", level: 1, type: "standard",
-        accept: ["sherlock holmes", "holmes"],
-        options: ["Sherlock Holmes", "Hercule Poirot", "Agatha Christie", "Inspector Clouseau"],
-        answer: "Sherlock Holmes"
-    },
-    {
-        q: "De las siguientes novelas épicas de fantasía, ¿cuál fue escrita por el autor británico J.R.R. Tolkien?",
-        category: "arteyliteratura", level: 1, type: "standard",
-        accept: ["el señor de los anillos", "señor de los anillos"],
-        options: ["El Señor de los Anillos", "Harry Potter", "Las Crónicas de Narnia", "Juego de Tronos"],
-        answer: "El Señor de los Anillos"
-    },
-    {
-        q: "¿Es cierto que Miguel de Cervantes Saavedra participó en la histórica batalla de Naval de Lepanto donde perdió la movilidad de su mano izquierda?",
-        category: "arteyliteratura", level: 3, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos pintores son máximos exponentes del movimiento surrealista, pero uno pertenece al impresionismo. ¿Cuál es el intruso?",
-        category: "arteyliteratura", level: 3, type: "find_false",
-        options: ["Salvador Dalí", "René Magritte", "Claude Monet", "Max Ernst"],
-        answer: "Claude Monet"
-    },
-    {
-        q: "¿Qué escritora británica es la creadora de la exitosa saga literaria juvenil de Harry Potter?",
-        category: "arteyliteratura", level: 1, type: "standard",
-        accept: ["j.k. rowling", "jk rowling", "rowling"],
-        options: ["J.K. Rowling", "Jane Austen", "Virginia Woolf", "Agatha Christie"],
-        answer: "J.K. Rowling"
-    },
-    {
-        q: "¿Cuál es el título de la célebre obra de teatro de Federico García Lorca que narra la tragedia de una madre en la España rural?",
-        category: "arteyliteratura", level: 2, type: "standard",
-        accept: ["bodas de sangre", "la casa de bernarda alba"],
-        options: ["Bodas de sangre", "Luces de bohemia", "Don Juan Tenorio", "La Celestina"],
-        answer: "Bodas de sangre"
-    },
-    {
-        q: "¿Qué famoso movimiento pictórico vanguardista lideró Georges Braque junto a Pablo Picasso a principios del siglo XX?",
-        category: "arteyliteratura", level: 3, type: "standard",
-        accept: ["cubismo"],
-        options: ["Cubismo", "Impresionismo", "Romanticismo", "Neoclasicismo"],
-        answer: "Cubismo"
-    },
-    {
-        q: "¿Es cierto que Edgar Allan Poe es considerado uno de los grandes maestros pioneros del relato corto de terror y de la novela policíaca?",
-        category: "arteyliteratura", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "De los siguientes premios literarios internacionales, ¿cuál es considerado el más prestigioso del mundo hispanohablante?",
-        category: "arteyliteratura", level: 3, type: "standard",
-        accept: ["premio cervantes", "premio miguel de cervantes"],
-        options: ["Premio Miguel de Cervantes", "Premio Planeta", "Premio Nadal", "Premio Princesa de Asturias"],
-        answer: "Premio Miguel de Cervantes"
-    },
+  // =========================================================================
+  // 6. VERDADERO / FALSO - NIVEL 3 (30 PREGUNTAS: 221 a 250)
+  // =========================================================================
+  { q: "La Constitución española de 1869 fue la primera de la historia de España en reconocer el sufragio universal masculino.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "Para Karl Popper, una teoría científica es válida si puede ser verificada definitivamente mediante inducción.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "La cadena de transporte de electrones mitocondrial se localiza en la membrana mitocondrial externa.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "El 'Libro de buen amor' del Arcipreste de Hita está escrito mayoritariamente en cuaderna vía.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "En un movimiento armónico simple, la aceleración es proporcional al desplazamiento y de sentido opuesto.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "La desamortización de Pascual Madoz de 1855 afectó principalmente a los bienes comunales y municipales.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "En la ética de Aristóteles, la virtud moral consiste en el extremo máximo de cualquier pasión humana.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "Los fragmentos de Okazaki se sintetizan en la hebra conductora durante la replicación del ADN.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "Una matriz cuadrada tiene inversa si y solo si su determinante es distinto de cero.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "La Conferencia de Berlín de 1884-1885 reguló el reparto colonial de África entre las potencias europeas.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "El efecto fotoeléctrico demostró que la energía de los fotoelectrones depende de la intensidad de la luz y no de su frecuencia.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "El mester de juglaría empleaba versos regulares de catorce sílabas con rima consonante estricta.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "La regla de Markovnikov predice la orientación de la adición electrófila a alquenos asimétricos.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "El Pacto del Pardo de 1885 aseguró la continuidad de la monarquía tras la muerte de Alfonso XII.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "Según Descartes, la 'res extensa' tiene como atributo esencial el pensamiento.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "La glucólisis ocurre en el citosol celular y no requiere presencia de oxígeno molecular.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "El teorema de Bolzano asegura que si una función continua toma signos opuestos en los extremos de [a,b], se anula en algún punto interior.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "La Semana Trágica de Barcelona de 1909 estalló por el envío de reservistas a la guerra de Marruecos.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "La obra 'La Celestina' de Fernando de Rojas se publicó originalmente en 1499 como 'Comedia de Calisto y Melibea'.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "Un campo magnético estático realiza trabajo mecánico sobre una carga eléctrica en movimiento.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "La hiperinflación alemana de 1923 estuvo vinculada al pago de reparaciones y la ocupación francesa del Ruhr.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "Para Santo Tomás de Aquino, la fe y la razón son incompatibles y se contradicen mutuamente.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "Los plásmidos son pequeñas moléculas de ADN circular extracromosómico frecuentes en bacterias.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "La Generación del 27 recibió ese nombre por conmemorar el tricentenario de la muerte de Luis de Góngora.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "El principio de Le Châtelier afirma que un sistema en equilibrio desplazado responde oponiéndose a la perturbación.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "El Convenio de Vergara de 1839 puso fin a la Tercera Guerra Carlista.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "En estadística, la varianza de una variable aleatoria puede tomar valores negativos.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "El estilo mudéjar es un arte exclusivo de los reinos cristianos hispánicos con mano de obra y tradición islámica.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
+  { q: "Los anticuerpos o inmunoglobulinas son sintetizados por los linfocitos T citotóxicos.", category: "culturageneral", level: 3, type: "true_false", answer: "Falso" },
+  { q: "La Revolución Gloriosa de 1868 provocó el exilio de Isabel II a Francia.", category: "culturageneral", level: 3, type: "true_false", answer: "Verdadero" },
 
-    // --- 7. CIENCIA Y TECNOLOGÍA ---
-    {
-        q: "¿Cuál es el planeta que se encuentra más cerca del Sol en nuestro sistema solar?",
-        category: "cienciaytecnologia", level: 1, type: "standard",
-        accept: ["mercurio"],
-        options: ["Mercurio", "Venus", "Marte", "La Tierra"],
-        answer: "Mercurio"
-    },
-    {
-        q: "¿Qué lenguaje de programación multiplataforma web comparte nombre con una popular bebida caliente de origen tropical?",
-        category: "cienciaytecnologia", level: 2, type: "standard",
-        accept: ["java"],
-        options: ["Java", "Python", "C++", "Ruby"],
-        answer: "Java"
-    },
-    {
-        q: "¿Cuál es el nombre del elemento químico cuyo símbolo oficial en la tabla periódica es 'Au'?",
-        category: "cienciaytecnologia", level: 3, type: "standard",
-        accept: ["oro"],
-        options: ["Oro", "Plata", "Aluminio", "Cobre"],
-        answer: "Oro"
-    },
-    {
-        q: "¿Qué científico formuló las leyes clásicas de la física y la ley de la gravitación universal tras ver caer una manzana?",
-        category: "cienciaytecnologia", level: 1, type: "standard",
-        accept: ["isaac newton", "newton"],
-        options: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Stephen Hawking"],
-        answer: "Isaac Newton"
-    },
-    {
-        q: "¿Es cierto que la velocidad de la luz en el vacío es la velocidad límite absoluta para el desplazamiento de cualquier partícula en el universo?",
-        category: "cienciaytecnologia", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "De los siguientes dispositivos de hardware informático, ¿cuál es considerado el cerebro principal encargado de procesar las instrucciones del sistema?",
-        category: "cienciaytecnologia", level: 1, type: "standard",
-        accept: ["procesador", "cpu"],
-        options: ["Procesador (CPU)", "Memoria RAM", "Tarjeta gráfica", "Disco duro"],
-        answer: "Procesador (CPU)"
-    },
-    {
-        q: "Tres de estos científicos ganaron un Premio Nobel de Física o Química, pero uno de ellos es un físico teórico clásico anterior. ¿Quién es el intruso?",
-        category: "cienciaytecnologia", level: 3, type: "find_false",
-        options: ["Marie Curie", "Albert Einstein", "Galileo Galilei", "Max Planck"],
-        answer: "Galileo Galilei"
-    },
-    {
-        q: "¿Qué gas abunda en mayor porcentaje en la composición química de la atmósfera terrestre?",
-        category: "cienciaytecnologia", level: 2, type: "standard",
-        accept: ["nitrogeno"],
-        options: ["Nitrógeno", "Oxígeno", "Dióxido de carbono", "Argón"],
-        answer: "Nitrógeno"
-    },
-    {
-        q: "¿Es cierto que los agujeros negros se llaman así porque su fuerza gravitatoria es tan intensa que ni siquiera la luz puede escapar de ellos?",
-        category: "cienciaytecnologia", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿Cuál es la unidad básica de almacenamiento de información digital en informática compuesta por un valor de 0 o 1?",
-        category: "cienciaytecnologia", level: 1, type: "standard",
-        accept: ["bit"],
-        options: ["Bit", "Byte", "Gigabyte", "Megabyte"],
-        answer: "Bit"
-    },
-    {
-        q: "De las siguientes afirmaciones sobre tecnología e internet, ¿cuál es la ÚNICA verdadera?",
-        category: "cienciaytecnologia", level: 3, type: "find_true",
-        options: [
-            "Tim Berners-Lee es considerado el inventor principal de la World Wide Web (WWW).",
-            "El primer ordenador personal del mundo fue fabricado por la empresa Google en 1998.",
-            "El lenguaje HTML se utiliza exclusivamente para compilar programas de inteligencia artificial.",
-            "La tecnología Wi-Fi fue inventada en el siglo XIX durante la Revolución Industrial."
-        ],
-        answer: "Tim Berners-Lee es considerado el inventor principal de la World Wide Web (WWW)."
-    },
-    {
-        q: "¿Qué partícula subatómica con carga positiva se encuentra en el núcleo de los átomos?",
-        category: "cienciaytecnologia", level: 2, type: "standard",
-        accept: ["proton"],
-        options: ["Protón", "Electrón", "Neutrón", "Fotón"],
-        answer: "Protón"
-    },
-    {
-        q: "¿Es cierto que la penicilina, el primer antibiótico de la historia, fue descubierta de forma accidental por Alexander Fleming?",
-        category: "cienciaytecnologia", level: 1, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿Cuál es el nombre del telescopio espacial orbital lanzado conjuntamente por la NASA y la ESA que revolucionó la astronomía moderna en 1990?",
-        category: "cienciaytecnologia", level: 2, type: "standard",
-        accept: ["hubble", "telescopio hubble"],
-        options: ["Telescopio Hubble", "James Webb", "Kepler", "Spitzer"],
-        answer: "Telescopio Hubble"
-    },
-    {
-        q: "¿Qué metal líquido a temperatura ambiente se utilizaba tradicionalmente en los termómetros médicos clásicos?",
-        category: "cienciaytecnologia", level: 2, type: "standard",
-        accept: ["mercurio"],
-        options: ["Mercurio", "Galio", "Bromo", "Platino"],
-        answer: "Mercurio"
-    },
-    {
-        q: "Tres de estos navegadores web actuales utilizan el motor de código abierto Chromium, pero uno utiliza un motor completamente independiente. ¿Cuál es el intruso?",
-        category: "cienciaytecnologia", level: 3, type: "find_false",
-        options: ["Google Chrome", "Microsoft Edge", "Mozilla Firefox", "Brave"],
-        answer: "Mozilla Firefox"
-    },
-    {
-        q: "¿Cuál es el planeta más caliente de todo el sistema solar debido a un potente efecto invernadero en su atmósfera?",
-        category: "cienciaytecnologia", level: 3, type: "standard",
-        accept: ["venus"],
-        options: ["Venus", "Mercurio", "Marte", "Júpiter"],
-        answer: "Venus"
-    },
-    {
-        q: "¿Es cierto que Nikola Tesla patentó el sistema de corriente alterna que hoy en día alimenta la red eléctrica de nuestros hogares?",
-        category: "cienciaytecnologia", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
+  // =========================================================================
+  // 7. ENCONTRAR LA AFIRMACIÓN CORRECTA - NIVEL 1 (5 PREGUNTAS: 251 a 255)
+  // =========================================================================
+  {
+    q: "¿Cuál de estas afirmaciones sobre la Historia de España es CORRECTA?",
+    category: "culturageneral", level: 1, type: "find_true",
+    options: ["La Constitución de 1978 instauró una monarquía parlamentaria.", "La Guerra Civil terminó en 1936.", "Alfonso XIII abdicó en 1975.", "Cádiz aprobó su Constitución en 1868."],
+    answer: "La Constitución de 1978 instauró una monarquía parlamentaria."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Biología celular es CORRECTA?",
+    category: "culturageneral", level: 1, type: "find_true",
+    options: ["Los ribosomas sintetizan proteínas.", "Las células animales tienen cloroplastos.", "El ADN se localiza solo en los lisosomas.", "La mitosis genera gametos haploides."],
+    answer: "Los ribosomas sintetizan proteínas."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Literatura Española es CORRECTA?",
+    category: "culturageneral", level: 1, type: "find_true",
+    options: ["Miguel de Cervantes murió en 1616.", "Lope de Vega escribió Don Quijote.", "García Lorca perteneció al siglo XVIII.", "El Lazarillo es una obra teatral en verso."],
+    answer: "Miguel de Cervantes murió en 1616."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Física y Química es CORRECTA?",
+    category: "culturageneral", level: 1, type: "find_true",
+    options: ["El agua pura hierve a 100 °C a 1 atm.", "El protón tiene carga negativa.", "El oro tiene símbolo químico Ag.", "La masa se mide en newtons."],
+    answer: "El agua pura hierve a 100 °C a 1 atm."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Geografía de España es CORRECTA?",
+    category: "culturageneral", level: 1, type: "find_true",
+    options: ["El río Ebro desemboca en el Mediterráneo.", "Madrid tiene costa en el Cantábrico.", "El Teide está en Mallorca.", "Portugal limita al este con España."],
+    answer: "El río Ebro desemboca en el Mediterráneo."
+  },
 
-    // --- 8. CINE ---
-    {
-        q: "¿En qué año se estrenó en cines la película original de Star Wars (Episodio IV: Una nueva esperanza)?",
-        category: "cine", level: 1, type: "standard",
-        accept: ["1977"],
-        options: ["1975", "1977", "1980", "1983"],
-        answer: "1977"
-    },
-    {
-        q: "Tres de estas películas fueron dirigidas por Christopher Nolan. ¿Cuál de ellas NO pertenece a su filmografía?",
-        category: "cine", level: 2, type: "find_false",
-        options: ["Interstellar", "Origen (Inception)", "Tenet", "Blade Runner 2049"],
-        answer: "Blade Runner 2049"
-    },
-    {
-        q: "¿Qué director surcoreano hizo historia al ganar el Óscar a la Mejor Película con 'Parásitos'?",
-        category: "cine", level: 2, type: "standard",
-        accept: ["bong joon ho", "bong joon-ho"],
-        options: ["Bong Joon-ho", "Park Chan-wook", "Kim Jee-woon", "Ryoo Seung-wan"],
-        answer: "Bong Joon-ho"
-    },
-    {
-        q: "¿Cómo se llama el famoso tiburón gigante prehistórico que protagoniza la película de acción de tiburones?",
-        category: "cine", level: 1, type: "standard",
-        accept: ["megalodon", "el megalodon"],
-        options: ["Megalodón", "Tiburón blanco", "Leviatán", "Mosasaurio"],
-        answer: "Megalodón"
-    },
-    {
-        q: "¿Es cierto que la película animada 'Toy Story' (1995) fue el primer largometraje de la historia del cine creado completamente por ordenador?",
-        category: "cine", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "De las siguientes sagas cinematográficas de ciencia ficción, ¿cuál fue creada por el director George Lucas?",
-        category: "cine", level: 1, type: "standard",
-        accept: ["star wars", "la guerra de las galaxias"],
-        options: ["Star Wars", "Star Trek", "Matrix", "Alien"],
-        answer: "Star Wars"
-    },
-    {
-        q: "Tres de estos actores han interpretado al famoso agente secreto James Bond en la gran pantalla, pero uno NO lo ha hecho. ¿Quién es el intruso?",
-        category: "cine", level: 3, type: "find_false",
-        options: ["Daniel Craig", "Pierce Brosnan", "Tom Cruise", "Sean Connery"],
-        answer: "Tom Cruise"
-    },
-    {
-        q: "¿Qué película de suspense dirigida por Alfred Hitchcock en 1960 popularizó la icónica escena del asesinato en la ducha?",
-        category: "cine", level: 2, type: "standard",
-        accept: ["psicosis", "psycho"],
-        options: ["Psicosis", "Los pájaros", "Vértigo", "La ventana indiscreta"],
-        answer: "Psicosis"
-    },
-    {
-        q: "¿Es cierto que la trilogía cinematográfica de 'El Señor de los Anillos' dirigida por Peter Jackson se rodó íntegramente en Nueva Zelanda?",
-        category: "cine", level: 1, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿Cuál es el título de la película de animación de Hayao Miyazaki que ganó el Óscar y narra las aventuras de Chihiro en un mundo de espíritus?",
-        category: "cine", level: 2, type: "standard",
-        accept: ["el viaje de chihiro", "viaje de chihiro"],
-        options: ["El viaje de Chihiro", "Mi vecino Totoro", "La princesa Mononoke", "El castillo ambulante"],
-        answer: "El viaje de Chihiro"
-    },
-    {
-        q: "De las siguientes afirmaciones sobre premios Óscar de Hollywood, ¿cuál es la ÚNICA verdadera?",
-        category: "cine", level: 3, type: "find_true",
-        options: [
-            "Titanic, Ben-Hur y El Señor de los Anillos: El retorno del Rey comparten el récord de 11 premios Óscar ganados.",
-            "Ninguna película de animación ha ganado jamás el premio Óscar a la Mejor Película.",
-            "Walt Disney es la persona que menos nominaciones a los Óscar ha recibido en la historia.",
-            "Los premios Óscar se entregan tradicionalmente en la ciudad de Nueva York."
-        ],
-        answer: "Titanic, Ben-Hur y El Señor de los Anillos: El retorno del Rey comparten el récord de 11 premios Óscar ganados."
-    },
-    {
-        q: "¿Quién interpretó al carismático y excéntrico capitán Jack Sparrow en la saga cinematográfica 'Piratas del Caribe'?",
-        category: "cine", level: 1, type: "standard",
-        accept: ["johnny depp", "depp"],
-        options: ["Johnny Depp", "Orlando Bloom", "Brad Pitt", "Leonardo DiCaprio"],
-        answer: "Johnny Depp"
-    },
-    {
-        q: "¿En qué año se estrenó la revolucionaria película de ciencia ficción 'Matrix' dirigida por las hermanas Wachowski?",
-        category: "cine", level: 2, type: "standard",
-        accept: ["1999"],
-        options: ["1999", "1995", "2001", "1997"],
-        answer: "1999"
-    },
-    {
-        q: "¿Es cierto que Heath Ledger ganó un premio Óscar póstumo por su inolvidable interpretación del Joker en 'El caballero oscuro'?",
-        category: "cine", level: 3, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos directores de cine son considerados maestros del cine de suspense y terror, pero uno destaca principalmente por sus comedias románticas. ¿Cuál es el intruso?",
-        category: "cine", level: 3, type: "find_false",
-        options: ["Alfred Hitchcock", "John Carpenter", "Richard Curtis", "Wes Craven"],
-        answer: "Richard Curtis"
-    },
-    {
-        q: "¿Cómo se llama el simpático pez cirujano azul olvidadizo que acompaña a Marlin en busca de Nemo?",
-        category: "cine", level: 1, type: "standard",
-        accept: ["dory"],
-        options: ["Dory", "Marlin", "Bubbles", "Gill"],
-        answer: "Dory"
-    },
-    {
-        q: "¿Qué actor protagonizó al legendario personaje de boxeo Rocky Balboa en la famosa saga cinematográfica homónima?",
-        category: "cine", level: 1, type: "standard",
-        accept: ["sylvester stallone", "stallone"],
-        options: ["Sylvester Stallone", "Arnold Schwarzenegger", "Bruce Willis", "Jean-Claude Van Damme"],
-        answer: "Sylvester Stallone"
-    },
-    {
-        q: "¿Es cierto que el director Quentin Tarantino es conocido por dirigir películas con diálogos muy elaborados, violencia estilizada y tramas no lineales?",
-        category: "cine", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
+  // =========================================================================
+  // 8. ENCONTRAR LA AFIRMACIÓN CORRECTA - NIVEL 2 (15 PREGUNTAS: 256 a 270)
+  // =========================================================================
+  {
+    q: "¿Cuál de estas afirmaciones sobre Filosofía Moderna es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["Descartes usó la duda metódica para hallar certezas.", "Hume defendió la existencia de ideas innatas.", "Kant rechazó la existencia del deber moral.", "Nietzsche defendió el platonismo cristiano."],
+    answer: "Descartes usó la duda metódica para hallar certezas."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre el siglo XIX español es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["La Restauración borbónica comenzó en 1874.", "La Primera República duró diez años.", "Carlos IV venció a Napoleón en Bailén.", "La Constitución de 1812 fue absolutista."],
+    answer: "La Restauración borbónica comenzó en 1874."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Genética Molecular es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["La transcripción sintetiza ARN a partir de ADN.", "La adenina se empareja con la citosina.", "El código genético es ambiguo.", "La replicación del ADN es conservativa."],
+    answer: "La transcripción sintetiza ARN a partir de ADN."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre la Generación del 27 es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["Sintetizó tradición popular y vanguardias.", "Rechazó por completo a los poetas clásicos.", "Se formó exclusivamente en Barcelona.", "Solo cultivó novela realista."],
+    answer: "Sintetizó tradición popular y vanguardias."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Química Orgánica es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["Los alquenos poseen al menos un doble enlace C=C.", "Los alcanos son hidrocarburos aromáticos.", "El grupo carboxilo caracteriza a las aminas.", "El benceno es un alcohol saturado."],
+    answer: "Los alquenos poseen al menos un doble enlace C=C."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre la Guerra Fría es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["La OTAN se fundó en 1949.", "El Pacto de Varsovia lo lideró EE. UU.", "La carrera espacial empezó en 1989.", "Corea se unificó en 1953."],
+    answer: "La OTAN se fundó en 1949."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Economía es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["La inflación es el aumento generalizado de precios.", "El IPC mide el desempleo juvenil.", "En un oligopolio hay infinitos oferentes.", "El BCE fija los impuestos en España."],
+    answer: "La inflación es el aumento generalizado de precios."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Cálculo Matemático es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["La derivada en un extremo relativo anulable vale cero.", "La integral de una constante es cero.", "El logaritmo de cero es uno.", "Toda matriz rectangular tiene determinante."],
+    answer: "La derivada en un extremo relativo anulable vale cero."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre el Siglo de Oro es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["Lope de Vega renovó el teatro con 'Arte nuevo de hacer comedias'.", "Garcilaso introdujo el verso alejandrino medieval.", "Calderón perteneció al Renacimiento temprano.", "Quevedo escribió 'Soledades'."],
+    answer: "Lope de Vega renovó el teatro con 'Arte nuevo de hacer comedias'."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Electromagnetismo es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["Una corriente eléctrica genera un campo magnético.", "Existen monopolos magnéticos aislados.", "La ley de Coulomb mide fuerzas gravitatorias.", "El campo magnético se mide en culombios."],
+    answer: "Una corriente eléctrica genera un campo magnético."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Historia Medieval peninsular es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["La conquista de Granada culminó en 1492.", "El Califato de Córdoba cayó en el siglo VIII.", "Alfonso X impulsó la Escuela de Traductores de Sevilla.", "Los visigodos entraron tras los musulmanes."],
+    answer: "La conquista de Granada culminó en 1492."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Metabolismo celular es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["El ciclo de Krebs ocurre en la matriz mitocondrial.", "La fermentación alcohólica produce ácido láctico.", "La fotosíntesis libera CO2 como residuo.", "La glucólisis ocurre dentro del núcleo."],
+    answer: "El ciclo de Krebs ocurre en la matriz mitocondrial."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Filosofía Antigua es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["Sócrates empleó la mayéutica para alumbrar la verdad.", "Aristóteles fundó la Academia de Atenas.", "Los sofistas defendían verdades absolutas inmutables.", "Epicuro predicaba el dolor como bien supremo."],
+    answer: "Sócrates empleó la mayéutica para alumbrar la verdad."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Historia del Arte es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["El Guernica de Picasso se pintó en 1937.", "Velázquez fue un pintor impresionista.", "La Mezquita de Córdoba es de estilo gótico.", "Dalí diseñó la Sagrada Familia."],
+    answer: "El Guernica de Picasso se pintó en 1937."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Geografía Física es CORRECTA?",
+    category: "culturageneral", level: 2, type: "find_true",
+    options: ["La Meseta Central está dividida por el Sistema Central.", "El Guadalquivir desemboca en el Atlántico en Huelva.", "Los Picos de Europa están en los Pirineos.", "El clima oceánico tiene veranos muy áridos."],
+    answer: "La Meseta Central está dividida por el Sistema Central."
+  },
 
-    // --- 9. VIDEOJUEGOS ---
-    {
-        q: "¿Cuál es el nombre del protagonista con gorra verde de la mítica saga de aventuras 'The Legend of Zelda'?",
-        category: "videojuegos", level: 1, type: "standard",
-        accept: ["link"],
-        options: ["Link", "Zelda", "Ganondorf", "Tingle"],
-        answer: "Link"
-    },
-    {
-        q: "¿Es cierto que el videojuego de construcción y supervivencia 'Minecraft' fue desarrollado inicialmente por una sola persona (Markus Notch Persson)?",
-        category: "videojuegos", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "De los siguientes títulos clásicos de la historia de los videojuegos, ¿cuál fue el ÚNICO lanzado originalmente en la década de los años 70?",
-        category: "videojuegos", level: 3, type: "find_true",
-        options: ["Space Invaders", "Super Mario Bros", "Pac-Man", "Tetris"],
-        answer: "Space Invaders"
-    },
-    {
-        q: "¿Cómo se llama el fontanero italiano mascota oficial de la compañía de videojuegos Nintendo?",
-        category: "videojuegos", level: 1, type: "standard",
-        accept: ["mario"],
-        options: ["Mario", "Luigi", "Sonic", "Kirby"],
-        answer: "Mario"
-    },
-    {
-        q: "¿Cuál es el nombre del erizo azul supersónico que actúa como mascota principal de la compañía SEGA?",
-        category: "videojuegos", level: 1, type: "standard",
-        accept: ["sonic"],
-        options: ["Sonic", "Knuckles", "Tails", "Shadow"],
-        answer: "Sonic"
-    },
-    {
-        q: "¿Es cierto que la consola de videojuegos PlayStation original fue lanzada al mercado por la empresa Sony en el año 1994?",
-        category: "videojuegos", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos videojuegos pertenecen al género de los juegos de disparos en primera persona (FPS), pero uno es un juego de rol (RPG) de mundo abierto. ¿Cuál es el intruso?",
-        category: "videojuegos", level: 3, type: "find_false",
-        options: ["Call of Duty", "Counter-Strike", "The Witcher 3: Wild Hunt", "Battlefield"],
-        answer: "The Witcher 3: Wild Hunt"
-    },
-    {
-        q: "¿Qué conocido motor gráfico multiplataforma fue desarrollado y creado por la empresa Epic Games?",
-        category: "videojuegos", level: 3, type: "standard",
-        accept: ["unreal engine"],
-        options: ["Unreal Engine", "Unity", "Frostbite", "CryEngine"],
-        answer: "Unreal Engine"
-    },
-    {
-        q: "¿Es cierto que el juego 'Tetris' fue inventado y creado en la Unión Soviética por el programador Alekséi Pázhitnov en 1984?",
-        category: "videojuegos", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "¿Cuál es el nombre del protagonista principal con cicatriz y tatuajes en la saga de videojuegos de acción 'God of War'?",
-        category: "videojuegos", level: 1, type: "standard",
-        accept: ["kratos"],
-        options: ["Kratos", "Master Chief", "Nathan Drake", "Ezio Auditore"],
-        answer: "Kratos"
-    },
-    {
-        q: "De los siguientes estudios de desarrollo, ¿cuál es el creador de la famosa saga de videojuegos de rol 'The Elder Scrolls' y 'Fallout'?",
-        category: "videojuegos", level: 2, type: "standard",
-        accept: ["bethesda", "bethesda game studios"],
-        options: ["Bethesda Game Studios", "Rockstar Games", "Ubisoft", "Electronic Arts"],
-        answer: "Bethesda Game Studios"
-    },
-    {
-        q: "¿Es cierto que la franquicia 'Pokémon' fue creada en Japón inicialmente como un par de juegos para la consola portátil Game Boy en 1996?",
-        category: "videojuegos", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estas consolas fueron fabricadas y lanzadas por la empresa Nintendo, pero una pertenece a la competencia (Microsoft). ¿Cuál es el intruso?",
-        category: "videojuegos", level: 2, type: "find_false",
-        options: ["Nintendo Switch", "Super Nintendo", "Xbox Series X", "Game Boy"],
-        answer: "Xbox Series X"
-    },
-    {
-        q: "¿Cómo se llama el carismático cazatesoros protagonista de la saga de aventuras exclusiva de PlayStation 'Uncharted'?",
-        category: "videojuegos", level: 2, type: "standard",
-        accept: ["nathan drake", "drake"],
-        options: ["Nathan Drake", "Lara Croft", "Kratos", "Solid Snake"],
-        answer: "Nathan Drake"
-    },
-    {
-        q: "¿Cuál es el nombre de la famosa princesa que el fontanero Mario debe rescatar habitualmente en los juegos clásicos de su franquicia?",
-        category: "videojuegos", level: 1, type: "standard",
-        accept: ["princesa peach", "peach"],
-        options: ["Princesa Peach", "Princesa Zelda", "Princesa Daisy", "Rosalina"],
-        answer: "Princesa Peach"
-    },
-    {
-        q: "De las siguientes afirmaciones sobre la historia del medio interactivo, ¿cuál es la ÚNICA verdadera?",
-        category: "videojuegos", level: 3, type: "find_true",
-        options: [
-            "El videojuego 'Pong' de Atari, lanzado en 1972, popularizó masivamente el sector arcade recreativo.",
-            "La primera consola de videojuegos doméstica de la historia se lanzó en el siglo XXI.",
-            "La compañía SEGA sigue fabricando consolas de sobremesa en la actualidad.",
-            "Los cartuchos de ROM se inventaron después de los discos Blu-ray."
-        ],
-        answer: "El videojuego 'Pong' de Atari, lanzado en 1972, popularizó masivamente el sector arcade recreativo."
-    },
-    {
-        q: "¿Qué videojuego multijugador masivo de género battle royale desarrollado por Epic Games popularizó las construcciones y los bailes virales en 2017?",
-        category: "videojuegos", level: 1, type: "standard",
-        accept: ["fortnite"],
-        options: ["Fortnite", "PUBG", "Apex Legends", "Free Fire"],
-        answer: "Fortnite"
-    },
-    {
-        q: "¿Es cierto que la saga de sigilo 'Metal Gear Solid' fue dirigida y creada por el famoso diseñador japonés Hideo Kojima?",
-        category: "videojuegos", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
+  // =========================================================================
+  // 9. ENCONTRAR LA AFIRMACIÓN CORRECTA - NIVEL 3 (5 PREGUNTAS: 271 a 275)
+  // =========================================================================
+  {
+    q: "¿Cuál de estas afirmaciones sobre Termodinámica Química es CORRECTA?",
+    category: "culturageneral", level: 3, type: "find_true",
+    options: ["Un proceso es espontáneo si ΔG < 0 a P y T constantes.", "Toda reacción exotérmica es siempre espontánea.", "La entalpía de formación de un elemento puro es positiva.", "La entropía disminuye en toda fusión."],
+    answer: "Un proceso es espontáneo si ΔG < 0 a P y T constantes."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre la Segunda República Española es CORRECTA?",
+    category: "culturageneral", level: 3, type: "find_true",
+    options: ["La Constitución de 1931 reconoció el voto femenino.", "El Bienio Reformista lo presidió Gil-Robles.", "La CEDA ganó las elecciones de febrero de 1936.", "La reforma agraria se aprobó durante el franquismo."],
+    answer: "La Constitución de 1931 reconoció el voto femenino."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Epistemología kantiana es CORRECTA?",
+    category: "culturageneral", level: 3, type: "find_true",
+    options: ["Espacio y tiempo son formas a priori de la sensibilidad.", "Las categorías del entendimiento proceden de la experiencia.", "La metafísica es posible como ciencia teórica.", "La razón práctica niega la libertad humana."],
+    answer: "Espacio y tiempo son formas a priori de la sensibilidad."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Inmunología es CORRECTA?",
+    category: "culturageneral", level: 3, type: "find_true",
+    options: ["Los linfocitos B maduran en la médula ósea.", "Los macrófagos son exclusivos de la inmunidad adaptativa.", "La sueroterapia confiere inmunidad activa duradera.", "Los antígenos son producidos por los linfocitos T."],
+    answer: "Los linfocitos B maduran en la médula ósea."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre Métrica y Literatura es CORRECTA?",
+    category: "culturageneral", level: 3, type: "find_true",
+    options: ["La silva combina versos heptasílabos y endecasílabos.", "El romance tiene rima consonante en los versos pares.", "La lira consta de seis versos alejandrinos.", "El haiku tradicional tiene cinco versos."],
+    answer: "La silva combina versos heptasílabos y endecasílabos."
+  },
 
-    // --- 10. MÚSICA ---
-    {
-        q: "¿Cómo se llamaba el legendario vocalista principal de la banda británica Queen?",
-        category: "musica", level: 1, type: "standard",
-        accept: ["freddie mercury", "mercury"],
-        options: ["Freddie Mercury", "Mick Jagger", "Elton John", "David Bowie"],
-        answer: "Freddie Mercury"
-    },
-    {
-        q: "¿Es cierto que el famoso festival de música electrónica 'Tomorrowland' se celebra originalmente en los Países Bajos (Ámsterdam)?",
-        category: "musica", level: 2, type: "true_false",
-        answer: "Falso"
-    },
-    {
-        q: "De las siguientes leyendas de la música rock, ¿cuál de ellas formaba parte como guitarrista principal de la mítica banda 'Queen'?",
-        category: "musica", level: 3, type: "standard",
-        accept: ["brian may", "brian"],
-        options: ["Brian May", "Eric Clapton", "Jimmy Page", "Slash"],
-        answer: "Brian May"
-    },
-    {
-        q: "¿Cómo se le conoce popularmente al legendario rey del rock and roll estadounidense fallecido en 1977?",
-        category: "musica", level: 1, type: "standard",
-        accept: ["elvis presley", "elvis"],
-        options: ["Elvis Presley", "Michael Jackson", "Chuck Berry", "Frank Sinatra"],
-        answer: "Elvis Presley"
-    },
-    {
-        q: "¿Qué famoso miembro de la legendaria banda británica The Beatles fue asesinado frente a su edificio en Nueva York en 1980?",
-        category: "musica", level: 2, type: "standard",
-        accept: ["john lennon", "lennon"],
-        options: ["John Lennon", "Paul McCartney", "George Harrison", "Ringo Starr"],
-        answer: "John Lennon"
-    },
-    {
-        q: "Tres de estos artistas musicales son iconos históricos del género pop, pero uno es un célebre compositor clásico. ¿Cuál es el intruso?",
-        category: "musica", level: 2, type: "find_false",
-        options: ["Michael Jackson", "Madonna", "Wolfgang Amadeus Mozart", "Prince"],
-        answer: "Wolfgang Amadeus Mozart"
-    },
-    {
-        q: "¿Cuál es el nombre del famoso rapero y productor estadounidense conocido artísticamente también como Slim Shady?",
-        category: "musica", level: 1, type: "standard",
-        accept: ["eminem", "marshall mathers"],
-        options: ["Eminem", "Snoop Dogg", "Jay-Z", "Kanye West"],
-        answer: "Eminem"
-    },
-    {
-        q: "¿Es cierto que el instrumento musical conocido como piano cuenta tradicionalmente con un total de 88 teclas?",
-        category: "musica", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "De las siguientes afirmaciones sobre la historia de la música, ¿cuál es la ÚNICA verdadera?",
-        category: "musica", level: 3, type: "find_true",
-        options: [
-            "Ludwig van Beethoven compuso algunas de sus obras maestras más célebres estando ya completamente sordo.",
-            "La guitarra eléctrica se inventó antes que la flauta travesera en la prehistoria.",
-            "El género musical del jazz nació en la ciudad europea de Viena a finales del siglo XVIII.",
-            "Los Beatles eran originarios de la ciudad de Londres."
-        ],
-        answer: "Ludwig van Beethoven compuso algunas de sus obras maestras más célebres estando ya completamente sordo."
-    },
-    {
-        q: "¿Qué legendaria banda de rock británica publicó en 1973 el icónico álbum conceptual 'The Dark Side of the Moon'?",
-        category: "musica", level: 3, type: "standard",
-        accept: ["pink floyd"],
-        options: ["Pink Floyd", "Led Zeppelin", "The Rolling Stones", "The Who"],
-        answer: "Pink Floyd"
-    },
-    {
-        q: "¿Cómo se llama el famoso festival de música y arte al aire libre que se celebra anualmente en el desierto de Colorado (California)?",
-        category: "musica", level: 2, type: "standard",
-        accept: ["coachella"],
-        options: ["Coachella", "Glastonbury", "Lollapalooza", "Rock in Rio"],
-        answer: "Coachella"
-    },
-    {
-        q: "¿Es cierto que Michael Jackson ostenta el título del álbum más vendido de todos los tiempos en la historia de la música con 'Thriller'?",
-        category: "musica", level: 1, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "Tres de estos músicos formaron parte de la mítica banda de rock británica Led Zeppelin, pero uno formaba parte de The Rolling Stones. ¿Cuál es el intruso?",
-        category: "musica", level: 3, type: "find_false",
-        options: ["Robert Plant", "Jimmy Page", "Mick Jagger", "John Bonham"],
-        answer: "Mick Jagger"
-    },
-    {
-        q: "¿Qué artista colombiana es internacionalmente conocida como la reina de la música latina con éxitos globales como 'Hips Don't Lie'?",
-        category: "musica", level: 1, type: "standard",
-        accept: ["shakira"],
-        options: ["Shakira", "Rosalía", "Jennifer Lopez", "Karol G"],
-        answer: "Shakira"
-    },
-    {
-        q: "¿En qué país europeo nació el célebre compositor clásico Wolfgang Amadeus Mozart en el siglo XVIII?",
-        category: "musica", level: 2, type: "standard",
-        accept: ["austria"],
-        options: ["Austria", "Alemania", "Italia", "Francia"],
-        answer: "Austria"
-    },
-    {
-        q: "¿Cuál es el nombre del legendario guitarrista zurdo considerado uno de los músicos más influyentes de la historia del rock psicodélico de los años 60?",
-        category: "musica", level: 2, type: "standard",
-        accept: ["jimi hendrix", "hendrix"],
-        options: ["Jimi Hendrix", "Eric Clapton", "B.B. King", "Carlos Santana"],
-        answer: "Jimi Hendrix"
-    },
-    {
-        q: "¿Es cierto que el formato de archivo de audio comprimido MP3 revolucionó la distribución digital de música a finales de los años 90?",
-        category: "musica", level: 2, type: "true_false",
-        answer: "Verdadero"
-    },
-    {
-        q: "De los siguientes géneros musicales, ¿cuál tiene sus raíces históricas y culturales originarias en la ciudad de Nueva Orleans (Estados Unidos) a principios del siglo XX?",
-        category: "musica", level: 3, type: "standard",
-        accept: ["jazz"],
-        options: ["Jazz", "Heavy Metal", "Techno", "Grunge"],
-        answer: "Jazz"
-    }
+  // =========================================================================
+  // 10. ENCONTRAR LA AFIRMACIÓN ERRÓNEA - NIVEL 1 (5 PREGUNTAS: 276 a 280)
+  // =========================================================================
+  {
+    q: "Señala la afirmación ERRÓNEA sobre la Tierra y el Sistema Solar:",
+    category: "culturageneral", level: 1, type: "find_false",
+    options: ["El Sol gira alrededor de la Tierra cada 24 horas.", "La Tierra tarda unos 365 días en orbitar el Sol.", "La Luna es el único satélite natural terrestre.", "Marte es el cuarto planeta desde el Sol."],
+    answer: "El Sol gira alrededor de la Tierra cada 24 horas."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Biología básica:",
+    category: "culturageneral", level: 1, type: "find_false",
+    options: ["Los hongos realizan la fotosíntesis.", "Los mamíferos son animales vertebrados.", "El corazón humano tiene cuatro cavidades.", "Las bacterias son organismos unicelulares."],
+    answer: "Los hongos realizan la fotosíntesis."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Historia Contemporánea:",
+    category: "culturageneral", level: 1, type: "find_false",
+    options: ["España participó activamente en la Segunda Guerra Mundial.", "La Primera Guerra Mundial acabó en 1918.", "La Revolución Francesa ocurrió en el siglo XVIII.", "La ONU se creó tras la Segunda Guerra Mundial."],
+    answer: "España participó activamente en la Segunda Guerra Mundial."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Lengua y Literatura:",
+    category: "culturageneral", level: 1, type: "find_false",
+    options: ["Las palabras agudas llevan tilde siempre.", "El verbo es el núcleo del predicado.", "Cervantes escribió novelas ejemplares.", "La metáfora identifica dos términos semejantes."],
+    answer: "Las palabras agudas llevan tilde siempre."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Química elemental:",
+    category: "culturageneral", level: 1, type: "find_false",
+    options: ["El agua es un elemento químico puro.", "El oxígeno es necesario para la combustión.", "Los ácidos tienen pH inferior a 7.", "El carbono es la base de la química orgánica."],
+    answer: "El agua es un elemento químico puro."
+  },
+
+  // =========================================================================
+  // 11. ENCONTRAR LA AFIRMACIÓN ERRÓNEA - NIVEL 2 (15 PREGUNTAS: 281 a 295)
+  // =========================================================================
+  {
+    q: "Señala la afirmación ERRÓNEA sobre el Reinado de Isabel II:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["Estableció el sufragio universal femenino.", "Sufrió las guerras carlistas.", "Alternó gobiernos moderados y progresistas.", "Terminó con la Revolución de 1868."],
+    answer: "Estableció el sufragio universal femenino."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre la filosofía de Platón:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["Defendió la democracia asamblearia como gobierno ideal.", "Propuso el gobierno de los filósofos-reyes.", "Dividió el alma en tres partes.", "Consideró las Ideas eternas e inmutables."],
+    answer: "Defendió la democracia asamblearia como gobierno ideal."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre la mitosis:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["Reduce a la mitad el número de cromosomas.", "Consta de profase, metafase, anafase y telofase.", "Origina dos células genéticamente idénticas.", "Interviene en el crecimiento de tejidos."],
+    answer: "Reduce a la mitad el número de cromosomas."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre el Romanticismo español:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["Buscó el equilibrio racional y didáctico clásico.", "José de Espronceda escribió 'La canción del pirata'.", "Gustavo Adolfo Bécquer destacó en la lírica intimista.", "Mariano José de Larra brilló en el artículo de costumbres."],
+    answer: "Buscó el equilibrio racional y didáctico clásico."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Mecánica Clásica:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["La energía cinética puede ser negativa.", "La energía mecánica se conserva sin rozamiento.", "La fuerza gravitatoria es siempre atractiva.", "La potencia se mide en vatios."],
+    answer: "La energía cinética puede ser negativa."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre la Transición Española:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["El Partido Comunista nunca fue legalizado.", "La Ley para la Reforma Política se aprobó en 1976.", "Se celebraron elecciones democráticas en junio de 1977.", "Se aprobaron estatutos de autonomía."],
+    answer: "El Partido Comunista nunca fue legalizado."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Economía de la Empresa:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["El activo siempre es mayor que el pasivo más neto.", "Los costes fijos no varían con la producción a corto plazo.", "El umbral de rentabilidad iguala ingresos y costes totales.", "Una sociedad anónima divide su capital en acciones."],
+    answer: "El activo siempre es mayor que el pasivo más neto."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Enlace Químico:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["Los compuestos iónicos conducen electricidad en estado sólido.", "Los metales poseen electrones deslocalizados.", "El diamante es un sólido covalente reticular.", "El agua presenta geometría angular."],
+    answer: "Los compuestos iónicos conducen electricidad en estado sólido."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Álgebra Lineal:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["El producto de matrices es siempre conmutativo.", "Un sistema compatible determinado tiene solución única.", "El rango de una matriz coincide con sus filas independientes.", "La traspuesta de una matriz simétrica es ella misma."],
+    answer: "El producto de matrices es siempre conmutativo."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Geografía de la Población:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["El saldo vegetativo es la diferencia entre inmigrantes y emigrantes.", "España presenta una baja tasa de natalidad.", "El éxodo rural creció en los años 60 en España.", "La esperanza de vida en España es de las más altas."],
+    answer: "El saldo vegetativo es la diferencia entre inmigrantes y emigrantes."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre la Segunda Guerra Mundial:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["Italia formó parte de los Aliados desde 1939.", "La invasión de Polonia detonó el conflicto europeo.", "La batalla de Stalingrado fue un punto de inflexión.", "Estados Unidos lanzó bombas atómicas sobre Japón."],
+    answer: "Italia formó parte de los Aliados desde 1939."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Ácidos Nucleicos:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["El ARN es siempre bicatenario en células humanas.", "Los nucleótidos contienen pentosa, fosfato y base.", "La adenina y la guanina son bases púricas.", "Las cadenas del ADN son antiparalelas."],
+    answer: "El ARN es siempre bicatenario en células humanas."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Realismo y Naturalismo:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["Idealizó la realidad huyendo de lo cotidiano.", "Benito Pérez Galdós retrató la sociedad madrileña.", "Emilia Pardo Bazán difundió el naturalismo en España.", "Utilizó frecuentemente un narrador omnisciente."],
+    answer: "Idealizó la realidad huyendo de lo cotidiano."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Óptica Geométrica:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["La luz viaja más rápido en el vidrio que en el vacío.", "El ángulo de incidencia iguala al de reflexión.", "La refracción cambia la dirección al variar el medio.", "Los espejos planos forman imágenes virtuales."],
+    answer: "La luz viaja más rápido en el vidrio que en el vacío."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Arte Renacentista:",
+    category: "culturageneral", level: 2, type: "find_false",
+    options: ["Renunció al estudio de la anatomía y perspectiva.", "Recuperó los órdenes arquitectónicos clásicos.", "Miguel Ángel esculpió el David en mármol.", "Leonardo da Vinci pintó La Última Cena."],
+    answer: "Renunció al estudio de la anatomía y perspectiva."
+  },
+
+  // =========================================================================
+  // 12. ENCONTRAR LA AFIRMACIÓN ERRÓNEA - NIVEL 3 (5 PREGUNTAS: 296 a 300)
+  // =========================================================================
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Cinética y Equilibrio Químico:",
+    category: "culturageneral", level: 3, type: "find_false",
+    options: ["Un catalizador modifica el valor de la constante Kc.", "Kc depende exclusivamente de la temperatura.", "La velocidad de reacción suele aumentar con la temperatura.", "En el equilibrio las velocidades directa e inversa se igualan."],
+    answer: "Un catalizador modifica el valor de la constante Kc."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre la filosofía de Karl Marx:",
+    category: "culturageneral", level: 3, type: "find_false",
+    options: ["La superestructura ideológica determina la base económica.", "El materialismo histórico analiza los modos de producción.", "El trabajo alienado separa al obrero de su producto.", "La historia avanza mediante contradicciones dialécticas."],
+    answer: "La superestructura ideológica determina la base económica."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Microbiología y Biotecnología:",
+    category: "culturageneral", level: 3, type: "find_false",
+    options: ["Los virus poseen metabolismo propio independiente.", "La PCR permite amplificar fragmentos específicos de ADN.", "Las enzimas de restricción cortan ADN en secuencias concretas.", "Los bacteriófagos son virus que infectan bacterias."],
+    answer: "Los virus poseen metabolismo propio independiente."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre el Sexenio Democrático (1868-1874):",
+    category: "culturageneral", level: 3, type: "find_false",
+    options: ["Alfonso XII reinó durante todo el Sexenio.", "Estalló la Guerra de los Diez Años en Cuba.", "Se produjo la insurrección cantonal en 1873.", "El general Prim fue asesinado en diciembre de 1870."],
+    answer: "Alfonso XII reinó durante todo el Sexenio."
+  },
+  {
+    q: "Señala la afirmación ERRÓNEA sobre Física Cuántica y Nuclear:",
+    category: "culturageneral", level: 3, type: "find_false",
+    options: ["La desintegración alfa emite electrones de alta energía.", "La constante de Planck cuantiza la energía de los fotones.", "La fusión nuclear une núcleos ligeros liberando energía.", "De Broglie asoció una longitud de onda a toda partícula."],
+    answer: "La desintegración alfa emite electrones de alta energía."
+  }
 ];
